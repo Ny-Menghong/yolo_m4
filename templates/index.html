@@ -1,0 +1,97 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <title>YOLO11 Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>YOLO11 Object Detection</h2>
+
+    <br>
+
+    <label class="upload-btn">
+        Select Image
+        <input type="file" id="file" hidden>
+    </label>
+
+    <br><br>
+    <button class="upload-btn" id="cameraBtn">
+    Use Camera
+</button>
+
+<br><br>
+<video id="video" autoplay playsinline></video>
+    <canvas id="canvas"></canvas>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>YOLO UI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LEFT PANEL -->
+    <div class="left">
+
+        <div class="title">UPLOAD IMAGES</div>
+
+        <label class="dropzone">
+            <input type="file" id="file" multiple>
+            <div>Click to upload</div>
+            <small>PNG, JPG, JPEG</small>
+        </label>
+
+        <button id="cameraBtn">Camera</button>
+        <button id="clearBtn">Clear Canvas</button>
+
+        <div class="info">
+            <div>Canvas: 500px</div>
+            <div id="objCount">Objects: 0</div>
+        </div>
+
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- TOP -->
+        <div class="top">
+            <div class="logo">YOLO11 OBJECT DETECTION</div>
+            <div class="stats">
+                <span id="fps">FPS: 0</span>
+            </div>
+        </div>
+
+        <!-- CANVAS -->
+        <div class="canvasBox">
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <!-- BOTTOM IMAGES -->
+        <div class="bottom" id="thumbs"></div>
+
+    </div>
+
+</div>
+
+<video id="video" autoplay></video>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
