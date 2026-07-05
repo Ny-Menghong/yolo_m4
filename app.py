@@ -77,6 +77,9 @@ def server_info():
         "local_ip": local_ip,
         "api": f"http://{local_ip}:5000"
     })
-
+# for local
+# if __name__ == "__main__":
+#     app.run(debug=True)
+#for deploy
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)

@@ -2,11 +2,9 @@
 const file = document.getElementById("file");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-
 const cameraBtn = document.getElementById("cameraBtn");
 const video = document.getElementById("video");
 video.style.display="none";
-
 const CANVAS_SIZE = 500;
 
 // Fixed canvas size
@@ -51,17 +49,14 @@ file.addEventListener("change", () => {
             newWidth,
             newHeight
         );
-
         // Send image to Flask
         const form = new FormData();
         console.log(form);
         form.append("image", selectedFile);
-
         const response = await fetch("/detect", {
             method: "POST",
             body: form
         });
-
         const boxes = await response.json();
         console.log(response.body);
 
@@ -176,144 +171,4 @@ cameraBtn.addEventListener("click", async () => {
         }
         video.srcObject = null;
     }
-
 });
-
-// const file = document.getElementById("file");
-// const canvas = document.getElementById("canvas");
-// const ctx = canvas.getContext("2d");
-
-// const thumbs = document.getElementById("thumbs");
-// const fpsText = document.getElementById("fps");
-// const objCount = document.getElementById("objCount");
-
-// const cameraBtn = document.getElementById("cameraBtn");
-// const clearBtn = document.getElementById("clearBtn");
-
-// const video = document.getElementById("video");
-// video.style.display = "none";
-
-// canvas.width = 500;
-// canvas.height = 500;
-
-// let stream = null;
-// let last = performance.now();
-
-// /* FPS */
-// function fps() {
-//     const now = performance.now();
-//     const f = Math.round(1000 / (now - last));
-//     last = now;
-//     fpsText.innerText = "FPS: " + f;
-// }
-
-// /* BOX */
-// function draw(box) {
-//     ctx.strokeStyle = "#00ff88";
-//     ctx.lineWidth = 2;
-//     ctx.strokeRect(box.x1, box.y1, box.x2 - box.x1, box.y2 - box.y1);
-
-//     const label = `${box.class} ${(box.confidence * 100).toFixed(1)}%`;
-
-//     ctx.font = "14px Arial";
-//     const w = ctx.measureText(label).width;
-
-//     ctx.fillStyle = "#00ff88";
-//     ctx.fillRect(box.x1, box.y1 - 18, w + 10, 18);
-
-//     ctx.fillStyle = "#000";
-//     ctx.fillText(label, box.x1 + 5, box.y1 - 5);
-// }
-
-// /* UPLOAD */
-// file.addEventListener("change", async () => {
-
-//     const files = [...file.files];
-
-//     for (let f of files) {
-
-//         const img = new Image();
-//         img.src = URL.createObjectURL(f);
-
-//         const t = document.createElement("img");
-//         t.src = img.src;
-//         thumbs.appendChild(t);
-
-//         img.onload = async () => {
-
-//             ctx.drawImage(img, 0, 0, 500, 500);
-
-//             const form = new FormData();
-//             form.append("image", f);
-
-//             const res = await fetch("/detect", { method: "POST", body: form });
-//             const boxes = await res.json();
-
-//             objCount.innerText = "Objects: " + boxes.length;
-
-//             boxes.forEach(draw);
-//         };
-//     }
-// });
-// let isRunning = false;
-// /* CAMERA */
-// async function loop() {
-//     if (!stream) return;
-
-//     ctx.drawImage(video, 0, 0, 500, 500);
-
-//     const temp = document.createElement("canvas");
-//     temp.width = 500;
-//     temp.height = 500;
-
-//     temp.getContext("2d").drawImage(video, 0, 0, 500, 500);
-
-//     const blob = await new Promise(r => temp.toBlob(r, "image/jpeg"));
-
-//     const form = new FormData();
-//     form.append("image", blob, "frame.jpg");
-
-//     const res = await fetch("/detect", { method: "POST", body: form });
-//     const boxes = await res.json();
-
-//     objCount.innerText = "Objects: " + boxes.length;
-
-//     boxes.forEach(draw);
-
-//     fps();
-
-//     setTimeout(loop, 80);
-// }
-
-// /* CAMERA BUTTON */
-// let isOpen=false;
-// cameraBtn.onclick = async () => {
-//     isOpen = !isOpen;
-
-//     if (isOpen) {
-//         cameraBtn.innerHTML="Close";
-//         stream = await navigator.mediaDevices.getUserMedia({ video: true });
-//         video.srcObject = stream;
-//         video.play();
-
-//         isRunning = true;   // START loop
-//         loop();
-//     } else {
-//         isRunning = false;  // STOP loop
-
-//         if (stream) {
-//             cameraBtn.innerHTML="Open";
-//             stream.getTracks().forEach(track => track.stop());
-//             stream = null;
-//         }
-
-//         video.srcObject = null;
-//     }
-// };
-
-// /* CLEAR */
-// clearBtn.onclick = () => {
-//     ctx.clearRect(0, 0, 500, 500);
-//     thumbs.innerHTML = "";
-//     objCount.innerText = "Objects: 0";
-// };
