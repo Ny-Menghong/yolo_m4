@@ -1,61 +1,3698 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>YOLO UI</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Vision Academy — Learn AI Object Detection with YOLO</title>
+  <meta name="description"
+    content="An interactive educational platform teaching Artificial Intelligence, Machine Learning, Deep Learning, Computer Vision and YOLO Object Detection.">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.css">
+  <!-- Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
-
-<body>
-
-<div class="container">
-
-    <!-- LEFT PANEL -->
-    <div class="left">
-
-        <div class="title">UPLOAD IMAGES</div>
-
-        <label class="dropzone">
-            <input type="file" id="file" multiple>
-            <div>Click to upload</div>
-            <small>PNG, JPG, JPEG</small>
-        </label>
-
-        <button id="cameraBtn">Camera</button>
-        <button id="clearBtn">Clear Canvas</button>
-
-        <div class="info">
-            <div>Canvas: 500px</div>
-            <div id="objCount">Objects: 0</div>
-        </div>
-
+<body class="bg-bg bg-grid">
+  <!-- ============ NAV ============ -->
+  <header id="siteNav" class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5">
+    <div class="max-w-full mx-2 md:px-8 h-16 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-2 font-display font-bold text-lg">
+        <span class="w-8 h-8 rounded-lg place-items-center">
+          <img src="https://rms.rupp.edu.kh/rupplogo.png" alt="">
+          <!-- <i class="fa-solid fa-eye text-white text-sm"></i> -->
+        </span>
+        M4 
+        <span class="grad-text">AI Vision </span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-6 text-sm text-slate-300 font-medium">
+        <button id="btn-home" class="nav-link" onclick="showPage('home')">Home</button>
+        <button id="btn-ai" class="nav-link" onclick="showPage('ai')">AI Lesson</button>
+        <button class="nav-link" onclick="showPage('yolol')">Yolo Lesson</button>
+        <button id="btn-demo" class="nav-link" onclick="showPage('demo')">Demo</button>
+        <button class="nav-link" onclick="showPage('yolol')">Train</button>
+        <button class="nav-link" onclick="showPage('yolol')">Dataset</button>
+        <button class="nav-link" onclick="showPage('yolol')">Model</button>
+      </nav>
+      <div class="flex items-center gap-3">
+        <!--  Icon menu for mobile -->
+        <button id="menuBtn"
+          class="lg:hidden w-10 h-10 grid place-items-center rounded-lg border border-white/10 text-slate-200">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
     </div>
-
-    <!-- MAIN -->
-    <div class="main">
-
-        <!-- TOP -->
-        <div class="top">
-            <div class="logo">YOLO11 OBJECT DETECTION</div>
-            <div class="stats">
-                <span id="fps">FPS: 0</span>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="lg:hidden max-h-0 overflow-hidden glass border-t border-white/5">
+      <nav class="flex flex-col px-5 py-3 text-sm text-slate-300">
+        <button id="btn-home" class="nav-link  py-2 border-b border-white/5" onclick="showPage('home')">Home</button>
+        <button id="btn-ai" class="nav-link  py-2 border-b border-white/5" onclick="showPage('ai')">AI Lesson</button>
+        <button class="nav-link  py-2 border-b border-white/5" onclick="showPage('yolol')">Yolo Lesson</button>
+        <button id="btn-demo" class="nav-link  py-2 border-b border-white/5" onclick="showPage('demo')">Demo</button>
+        <button class="nav-link  py-2 border-b border-white/5" onclick="showPage('yolol')">Train</button>
+        <button class="nav-link  py-2 border-b border-white/5" onclick="showPage('yolol')">Dataset</button>
+        <button class="nav-link  py-2 border-b border-white/5" onclick="showPage('yolol')">Model</button>
+      </nav>
+    </div>
+  </header>
+  <!-- ============ HERO ============ -->
+<div id="home" class="page">
+    <section id="ho" class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
+      <div class="glow-orb w-[36rem] h-[36rem] bg-primary top-[-10rem] left-[-10rem]"></div>
+      <div class="glow-orb w-[30rem] h-[30rem] bg-secondary bottom-[-8rem] right-[-6rem]"></div>
+      <div class="max-w-7xl mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-14 items-center relative z-10">
+        <div data-aos="fade-up">
+          <span
+            class="inline-flex items-center gap-2 text-xs font-mono pill px-3 py-1 glass text-accent section-eyebrow">
+            <i class="fa-solid fa-microchip"></i> ការរកឃើញវត្ថុតាមពេលវេលាជាក់ស្តែង
+          </span>
+          <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl mt-6 leading-tight">
+            <span id="typingTarget" class="typing-cursor"></span>
+          </h1>
+          <p class="mt-6 text-slate-300 text-lg max-w-xl">
+            ស្វែងយល់ពីរបៀបដែលបញ្ញាសិប្បនិម្មិតទំនើបអាចរកឃើញមនុស្ស រថយន្ត សត្វ និងវត្ថុរាប់រយផ្សេងទៀតក្នុងពេលវេលាជាក់ស្តែង — ពីណឺរ៉ូនរហូតដល់ប្រអប់ព្រំដែន។
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <button onclick="document.getElementById('btn-ai').click();" class="btn-primary text-white font-semibold px-6 py-3 rounded-xl">
+              <i class="fa-solid fa-graduation-cap mr-2"></i>ចាប់ផ្ដើមរៀន
+            </button>
+            <button onclick="document.getElementById('btn-demo').click()" class="btn-outline glass text-slate-100 font-semibold px-6 py-3 rounded-xl">
+              <i class="fa-solid fa-camera mr-2"></i>សាក Demo
+            </button>
+          </div>
+          <!-- <div class="grid grid-cols-3 gap-6 mt-12 max-w-md">
+            <div>
+              <div class="font-display font-bold text-3xl grad-text counter" data-target="99.5">0</div>
+              <div class="text-xs text-slate-400 mt-1">FPS ក្នុងពេលជាក់ស្តែង*</div>
             </div>
+            <div>
+              <div class="font-display font-bold text-3xl grad-text counter" data-target="11">0</div>
+              <div class="text-xs text-slate-400 mt-1">កំណែ YOLO</div>
+            </div>
+            <div>
+              <div class="font-display font-bold text-3xl grad-text counter" data-target="80">0</div>
+              <div class="text-xs text-slate-400 mt-1">ថ្នាក់ COCO</div>
+            </div>
+          </div> -->
+        </div>
+        <!-- រូបភាពសម្រាប់បង្ហាញការរកឃើញ -->
+        <div class="relative h-full" data-aos="fade-left">
+            <img src="https://media3.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3M2d3N2Rma2VobGFsZ2hkaDRha2pyd3EzN3psc3dsZTVtcGVsN3lyYSZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9cw/cnKVuxkLZxyxq2JHZb/giphy.webp" alt="">
+        </div>
+      </div>
+      <a href="#intro" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-slate-400 animate-bounce">
+        <i class="fa-solid fa-chevron-down"></i>
+      </a>
+    </section>
+        <section id="about-project" class="py-20 px-5 md:px-8 relative">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12 items-center" data-aos="fade-up">
+          <div>
+            <span class="text-xs font-mono text-primary uppercase tracking-wider">អំពីគម្រោងនេះ</span>
+            <h2 class="text-3xl md:text-4xl font-display font-bold mt-4">
+              ស្វែងយល់ពី <span class="grad-text">ការស្វែងរក Object</span>
+            </h2>
+            <p class="text-slate-300 mt-4 leading-relaxed">
+              គម្រោងអប់រំនេះស្វែងយល់ពីរបៀបដែលបញ្ញាសិប្បនិម្មិតអាចកំណត់អត្តសញ្ញាណ និងកំណត់ទីតាំងវត្ថុក្នុងរូបភាព និងវីដេអូ។ យើងបំបែកគំនិតស្មុគស្មាញទៅជាការពន្យល់សាមញ្ញ និងងាយយល់សម្រាប់សិស្សានុសិស្ស។
+            </p>
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-primary mt-1"></i>
+                <span class="text-slate-300">រៀនពីរបៀបដែលកុំព្យូទ័រ "មើលឃើញ" និងស្គាល់វត្ថុ</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-secondary mt-1"></i>
+                <span class="text-slate-300">យល់ពីក្បួនដោះស្រាយ YOLO ជាជំហានៗ</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fa-solid fa-check-circle text-accent mt-1"></i>
+                <span class="text-slate-300">ស្វែងយល់ពីកម្មវិធី និងករណីប្រើប្រាស់ក្នុងពិភពពិត</span>
+              </li>
+            </ul>
+          </div>
+          <div class="relative" data-aos="fade-left">
+            <div class="glass p-6 rounded-2xl border border-white/10">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
+                  <i class="fa-solid fa-graduation-cap text-primary text-xl"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-slate-400">មុខវិជ្ជា</p>
+                  <p class="font-semibold">វិទ្យាកុំព្យូទ័រ</p>
+                </div>
+              </div>
+              <div class="items-center gap-4 p-3">
+                <div class="h-12 bg-secondary/20 rounded-full flex gap-7 items-center">
+                  <i class="fa-solid fa-user text-secondary text-xl"></i>
+                  <p class="text-sm text-slate-400">សមាជិក</p>
+                </div>
+                <div class="">
+                  <p class="font-semibold">[   ១. GTP    ]</p>
+                  <p class="font-semibold">[   ២. Stitch     ]</p>
+                  <p class="font-semibold">[   ៣. Cloud    ]</p>
+                  <p class="font-semibold">[   ៤. Deepseek       ]</p>
+                  <!-- <p class="font-semibold">[   ៥.    ]</p>
+                  <p class="font-semibold">[   ៦. ហ៊ាង ម៉ាលីហ័ង​  ]</p>
+                  <p class="font-semibold">[   ៧. ង៉ាន សុខណៃ   ]</p> -->
+                </div>
+              </div>
+              <div class="mt-4 pt-4 border-t border-white/10 flex justify-between text-xs text-slate-400">
+                <span><i class="fa-regular fa-calendar-days"></i> ដឹកនាំដោយ: លោកគ្រូ​ អ៊ុក ប៉ូលីវ៉ាន់</span>
+                <span>[សាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ]</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="objectives" class="py-20 px-5 md:px-8 relative bg-gradient-to-b from-primary/5 to-transparent">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
+          <span class="text-xs font-mono text-secondary uppercase tracking-wider">គោលដៅសិក្សា</span>
+          <h2 class="text-3xl md:text-4xl font-display font-bold mt-4">
+            អ្វីដែលអ្នកនឹង <span class="grad-text">រៀន</span>
+          </h2>
+          <p class="text-slate-300 mt-4">ក្រោយពេលបញ្ចប់នៃគម្រោងនេះ អ្នកនឹងយល់ដឹងអំពី៖</p>
         </div>
 
-        <!-- CANVAS -->
-        <div class="canvasBox">
-            <canvas id="canvas"></canvas>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+          <div class="glass p-6 rounded-2xl border border-white/5 hover:border-primary/30 transition-all group"
+            data-aos="flip-up" data-aos-delay="100">
+            <div class="text-4xl mb-3 text-pink-400"><i class="fa-solid fa-brain"></i></div>
+            <h3 class="font-semibold">គោលគំនិតស្នូល</h3>
+            <p class="text-sm text-slate-400 mt-2">តើការ​ Deteact Object ជាអ្វី? ហើយហេតុអ្វីវាសំខាន់?</p>
+            <div class="mt-3 flex items-center gap-1 text-xs text-primary">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>និយមន័យពាក្យគន្លឹះ</span>
+            </div>
+          </div>
+
+          <div class="glass p-6 rounded-2xl border border-white/5 hover:border-secondary/30 transition-all group"
+            data-aos="flip-up" data-aos-delay="200">
+            <div class="text-4xl mb-3"><i class="fa-solid fa-robot"></i></div>
+            <h3 class="font-semibold">AI Model</h3>
+            <p class="text-sm text-slate-400 mt-2">របៀបដែល YOLO និង Model ដំណើរការដើម្បី Detect</p>
+            <div class="mt-3 flex items-center gap-1 text-xs text-secondary">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>ការពន្យល់អំពីស្ថាបត្យកម្ម</span>
+            </div>
+          </div>
+
+          <div class="glass p-6 rounded-2xl border border-white/5 hover:border-accent/30 transition-all group"
+            data-aos="flip-up" data-aos-delay="300">
+            <div class="text-4xl mb-3 text-blue-400"><i class="fa-solid fa-chart-simple"></i></div>
+            <h3 class="font-semibold">Datasetsនិងការ Train</h3>
+            <p class="text-sm text-slate-400 mt-2">របៀបដែល Model រៀនពីទិន្នន័យ(Datasets)</p>
+            <div class="mt-3 flex items-center gap-1 text-xs text-accent">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>ដំណើរការហ្វឹកហាត់</span>
+            </div>
+          </div>
+
+          <div class="glass p-6 rounded-2xl border border-white/5 hover:border-green-400/30 transition-all group"
+            data-aos="flip-up" data-aos-delay="400">
+            <div class="text-4xl mb-3 text-yellow-400"><i class="fa-regular fa-lightbulb"></i></div>
+            <h3 class="font-semibold">កម្មវិធី</h3>
+            <p class="text-sm text-slate-400 mt-2">ការប្រើប្រាស់ការ Detect ដោយ AI ក្នុងពិភពពិត</p>
+            <div class="mt-3 flex items-center gap-1 text-xs text-green-400">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>ករណីសិក្សា</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="cta" class="py-20 px-5 md:px-8 relative">
+      <div class="max-w-4xl mx-auto">
+        <div class="glass rounded-3xl border border-white/10 p-8 md:p-12 text-center relative overflow-hidden"
+          data-aos="zoom-in">
+          <!-- ផ្ទៃខាងក្រោយតុបតែង -->
+          <div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl"></div>
+          <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-secondary/20 rounded-full blur-3xl"></div>
+
+          <div class="relative z-10">
+            <i class="fa-solid fa-rocket text-5xl text-primary mb-4 animate-bounce"></i>
+            <h2 class="text-3xl md:text-4xl font-display font-bold">
+              ត្រៀមខ្លួនចាប់ផ្តើមដំណើរ <span class="grad-text">AI របស់អ្នកហើយឬនៅ?</span>
+            </h2>
+            <p class="text-slate-300 mt-4 max-w-xl mx-auto">
+              ចូលរួមជាមួយអ្នកអភិវឌ្ឍន៍រាប់ពាន់នាក់ក្នុងការស្ទាត់ជំនាញការរកឃើញវត្ថុ។ ចាប់ផ្តើមរៀនដោយឥតគិតថ្លៃថ្ងៃនេះ។
+            </p>
+            <div class="mt-8 flex flex-wrap gap-4 justify-center">
+              <button  onclick="document.getElementById('btn-ai').click();"
+                class="btn-primary text-white font-semibold px-8 py-3 rounded-xl hover:scale-105 transition-transform">
+                <i class="fa-solid fa-graduation-cap mr-2"></i> ចាប់ផ្តើមរៀនឥឡូវនេះ
+              </button>
+              <a href="#"
+                class="btn-outline glass text-slate-100 font-semibold px-8 py-3 rounded-xl hover:scale-105 transition-transform">
+                <i class="fa-regular fa-circle-play mr-2"></i> មើល Demo
+              </a>
+            </div>
+            <p class="mt-4 text-xs text-slate-500">
+              <i class="fa-solid fa-check-circle text-green-400 mr-1"></i> ចូលប្រើដោយឥតគិតថ្លៃ • មិនត្រូវការកាតឥណទានទេ
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div id="ai" class="page">
+    <!-- ============ INTRO / SECTION 1: តើបញ្ញាសិប្បនិម្មិត (AI) គឺជាអ្វី? ============ -->
+    <section id="intro" class="relative py-24 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-5 md:px-8">
+        <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
+          <span class="text-xs font-mono text-accent section-eyebrow">មេរៀនទី១</span>
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">
+            តើបញ្ញាសិប្បនិម្មិត (Artificial Intelligence - AI) គឺជាអ្វី?
+          </h2>
+          <p class="text-red-400 mt-4 leading-8 text-justify">
+            បញ្ញាសិប្បនិម្មិត (Artificial Intelligence ឬ AI) គឺជាបច្ចេកវិទ្យាមួយក្នុងវិទ្យាសាស្ត្រកុំព្យូទ័រ
+            ដែលផ្តោតលើការបង្កើតប្រព័ន្ធ ឬកម្មវិធីដែលអាចធ្វើការសម្រេចចិត្ត
+            រៀនពីទិន្នន័យ វិភាគព័ត៌មាន និងដោះស្រាយបញ្ហាបានដូចមនុស្ស។
+            AI អាចស្គាល់រូបភាព ស្តាប់សំឡេង បកប្រែភាសា ឆ្លើយសំណួរ
+            និងទស្សន៍ទាយលទ្ធផលដោយផ្អែកលើទិន្នន័យដែលបានរៀន។
+            បច្ចុប្បន្ន AI ត្រូវបានប្រើប្រាស់យ៉ាងទូលំទូលាយក្នុងវិស័យសុខាភិបាល
+            ការអប់រំ ធនាគារ កសិកម្ម ពាណិជ្ជកម្ម និងឧស្សាហកម្មជាច្រើន។
+          </p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6 mt-14">
+          <!-- History -->
+          <div class="glass glass-card frame-corners p-6" data-aos="fade-up">
+            <span class="fc-tr"></span>
+            <span class="fc-br"></span>
+            <!-- if delete break hover -->
+            <i class="fa-solid fa-clock-rotate-left text-2xl text-red-400"></i>
+            <h3 class="font-display font-semibold text-xl mt-4">
+              ប្រវត្តិនៃការអភិវឌ្ឍ AI
+            </h3>
+            <ul class="mt-4 space-y-4 text-sm text-slate-300 leading-7">
+              <li>
+                <span class="font-mono text-accent">១៩៥០</span>
+                — លោក Alan Turing បានបង្កើត "Turing Test"
+                ដើម្បីវាស់ថាតើម៉ាស៊ីនអាចគិតដូចមនុស្សបានដែរឬទេ។
+              </li>
+              <li>
+                <span class="font-mono text-accent">១៩៥៦</span>
+                — ពាក្យ "Artificial Intelligence" ត្រូវបានប្រើជាផ្លូវការលើកដំបូង
+                នៅសន្និសីទ Dartmouth Conference។
+              </li>
+              <li>
+                <span class="font-mono text-accent">១៩៨០</span>
+                — ប្រព័ន្ធ Expert Systems មានការរីកចម្រើន
+                ប៉ុន្តែក្រោយមក AI បានជួបបញ្ហាដែលគេហៅថា AI Winter។
+              </li>
+
+              <li>
+                <span class="font-mono text-accent">១៩៩៧</span>
+                — កុំព្យូទ័រ Deep Blue បានយកឈ្នះជើងឯកអុកពិភពលោក Garry Kasparov។
+              </li>
+
+              <li>
+                <span class="font-mono text-accent">២០១២</span>
+                — AlexNet បានបង្ហាញថា Deep Learning
+                អាចស្គាល់រូបភាពបានយ៉ាងមានប្រសិទ្ធភាព។
+              </li>
+
+              <li>
+                <span class="font-mono text-accent">២០១៥</span>
+                — YOLO (You Only Look Once)
+                បានបង្កើតការរកឃើញវត្ថុក្នុងរូបភាព និងវីដេអូបានយ៉ាងលឿន។
+              </li>
+
+              <li>
+                <span class="font-mono text-accent">បច្ចុប្បន្ន</span>
+                — AI ត្រូវបានប្រើក្នុង ChatGPT, Gemini,
+                ការបើកបររថយន្តស្វ័យប្រវត្តិ,
+                មនុស្សយន្ត និងការវិភាគទិន្នន័យធំៗ។
+              </li>
+
+            </ul>
+          </div>
+          <!-- Applications -->
+          <div class="glass glass-card frame-corners p-6" data-aos="fade-up" data-aos-delay="100">
+            <img width="200" src="https://lankasara.com/wp-content/uploads/2024/09/Featured-Image-1.jpg" alt="">
+            <span class="fc-tr"></span>
+            <span class="fc-br"></span>
+            <i class="fa-solid fa-globe text-2xl text-secondary"></i>
+            <h3 class="font-display font-semibold text-xl mt-4">
+              ការប្រើប្រាស់ AI ក្នុងជីវិតប្រចាំថ្ងៃ
+            </h3>
+
+            <div class="grid grid-cols-2 gap-4 mt-5 text-sm text-slate-300">
+
+              <div>
+                <i class="fa-solid fa-stethoscope text-accent mr-2"></i>
+                វិភាគជំងឺ និងជួយវេជ្ជបណ្ឌិត
+              </div>
+
+              <div>
+                <i class="fa-solid fa-car text-accent mr-2"></i>
+                រថយន្តបើកបរស្វ័យប្រវត្តិ
+              </div>
+
+              <div>
+                <i class="fa-solid fa-comments text-accent mr-2"></i>
+                Chatbot និងជំនួយការឆ្លាតវៃ
+              </div>
+
+              <div>
+                <i class="fa-solid fa-shield-halved text-accent mr-2"></i>
+                រកឃើញការក្លែងបន្លំធនាគារ
+              </div>
+
+              <div>
+                <i class="fa-solid fa-store text-accent mr-2"></i>
+                ណែនាំផលិតផលក្នុងអាជីវកម្មអនឡាញ
+              </div>
+
+              <div>
+                <i class="fa-solid fa-seedling text-accent mr-2"></i>
+                វិភាគដំណាំ និងកសិកម្មឆ្លាតវៃ
+              </div>
+
+              <div>
+                <i class="fa-solid fa-camera text-accent mr-2"></i>
+                ស្គាល់មុខមនុស្ស និងរកឃើញវត្ថុ
+              </div>
+
+              <div>
+                <i class="fa-solid fa-graduation-cap text-accent mr-2"></i>
+                ការរៀនតាមអ៊ីនធឺណិត
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
 
-        <!-- BOTTOM IMAGES -->
-        <div class="bottom" id="thumbs"></div>
+        <!-- Advantages / Disadvantages -->
+        <div class="grid md:grid-cols-2 gap-6 mt-6">
 
+          <div class="glass glass-card p-6 border-l-2 border-blue-300" data-aos="fade-right">
+
+            <h4 class="font-display font-semibold text-lg text-blue-400">
+              <i class="fa-solid fa-circle-check mr-2"></i>
+              អត្ថប្រយោជន៍របស់ AI
+            </h4>
+
+            <ul class="mt-4 space-y-3 text-sm text-slate-300 list-disc list-inside leading-7">
+
+              <li>ជួយធ្វើការងារដដែលៗដោយស្វ័យប្រវត្តិ។</li>
+
+              <li>អាចវិភាគទិន្នន័យបានលឿន និងមានភាពត្រឹមត្រូវ។</li>
+
+              <li>កាត់បន្ថយកំហុសដែលបង្កឡើងដោយមនុស្ស។</li>
+
+              <li>ធ្វើការបាន ២៤ ម៉ោង ដោយមិនចាំបាច់សម្រាក។</li>
+
+              <li>ជួយសម្រេចចិត្តដោយផ្អែកលើទិន្នន័យជាក់ស្តែង។</li>
+
+              <li>បង្កើនផលិតភាព និងកាត់បន្ថយចំណាយរយៈពេលវែង។</li>
+
+            </ul>
+
+          </div>
+
+          <div class="glass glass-card p-6 border-l-2 border-orange-300" data-aos="fade-left">
+
+            <h4 class="font-display font-semibold text-lg text-red-300">
+              <i class="fa-solid fa-circle-exclamation mr-2"></i>
+              គុណវិបត្តិរបស់ AI
+            </h4>
+
+            <ul class="mt-4 space-y-3 text-sm text-slate-300 list-disc list-inside leading-7">
+
+              <li>ត្រូវការទិន្នន័យច្រើន និងមានគុណភាពល្អ។</li>
+
+              <li>ការបណ្តុះបណ្តាលម៉ូដែលត្រូវការកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់។</li>
+
+              <li>អាចបង្កើតការរើសអើង ប្រសិនបើទិន្នន័យបណ្តុះបណ្តាលមានភាពលំអៀង។</li>
+
+              <li>អាចប៉ះពាល់ដល់ការងារមួយចំនួនរបស់មនុស្ស។</li>
+
+              <li>មានការចំណាយខ្ពស់ក្នុងការអភិវឌ្ឍ និងថែទាំ។</li>
+
+              <li>មិនអាចជំនួសការគិត វិនិច្ឆ័យ និងសីលធម៌របស់មនុស្សបានទាំងស្រុង។</li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- ============ SECTION 2 : មុខងារសំខាន់ៗរបស់បញ្ញាសិប្បនិម្មិត (AI Key Functions) ============ -->
+    <section id="functions" class="relative py-24 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-5 md:px-8">
+        <!-- Title -->
+        <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
+          <span class="text-xs font-mono text-accent section-eyebrow">មេរៀនទី២</span>
+
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">
+            មុខងារសំខាន់ៗរបស់បញ្ញាសិប្បនិម្មិត (AI Key Functions)
+          </h2>
+
+          <p class="text-slate-400 mt-4 leading-8 text-justify">
+            បញ្ញាសិប្បនិម្មិត (AI) មិនមែនគ្រាន់តែជាបច្ចេកវិទ្យាដែលអាចឆ្លើយសំណួរបានប៉ុណ្ណោះទេ
+            ប៉ុន្តែវាមានមុខងារសំខាន់ៗជាច្រើនដែលជួយឲ្យម៉ាស៊ីនអាចយល់ ពិចារណា រៀន និងធ្វើសកម្មភាពបានដូចមនុស្ស។
+            មុខងារទាំងនេះគឺជាមូលដ្ឋានសម្រាប់កម្មវិធី AI ទាំងអស់ដូចជា Chatbot, Image Recognition, Self-driving car និង
+            YOLO Detection។
+          </p>
+        </div>
+
+        <!-- Cards -->
+        <div class="grid md:grid-cols-2 gap-6 mt-14">
+
+          <!-- 1 -->
+          <div class="glass glass-card frame-corners p-6" data-aos="fade-up">
+            <h3 class="font-display font-semibold text-xl text-pink-500">
+              <i class="fa-brands fa-cloudversify"></i> ១. ការរៀនពីទិន្នន័យ (Learning)
+            </h3>
+            <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
+              មុខងារសំខាន់បំផុតរបស់ AI គឺការរៀនពីទិន្នន័យ (Data Learning)។
+              AI ប្រើទិន្នន័យចាស់ៗដើម្បីស្វែងរកលំនាំ (patterns) ហើយបង្កើតចំណេះដឹងថ្មី។
+              ឧទាហរណ៍៖ ប្រព័ន្ធ AI អាចរៀនស្គាល់មុខមនុស្សពីរូបថតរាប់ពាន់សន្លឹក
+              ឬទស្សន៍ទាយថាអតិថិជននឹងទិញផលិតផលណាមួយ។<br>
+              -Machine Learning និង Deep Learning និង​​​ Reinforcement Learning
+              គឺជាវិធីសាស្រ្តសំខាន់ៗសម្រាប់ការរៀនពីទិន្នន័យ។
+            </p>
+          </div>
+          <!-- 2 -->
+          <div class="glass glass-card frame-corners p-6" data-aos="fade-up">
+            <h3 class="font-display font-semibold text-xl text-green-200">
+              <i class="fa-solid fa-hexagon-nodes-bolt"></i></i> ២. ការពិចារណា និងសម្រេចចិត្ត (Reasoning & Decision Making)
+            </h3>
+            <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
+              AI អាចវិភាគព័ត៌មាន ហើយសម្រេចចិត្តដោយ Algorithm ដែលបានកំណត់ទុកនិង​ Model​ ដែលបានរៀបចំទិន្នន័យ។
+              ឧទាហរណ៍៖ ប្រព័ន្ធធនាគារអាចសម្រេចថា តើប្រតិបត្តិការណាមួយមានហានិភ័យឬអត់។
+              AI ក្នុងរថយន្តស្វ័យប្រវត្តិអាចសម្រេចថាត្រូវបត់ ឈប់ ឬបន្តដំណើរ។
+              <br>
+              - Logical Reasoning, Probabilistic Reasoning និង Decision Trees គឺជាវិធីសាស្រ្តសំខាន់ៗសម្រាប់ការពិចារណា
+              និងសម្រេចចិត្ត។
+            </p>
+          </div>
+          <!-- 3 -->
+          <div class="glass glass-card frame-corners p-6" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="font-display font-semibold text-xl">
+              <i class="fa-solid fa-chart-pie"></i>
+               ៣. ការវិភាគ (Analysis)
+            </h3>
+            <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
+              AI អាចវិភាគទិន្នន័យដើម្បីរកលំនាំ និងទស្សន៍ទាយលទ្ធផល។
+              វាត្រូវបានប្រើក្នុងការវិភាគអតិថិជន ទស្សន៍ទាយទីផ្សារ និងស្វែងរកការប្រព្រឹត្តបទល្មើស។
+              ឧទាហរណ៍៖ ប្រព័ន្ធ AI អាចវិភាគទិន្នន័យអតិថិជនដើម្បីផ្តល់អនុសាសន៍ផលិតផលឬសេវាកម្មដែលពួកគេចូលចិត្ត។
+              - Natural Language Processing (NLP) និង Computer Vision គឺជាវិធីសាស្រ្តសំខាន់ៗសម្រាប់ការវិភាគទិន្នន័យ។
+            </p>
+          </div>
+          <!-- 4 -->
+          <div class="glass glass-card frame-corners p-6" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="font-display font-semibold text-xl">
+              <i class="fa-brands fa-keycdn"></i> ៤. ការអនុវត្តសកម្មភាព (Action & Automation)
+            </h3>
+            <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
+              AI អាចធ្វើសកម្មភាពដោយស្វ័យប្រវត្តិ ដោយគ្មានការគ្រប់គ្រងពីមនុស្សដោយផ្អែកលើលទ្ធផលដែលបានពី
+              Learning,Reasesioning,Analysis។
+              ឧទាហរណ៍៖ Robot នៅរោងចក្រ, Self-driving car,
+              និងប្រព័ន្ធណែនាំក្នុងអ៊ីនធឺណិតដែលធ្វើការដោយស្វ័យប្រវត្តិ។
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Summary -->
+        <div class="mt-10 glass glass-card p-6 border-l-2 border-primary" data-aos="fade-up">
+          <h4 class="font-display font-semibold text-lg text-primary">
+            សរុប
+          </h4>
+          <p class="mt-3 text-sm text-slate-300 leading-8 text-justify">
+            មុខងារសំខាន់ៗរបស់ AI រួមមាន ការរៀនពីទិន្នន័យ(Learning) + ការពិចារណា(Reasesioning)
+            + ការវិភាគ(Analysing) + និងការអនុវត្តសកម្មភាព។
+            មុខងារទាំងនេះធ្វើឲ្យ AI ក្លាយជាបច្ចេកវិទ្យាដ៏សំខាន់ក្នុងសម័យឌីជីថល
+            និងជួយបង្កើនប្រសិទ្ធភាពក្នុងជីវិតប្រចាំថ្ងៃ។
+          </p>
+        </div>
+
+      </div>
+    </section>
+    <!-- ============ SECTION 3: របៀបដំណើរការរបស់ AI (លម្អិត) ============ -->
+    <section id="ai-flow" class="relative py-24 border-t border-white/5">
+      <div class="max-w-4xl mx-auto px-5 md:px-8">
+
+        <!-- Title -->
+        <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+          <span class="text-xs font-mono text-accent section-eyebrow">មេរៀនទី៣</span>
+
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">
+            របៀបដំណើរការរបស់បញ្ញាសិប្បនិម្មិត (AI Workflow)
+          </h2>
+
+          <p class="text-slate-400 mt-4 leading-8 text-justify">
+            AI ដំណើរការតាមជំហានជាបន្តបន្ទាប់ពីទិន្នន័យទៅការរៀន បណ្តុះបណ្តាល
+            សម្រេចចិត្ត និងការកែលម្អ។ ជំហានទាំងនេះជួយឲ្យ AI កាន់តែឆ្លាត និងមានភាពត្រឹមត្រូវខ្ពស់។
+          </p>
+        </div>
+
+        <!-- FLOW -->
+        <div class="mt-14 flex flex-col items-center text-center space-y-6">
+
+          <!-- 1 -->
+          <div class="glass glass-card p-6 w-full md:w-2/3">
+            <h3 class="font-semibold text-xl">1. 📊 ទិន្នន័យ (Data Collection)</h3>
+            <p class="text-sm text-slate-300 mt-3 leading-8 text-justify">
+              ដំណើរការរបស់ AI ចាប់ផ្តើមពីទិន្នន័យ។ ទិន្នន័យអាចជារូបភាព វីដេអូ សំឡេង អត្ថបទ
+              ឬព័ត៌មានពីអ្នកប្រើប្រាស់។ ទិន្នន័យទាំងនេះត្រូវបានប្រមូលពីប្រភពផ្សេងៗ
+              ហើយយកមកសម្អាត (cleaning) និងរៀបចំ (preprocessing) ដើម្បីឲ្យម៉ាស៊ីនអាចយល់បាន។
+              ប្រសិនបើទិន្នន័យមានកំហុស ឬលំអៀង នោះ AI នឹងរៀនខុសដែរ។
+            </p>
+          </div>
+
+          <div class="text-accent text-2xl">⬇</div>
+
+          <!-- 2 -->
+          <div class="glass glass-card p-6 w-full md:w-2/3">
+            <h3 class="font-semibold text-xl">2. 🧠 ការរៀន (Learning)</h3>
+            <p class="text-sm text-slate-300 mt-3 leading-8 text-justify">
+              នៅដំណាក់កាលនេះ AI ចាប់ផ្តើមស្វែងរកលំនាំ (patterns) និងទំនាក់ទំនងក្នុងទិន្នន័យ។
+              វាប្រើ algorithm ដើម្បីយល់ថា តើអ្វីជាអ្វី។ ឧទាហរណ៍ AI អាចរៀនថា
+              រូបភាពដែលមានភ្នែក ច្រមុះ និងមាត់ អាចជាមុខមនុស្ស។
+              នេះគឺជាដំណាក់កាលដែល AI បង្កើត “ចំណេះដឹងដំបូង” របស់ខ្លួន។
+            </p>
+          </div>
+
+          <div class="text-accent text-2xl">⬇</div>
+
+          <!-- 3 -->
+          <div class="glass glass-card p-6 w-full md:w-2/3">
+            <h3 class="font-semibold text-xl">3. ⚙️ ការបណ្តុះបណ្តាលម៉ូដែល (Model Training)</h3>
+            <p class="text-sm text-slate-300 mt-3 leading-8 text-justify">
+              ម៉ូដែល (Model) គឺជាគណិតវិទ្យា ឬ algorithm ដែល AI ប្រើសម្រាប់ទស្សន៍ទាយ។
+              ក្នុងដំណាក់កាលនេះ AI ត្រូវបានបណ្តុះបណ្តាលដោយទិន្នន័យច្រើនដង
+              ដើម្បីកាត់បន្ថយកំហុស (error) និងបង្កើនភាពត្រឹមត្រូវ។
+              វាធ្វើការកែសម្រួលខ្លួនឯងជាបន្តបន្ទាប់រហូតដល់ទទួលបានលទ្ធផលល្អ។
+            </p>
+          </div>
+
+          <div class="text-accent text-2xl">⬇</div>
+
+          <!-- 4 -->
+          <div class="glass glass-card p-6 w-full md:w-2/3">
+            <h3 class="font-semibold text-xl">4. 🎯 ការសម្រេចចិត្ត និងសកម្មភាព (Decision Making & Action)</h3>
+            <p class="text-sm text-slate-300 mt-3 leading-8 text-justify">
+              បន្ទាប់ពីម៉ូដែលត្រូវបានបណ្តុះបណ្តាល AI អាចប្រើវាដើម្បីសម្រេចចិត្ត។
+              ឧទាហរណ៍ AI អាចស្គាល់រូបភាពថាជាឆ្មា ឬឆ្កែ,
+              ឬសម្រេចថាប្រតិបត្តិការធនាគារមានសុវត្ថិភាពឬអត់។
+              នៅក្នុងប្រព័ន្ធពិត AI អាចធ្វើសកម្មភាពដោយស្វ័យប្រវត្តិ
+              ដូចជា បើកបររថយន្ត ឆ្លើយសំណួរ ឬណែនាំផលិតផល។
+            </p>
+          </div>
+
+          <div class="text-accent text-2xl">⬇</div>
+
+          <!-- 5 -->
+          <div class="glass glass-card p-6 w-full md:w-2/3 border-l-2 border-primary">
+            <h3 class="font-semibold text-xl text-primary">
+              5. 🔄 ការកែលម្អជាបន្តបន្ទាប់ (Continuous Improvement)
+            </h3>
+            <p class="text-sm text-slate-300 mt-3 leading-8 text-justify">
+              AI មិនឈប់រៀនទេ។ នៅពេលវាត្រូវបានប្រើប្រាស់ក្នុងពិភពពិត
+              វានឹងទទួលបានទិន្នន័យថ្មីៗ និង feedback ពីអ្នកប្រើប្រាស់។
+              ទិន្នន័យថ្មីៗនេះត្រូវបានយកទៅបន្ថែមក្នុងការបណ្តុះបណ្តាលវិញ
+              ដើម្បីធ្វើឲ្យម៉ូដែលកាន់តែឆ្លាត និងត្រឹមត្រូវជាងមុន។
+              ដំណើរការនេះហៅថា “Feedback Loop” ដែលធ្វើឲ្យ AI កែលម្អខ្លួនឯងជាបន្តបន្ទាប់។
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- ============ SECTION 4: ប្រភេទនៃបញ្ញាសិប្បនិម្មិត (Types of AI - Old Style) ============ -->
+    <section id="ai-types" class="relative py-24 border-t border-white/10 bg-slate-950">
+
+      <div class="max-w-6xl mx-auto px-5 md:px-8">
+
+        <!-- Title -->
+        <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
+          <span class="text-xs font-mono text-accent section-eyebrow">
+            មេរៀនទី៤
+          </span>
+
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3 text-slate-100">
+            ប្រភេទនៃបញ្ញាសិប្បនិម្មិត (Types of AI)
+          </h2>
+
+          <p class="text-slate-400 mt-4 leading-8 text-justify">
+            បញ្ញាសិប្បនិម្មិត (AI) អាចត្រូវបានបែងចែកជាប្រភេទផ្សេងៗ
+            ដោយផ្អែកលើកម្រិតនៃភាពឆ្លាត និងសមត្ថភាពក្នុងការគិត។
+            ប្រភេទទាំងនេះបង្ហាញពីការវិវត្តន៍ពី AI សាមញ្ញទៅ AI ដែលមានសមត្ថភាពខ្ពស់។
+          </p>
+        </div>
+
+        <!-- Old Style Cards -->
+        <div class="mt-14 space-y-8">
+
+          <!-- 1 -->
+          <div class="frame-corners border border-slate-700 bg-slate-900/40 p-6 md:p-8 rounded-sm shadow-lg"
+            data-aos="fade-up">
+
+            <h3 class="font-display text-xl font-semibold text-slate-100">
+              1. 🤖 Narrow AI (AI តូច / AI មានកម្រិត)
+            </h3>
+
+            <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
+              Narrow AI គឺជា AI ដែលត្រូវបានបង្កើតឡើងសម្រាប់ការងារតែមួយប៉ុណ្ណោះ។
+              វាមិនអាចគិតក្រៅពីភារកិច្ចដែលវាត្រូវបានបណ្តុះបណ្តាល។
+              ឧទាហរណ៍៖ Face Recognition, Google Translate, Chatbot និង YOLO Object Detection។
+              AI ប្រភេទនេះគឺជាប្រភេទដែលយើងប្រើប្រាស់ជាទូទៅបំផុតក្នុងពិភពបច្ចុប្បន្ន។
+            </p>
+          </div>
+
+          <!-- 2 -->
+          <div class="border border-slate-700 bg-slate-900/40 p-6 md:p-8 rounded-sm shadow-lg" data-aos="fade-up">
+
+            <h3 class="font-display text-xl font-semibold text-slate-100">
+              2. 🧠 General AI (AI ទូទៅ)
+            </h3>
+
+            <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
+              General AI គឺជា AI ដែលមានសមត្ថភាពគិត និងរៀនដូចមនុស្ស។
+              វាអាចធ្វើការងារជាច្រើនប្រភេទ មិនចាំបាច់កំណត់តែមួយភារកិច្ចទេ។
+              ឧទាហរណ៍ វាអាចរៀនគណិតវិទ្យា សរសេរកូដ និងយល់ពីអារម្មណ៍មនុស្សបាន។
+              ប៉ុន្តែបច្ចុប្បន្ន General AI នៅតែជាគំនិត និងការស្រាវជ្រាវប៉ុណ្ណោះ។
+            </p>
+          </div>
+
+          <!-- 3 -->
+          <div class="border border-slate-700 bg-slate-900/40 p-6 md:p-8 rounded-sm shadow-lg" data-aos="fade-up">
+
+            <h3 class="font-display text-xl font-semibold text-slate-100">
+              3. ⚡ Super AI (AI លើសមនុស្ស)
+            </h3>
+
+            <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
+              Super AI គឺជា AI ដែលមានសមត្ថភាពខ្ពស់ជាងមនុស្សក្នុងគ្រប់វិស័យ
+              ដូចជា ការគិត វិភាគ សម្រេចចិត្ត និងការច្នៃប្រឌិត។
+              វាអាចដោះស្រាយបញ្ហាស្មុគស្មាញបានលឿនជាងមនុស្សជាច្រើនដង។
+              បច្ចុប្បន្ន Super AI មិនទាន់មានជាក់ស្តែងទេ ប៉ុន្តែជាគោលដៅនាពេលអនាគត។
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Footer note -->
+        <div class="mt-10 text-center text-sm text-slate-500">
+          💡 សរុប៖ AI មានការវិវត្តន៍ពី Narrow AI → General AI → Super AI
+        </div>
+
+      </div>
+    </section>
+    <!-- ============ SECTION 5: MACHINE LEARNING ============ -->
+    <section id="ml" class="relative py-24 border-t border-white/5 bg-white/[0.02]">
+      <div class="max-w-7xl mx-auto px-5 md:px-8">
+        <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+          <span class="text-xs font-mono text-accent section-eyebrow">LEARNING FROM DATA</span>
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">Machine Learning</h2>
+          <p class="text-slate-400 mt-4">Machine Learning gives computers the ability to improve at a task by learning
+            from examples, instead of following hand-written rules.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 mt-14">
+          <div class="glass glass-card frame-corners p-6 text-center" data-aos="fade-up">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+            <div
+              class="w-14 h-14 mx-auto rounded-xl bg-gradient-to-br from-primary to-accent grid place-items-center mb-4">
+              <i class="fa-solid fa-tags text-white text-xl"></i>
+            </div>
+            <h3 class="font-display font-semibold text-lg">Supervised Learning</h3>
+            <p class="text-sm text-slate-400 mt-2">Learns from labeled examples — inputs paired with correct answers —
+              to predict labels for new data.</p>
+            <div class="mt-3 text-xs font-mono text-primary">e.g. spam detection, YOLO training</div>
+          </div>
+          <div class="glass glass-card frame-corners p-6 text-center" data-aos="fade-up" data-aos-delay="100">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+            <div
+              class="w-14 h-14 mx-auto rounded-xl bg-gradient-to-br from-secondary to-primary grid place-items-center mb-4">
+              <i class="fa-solid fa-shapes text-white text-xl"></i>
+            </div>
+            <h3 class="font-display font-semibold text-lg">Unsupervised Learning</h3>
+            <p class="text-sm text-slate-400 mt-2">Finds hidden structure in unlabeled data by grouping similar examples
+              together.</p>
+            <div class="mt-3 text-xs font-mono text-secondary">e.g. customer segmentation</div>
+          </div>
+          <div class="glass glass-card frame-corners p-6 text-center" data-aos="fade-up" data-aos-delay="200">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+            <div
+              class="w-14 h-14 mx-auto rounded-xl bg-gradient-to-br from-accent to-secondary grid place-items-center mb-4">
+              <i class="fa-solid fa-gamepad text-white text-xl"></i>
+            </div>
+            <h3 class="font-display font-semibold text-lg">Reinforcement Learning</h3>
+            <p class="text-sm text-slate-400 mt-2">An agent learns by trial and error, receiving rewards or penalties
+              for its actions.</p>
+            <div class="mt-3 text-xs font-mono text-accent">e.g. game-playing agents, robotics</div>
+          </div>
+        </div>
+
+        <!-- diagram -->
+        <div class="glass glass-card p-8 mt-10" data-aos="fade-up">
+          <svg viewBox="0 0 800 160" class="w-full h-auto">
+            <rect x="20" y="60" width="140" height="46" rx="10" fill="none" stroke="#3B82F6" stroke-width="2" />
+            <text x="90" y="88" text-anchor="middle" fill="#cbd5e1" font-size="13" font-family="Inter">Raw Data</text>
+            <line x1="160" y1="83" x2="230" y2="83" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+            <rect x="230" y="20" width="160" height="46" rx="10" fill="none" stroke="#8B5CF6" stroke-width="2" />
+            <text x="310" y="48" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Inter">Model
+              Training</text>
+            <line x1="390" y1="43" x2="460" y2="43" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+            <rect x="230" y="94" width="160" height="46" rx="10" fill="none" stroke="#06B6D4" stroke-width="2" />
+            <text x="310" y="122" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Inter">Pattern
+              Discovery</text>
+            <line x1="390" y1="117" x2="460" y2="117" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+            <rect x="460" y="60" width="160" height="46" rx="10" fill="none" stroke="#10B981" stroke-width="2" />
+            <text x="540" y="88" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Inter">Trained
+              Model</text>
+            <line x1="620" y1="83" x2="690" y2="83" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+            <rect x="690" y="60" width="90" height="46" rx="10" fill="none" stroke="#F59E0B" stroke-width="2" />
+            <text x="735" y="88" text-anchor="middle" fill="#cbd5e1" font-size="12"
+              font-family="Inter">Predictions</text>
+            <defs>
+              <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 z" fill="#475569" />
+              </marker>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    </section>
+    <!-- ============ SECTION 6: DEEP LEARNING ============ -->
+    <section id="dl" class="relative py-24 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-14 items-center">
+        <div data-aos="fade-right">
+          <span class="text-xs font-mono text-accent section-eyebrow">NEURAL NETWORKS</span>
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">Deep Learning</h2>
+          <p class="text-slate-400 mt-4">Deep Learning uses layered neural networks to automatically learn features
+            directly from raw data like pixels.</p>
+
+          <div class="space-y-4 mt-8">
+            <div class="glass rounded-xl p-4 frame-corners">
+              <span class="fc-tr"></span><span class="fc-br"></span>
+              <h4 class="font-semibold text-sm text-primary"><i class="fa-solid fa-diagram-project mr-2"></i>Neural
+                Networks</h4>
+              <p class="text-sm text-slate-400 mt-1">Layers of connected nodes ("neurons") that transform input signals
+                into predictions.</p>
+            </div>
+            <div class="glass rounded-xl p-4 frame-corners">
+              <span class="fc-tr"></span><span class="fc-br"></span>
+              <h4 class="font-semibold text-sm text-secondary"><i class="fa-solid fa-layer-group mr-2"></i>Hidden Layers
+              </h4>
+              <p class="text-sm text-slate-400 mt-1">Intermediate layers between input and output that build
+                increasingly abstract features.</p>
+            </div>
+            <div class="glass rounded-xl p-4 frame-corners">
+              <span class="fc-tr"></span><span class="fc-br"></span>
+              <h4 class="font-semibold text-sm text-accent"><i class="fa-solid fa-scale-unbalanced mr-2"></i>Weights
+                &amp; Bias</h4>
+              <p class="text-sm text-slate-400 mt-1">Weights scale each input's importance; bias shifts the result —
+                both are learned during training.</p>
+            </div>
+            <div class="glass rounded-xl p-4 frame-corners">
+              <span class="fc-tr"></span><span class="fc-br"></span>
+              <h4 class="font-semibold text-sm text-warning"><i class="fa-solid fa-wave-square mr-2"></i>Activation
+                Functions</h4>
+              <p class="text-sm text-slate-400 mt-1">Non-linear functions (like ReLU) that let networks model complex
+                relationships.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass glass-card p-4" data-aos="fade-left">
+          <canvas id="nnCanvas" class="w-full" height="360"></canvas>
+          <p class="text-center text-xs text-slate-500 mt-2 font-mono">interactive signal propagation</p>
+        </div>
+      </div>
+    </section>
+    <!-- ============ SECTION 7: COMPUTER VISION ============ -->
+    <section id="cv" class="relative py-24 border-t border-white/5 bg-white/[0.02]">
+      <div class="max-w-7xl mx-auto px-5 md:px-8">
+        <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+          <span class="text-xs font-mono text-accent section-eyebrow">TEACHING MACHINES TO SEE</span>
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">Computer Vision</h2>
+          <p class="text-slate-400 mt-4">A family of tasks that let machines interpret images and video — YOLO focuses
+            on one of them: object detection.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-14">
+          <div class="glass glass-card frame-corners p-5" data-aos="zoom-in">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+            <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
+              <rect width="100" height="70" rx="8" fill="#1e293b" />
+              <circle cx="50" cy="35" r="18" fill="#3B82F6" />
+            </svg>
+            <h4 class="font-semibold text-sm">Image Classification</h4>
+            <p class="text-xs text-slate-400 mt-1">"What is this image?" — one label for the whole image.</p>
+          </div>
+          <div class="glass glass-card frame-corners p-5 ring-1 ring-accent/40" data-aos="zoom-in" data-aos-delay="80">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+            <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
+              <rect width="100" height="70" rx="8" fill="#1e293b" />
+              <circle cx="50" cy="35" r="16" fill="#8B5CF6" />
+              <rect x="30" y="15" width="40" height="40" fill="none" stroke="#06B6D4" stroke-width="2" rx="4" />
+            </svg>
+            <h4 class="font-semibold text-sm">Object Detection</h4>
+            <p class="text-xs text-slate-400 mt-1">Locates &amp; labels multiple objects with bounding boxes — YOLO's
+              specialty.</p>
+          </div>
+          <div class="glass glass-card frame-corners p-5" data-aos="zoom-in" data-aos-delay="160">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+            <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
+              <rect width="100" height="70" rx="8" fill="#1e293b" />
+              <path d="M30 50 Q50 10 70 50 Z" fill="#10B981" opacity="0.7" />
+            </svg>
+            <h4 class="font-semibold text-sm">Image Segmentation</h4>
+            <p class="text-xs text-slate-400 mt-1">Classifies every pixel, tracing an object's exact outline.</p>
+          </div>
+          <div class="glass glass-card frame-corners p-5" data-aos="zoom-in" data-aos-delay="240">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+            <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
+              <rect width="100" height="70" rx="8" fill="#1e293b" />
+              <circle cx="50" cy="20" r="7" fill="#F59E0B" />
+              <line x1="50" y1="27" x2="50" y2="50" stroke="#F59E0B" stroke-width="3" />
+              <line x1="50" y1="35" x2="35" y2="45" stroke="#F59E0B" stroke-width="3" />
+              <line x1="50" y1="35" x2="65" y2="45" stroke="#F59E0B" stroke-width="3" />
+            </svg>
+            <h4 class="font-semibold text-sm">Pose Estimation</h4>
+            <p class="text-xs text-slate-400 mt-1">Maps skeletal keypoints to understand body position and movement.</p>
+          </div>
+          <div class="glass glass-card frame-corners p-5" data-aos="zoom-in" data-aos-delay="320">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+            <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
+              <rect width="100" height="70" rx="8" fill="#1e293b" /><text x="50" y="42" text-anchor="middle"
+                fill="#06B6D4" font-family="JetBrains Mono" font-size="16">A19</text>
+            </svg>
+            <h4 class="font-semibold text-sm">OCR</h4>
+            <p class="text-xs text-slate-400 mt-1">Reads and extracts text characters straight out of images.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div id="yolol" class="page">
+    <!-- ============ SECTION 8: YOLO DETECTION ============ -->
+    <section id="yolo" class="relative py-24 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-5 md:px-8">
+        <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
+          <span class="text-xs font-mono text-accent section-eyebrow">មេរៀនសំខាន់ក្នុងវគ្គនេះ</span>
+          <h2 class="font-display font-bold text-4xl md:text-5xl mt-3 grad-text">YOLO (You Only Look Once)</h2>
+          <p class="text-slate-400 mt-4 text-lg">
+            YOLO គឺជា Model សម្រាប់រកវត្ថុ (Object Detection) ដែលអាចមើលរូបភាពតែមួយដងប៉ុណ្ណោះ
+            ហើយអាចទាយបានទាំងទីតាំង (Location) និងប្រភេទវត្ថុ (Class) ក្នុងពេលតែមួយ។
+            វាធ្វើឲ្យប្រព័ន្ធមានល្បឿនលឿនខ្លាំង និងអាចប្រើបានក្នុងការងារពេលវេលាពិត (Real-time) ដូចជា
+            Camera, Self-driving car និង AI Surveillance។
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mt-14">
+
+          <div class="glass glass-card frame-corners p-6" data-aos="fade-up">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+            <i class="fa-solid fa-bolt text-2xl text-warning"></i>
+            <h3 class="font-display font-semibold text-lg mt-3">ហេតុអ្វី YOLO លឿន?</h3>
+            <p class="text-sm text-slate-400 mt-2">
+              មុននេះ Object Detection ប្រើវិធីច្រើនជំហាន (Multi-stage) ដូចជា៖
+              ស្វែងរក Region ជាមុន → បន្ទាប់មកចាត់ថ្នាក់វត្ថុក្នុង Region នោះ។
+              ប៉ុន្តែ YOLO បម្លែងបញ្ហានេះទៅជា <span class="text-slate-200 font-medium">បញ្ហា Regression តែមួយដង</span>
+              ដោយទាយ bounding boxes និង class ទាំងអស់ក្នុងការបញ្ជូនតែមួយ (single forward pass)។
+              ដូច្នេះវាលឿនជាងប្រព័ន្ធចាស់ៗយ៉ាងខ្លាំង។
+            </p>
+          </div>
+
+          <div class="glass glass-card frame-corners p-6" data-aos="fade-up" data-aos-delay="80">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+            <i class="fa-solid fa-layer-group text-2xl text-primary"></i>
+            <h3 class="font-display font-semibold text-lg mt-3">One-Stage Detector (ប្រព័ន្ធមួយជំហាន)</h3>
+            <p class="text-sm text-slate-400 mt-2">
+              YOLO បែងចែករូបភាពទៅជា Grid (តារាងតូចៗ)។
+              Grid នីមួយៗមានភារកិច្ចទាយថា៖ តើមានវត្ថុឬអត់?
+              បើមាន វានឹងទាយ bounding box និង class probability ភ្លាមៗ។
+              មិនចាំបាច់មានការបង្កើត Region Proposal ដូច R-CNN ទេ។
+            </p>
+          </div>
+
+          <div class="glass glass-card frame-corners p-6" data-aos="fade-up" data-aos-delay="160">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+            <i class="fa-solid fa-vector-square text-2xl text-secondary"></i>
+            <h3 class="font-display font-semibold text-lg mt-3">Bounding Box និង Confidence Score</h3>
+            <p class="text-sm text-slate-400 mt-2">
+              Bounding Box គឺជាស៊ុម (Rectangle) ដែលបង្ហាញទីតាំងវត្ថុក្នុងរូបភាព។
+              វាមានតម្លៃដូចជា៖ x, y (ទីតាំង) និង width, height (ទំហំ)។
+              YOLO ក៏ផ្តល់ Confidence Score ដែលបង្ហាញកម្រិតជឿជាក់ថា នៅក្នុង box នោះមានវត្ថុពិតប្រាកដ។
+            </p>
+          </div>
+
+          <div class="glass glass-card frame-corners p-6" data-aos="fade-up" data-aos-delay="240">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+            <i class="fa-solid fa-filter text-2xl text-accent"></i>
+            <h3 class="font-display font-semibold text-lg mt-3">Class Prediction និង NMS</h3>
+            <p class="text-sm text-slate-400 mt-2">
+              ក្នុងមួយ Bounding Box YOLO ក៏ទាយប្រភេទវត្ថុ (Class Probability) ដូចជា មនុស្ស, ឡាន, ឆ្កែ។
+              បន្ទាប់មកប្រើ Non-Maximum Suppression (NMS) ដើម្បីលុប box ដែលស្ទួនគ្នា
+              ហើយរក្សាទុកតែ box ដែលមាន confidence ខ្ពស់បំផុតសម្រាប់វត្ថុនីមួយៗ។
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Pipeline -->
+        <div class="mt-20" data-aos="fade-up">
+          <h3 class="font-display font-semibold text-2xl text-center mb-10">
+            ដំណើរការទាំងមូល (Complete Pipeline)
+          </h3>
+          <div class="flex flex-col items-center">
+            <div id="pipeline" class="flex flex-col items-center"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <div class="p-10">
+      <img src="ChatGPT Image Jul 4, 2026, 12_09_42 AM.png" alt="">
+    </div>
+    <!-- ============ SECTION 9: YOLO ARCHITECTURE (KHMER + DETAILED) ============ -->
+    <section class="relative py-24 border-t border-white/5 bg-white/[0.02]">
+      <div class="max-w-7xl mx-auto px-5 md:px-8">
+
+        <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+          <span class="text-xs font-mono text-accent section-eyebrow">ខាងក្នុងប្រព័ន្ធ (UNDER THE HOOD)</span>
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">ស្ថាបត្យកម្ម YOLO (YOLO Architecture)</h2>
+          <p class="text-slate-400 mt-4">
+            ម៉ូឌែល YOLO ត្រូវបានបែងចែកជាបីផ្នែកសំខាន់ ដែលធ្វើការជាមួយគ្នា ដើម្បីអាចសម្គាល់វត្ថុបានលឿន និងត្រឹមត្រូវ។
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 mt-14">
+
+          <!-- Backbone -->
+          <div class="glass glass-card frame-corners p-6 relative overflow-hidden" data-aos="fade-up">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+
+            <div class="absolute inset-0 arch-pulse opacity-0" data-arch="0"
+              style="background:radial-gradient(circle at 50% 0%, rgba(59,130,246,0.25), transparent 70%);"></div>
+
+            <div class="relative">
+              <span class="text-xs font-mono text-primary">01</span>
+              <h3 class="font-display font-semibold text-lg mt-2">Backbone (ផ្នែកទាញយកលក្ខណៈ)</h3>
+
+              <p class="text-sm text-slate-400 mt-2">
+                Backbone គឺជាបណ្តាញ Convolutional Neural Network (CNN) ដូចជា CSPDarknet។
+                វាមានភារកិច្ចក្នុងការទាញយកលក្ខណៈសំខាន់ៗពីរូបភាព ដូចជា៖
+              </p>
+
+              <ul class="text-sm text-slate-400 mt-3 list-disc pl-5 space-y-1">
+                <li>គែម (Edges)</li>
+                <li>រចនាសម្ព័ន្ធ និងប្លង់ (Shapes & Structures)</li>
+                <li>វាយនភាព (Textures)</li>
+                <li>លក្ខណៈពិសេសសំខាន់ៗរបស់វត្ថុ</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Neck -->
+          <div class="glass glass-card frame-corners p-6 relative overflow-hidden" data-aos="fade-up"
+            data-aos-delay="100">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+
+            <div class="absolute inset-0 arch-pulse opacity-0" data-arch="1"
+              style="background:radial-gradient(circle at 50% 0%, rgba(139,92,246,0.25), transparent 70%);"></div>
+
+            <div class="relative">
+              <span class="text-xs font-mono text-secondary">02</span>
+              <h3 class="font-display font-semibold text-lg mt-2">Neck (ផ្នែកបញ្ចូលលក្ខណៈច្រើនកម្រិត)</h3>
+
+              <p class="text-sm text-slate-400 mt-2">
+                Neck ជាស្រទាប់មធ្យមដែលភ្ជាប់ Backbone និង Head។
+                វាប្រើបច្ចេកទេសដូចជា FPN (Feature Pyramid Network) និង PANet
+                ដើម្បីបញ្ចូលព័ត៌មានពីកម្រិតផ្សេងៗនៃរូបភាព។
+              </p>
+
+              <ul class="text-sm text-slate-400 mt-3 list-disc pl-5 space-y-1">
+                <li>បញ្ចូលព័ត៌មានពីរូបភាពធំ និងតូច</li>
+                <li>ជួយរកវត្ថុតូចៗបានល្អជាងមុន</li>
+                <li>បង្កើនភាពត្រឹមត្រូវក្នុងការសម្គាល់វត្ថុ</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Head -->
+          <div class="glass glass-card frame-corners p-6 relative overflow-hidden" data-aos="fade-up"
+            data-aos-delay="200">
+            <span class="fc-tr"></span><span class="fc-br"></span>
+
+            <div class="absolute inset-0 arch-pulse opacity-0" data-arch="2"
+              style="background:radial-gradient(circle at 50% 0%, rgba(6,182,212,0.25), transparent 70%);"></div>
+
+            <div class="relative">
+              <span class="text-xs font-mono text-accent">03</span>
+              <h3 class="font-display font-semibold text-lg mt-2">Head (ផ្នែកទស្សន៍ទាយលទ្ធផល)</h3>
+
+              <p class="text-sm text-slate-400 mt-2">
+                Head គឺជាផ្នែកចុងក្រោយដែលធ្វើការទស្សន៍ទាយលទ្ធផល។
+                វាបម្លែងលក្ខណៈដែលបានទាញយកទៅជាព័ត៌មានសម្រាប់ការសម្គាល់វត្ថុ។
+              </p>
+
+              <ul class="text-sm text-slate-400 mt-3 list-disc pl-5 space-y-1">
+                <li>Bounding Box (ប្រអប់កំណត់ទីតាំងវត្ថុ)</li>
+                <li>Confidence Score (កម្រិតទំនុកចិត្ត)</li>
+                <li>Class Probability (ប្រភេទវត្ថុ)</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Flow Diagram -->
+        <div class="glass glass-card p-6 mt-8" data-aos="fade-up">
+          <svg viewBox="0 0 800 100" class="w-full h-auto">
+
+            <rect x="10" y="27" width="220" height="46" rx="10" fill="rgba(59,130,246,0.12)" stroke="#3B82F6"
+              stroke-width="2" />
+            <text x="120" y="55" text-anchor="middle" fill="#cbd5e1" font-size="13">Backbone (ទាញយកលក្ខណៈ)</text>
+
+            <line x1="230" y1="50" x2="290" y2="50" stroke="#475569" stroke-width="2" />
+
+            <rect x="290" y="27" width="220" height="46" rx="10" fill="rgba(139,92,246,0.12)" stroke="#8B5CF6"
+              stroke-width="2" />
+            <text x="400" y="55" text-anchor="middle" fill="#cbd5e1" font-size="13">Neck (បញ្ចូលលក្ខណៈ)</text>
+
+            <line x1="510" y1="50" x2="570" y2="50" stroke="#475569" stroke-width="2" />
+
+            <rect x="570" y="27" width="220" height="46" rx="10" fill="rgba(6,182,212,0.12)" stroke="#06B6D4"
+              stroke-width="2" />
+            <text x="680" y="55" text-anchor="middle" fill="#cbd5e1" font-size="13">Head → លទ្ធផលសម្គាល់</text>
+
+          </svg>
+        </div>
+
+      </div>
+    </section>
+    <!-- ============ SECTION 10: HOW YOLO DETECTS ============ -->
+    <section class="relative py-24 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-5 md:px-8">
+        <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+          <span class="text-xs font-mono text-accent section-eyebrow">STEP BY STEP</span>
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">How YOLO Detects Objects</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-5 mt-14 max-w-4xl mx-auto">
+          <!-- steps injected -->
+          <div id="stepsList" class="contents"></div>
+        </div>
+      </div>
+    </section>
+    <!-- ============ SECTION 11: BOUNDING BOX ============ -->
+    <section class="relative py-24 border-t border-white/5 bg-white/[0.02]">
+      <div class="max-w-7xl mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-14 items-center">
+
+        <div data-aos="fade-right">
+          <span class="text-xs font-mono text-accent section-eyebrow">LOCATING OBJECTS</span>
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">The Bounding Box</h2>
+
+          <p class="text-slate-400 mt-4">
+            Bounding Box គឺជាគំនិតសំខាន់មួយក្នុង Object Detection ដែលប្រើសម្រាប់កំណត់ទីតាំងរបស់វត្ថុនៅក្នុងរូបភាព។
+            YOLO មិនត្រឹមតែអាចដឹងថាវត្ថុជា​អ្វីទេ ប៉ុន្តែវាក៏អាចកំណត់ថាវត្ថុនោះស្ថិតនៅត្រង់ណា និងមានទំហំប៉ុនណា។
+          </p>
+
+          <p class="text-slate-400 mt-4">
+            នៅក្នុងប្រព័ន្ធ AI មួយ Bounding Box ត្រូវបានប្រើដើម្បី “គូសប្រអប់” ជុំវិញវត្ថុដែលបានរកឃើញ។
+            ប្រអប់នេះអាចផ្លាស់ប្តូរទំហំ និងទីតាំងបាន ដើម្បីឲ្យសមនឹងវត្ថុពិតក្នុងរូបភាព។
+          </p>
+
+          <p class="text-slate-400 mt-4">
+            រាល់ Bounding Box មួយត្រូវបានបង្កើតឡើងដោយលេខសំខាន់ ៤ គេហៅថា
+            <span class="text-accent font-mono">x, y, w, h</span> ដែលជាគន្លងគណិតវិទ្យាសម្រាប់កំណត់ទីតាំង និងទំហំ។
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 mt-6 font-mono text-sm">
+            <div class="glass rounded-xl p-4">
+              <span class="text-sky-400">x</span> — ទីតាំងកណ្ដាលតាមអ័ក្ស X (horizontal)
+              <br /><i class="fa-regular fa-hand-point-right text-yellow-400"></i> បង្ហាញថាវត្ថុស្ថិតនៅខាងឆ្វេង ឬស្តាំក្នុងរូបភាពប៉ុណ្ណា
+            </div>
+
+            <div class="glass rounded-xl p-4">
+              <span class="text-amber-600">y</span> — ទីតាំងកណ្ដាលតាមអ័ក្ស Y (vertical)
+              <br /><i class="fa-regular fa-hand-point-right text-yellow-400"></i> បង្ហាញថាវត្ថុស្ថិតនៅខាងលើ ឬខាងក្រោមក្នុងរូបភាព
+            </div>
+
+            <div class="glass rounded-xl p-4">
+              <span class="text-pink-600">w</span> — ទទឹងប្រអប់ (width)
+              <br /><i class="fa-regular fa-hand-point-right text-yellow-400"></i> កំណត់ថាវត្ថុមានទំហំទូលាយប៉ុនណា តាមទិសផ្ដេក
+            </div>
+
+            <div class="glass rounded-xl p-4">
+              <span class="text-red-600">h</span> — កម្ពស់ប្រអប់ (height)
+              <br /><i class="fa-regular fa-hand-point-right text-yellow-400"></i> កំណត់ថាវត្ថុមានកម្ពស់ប៉ុនណា តាមទិសបញ្ឈរ
+            </div>
+          </div>
+
+          <p class="text-slate-400 mt-6">
+            ក្នុង YOLO មួយរូបភាពអាចមាន Bounding Box ច្រើន។ ម៉ូដែលនឹងបង្កើតប្រអប់ជាច្រើនសម្រាប់វត្ថុដែលអាចមាន។
+            បន្ទាប់មកវានឹងគណនាពិន្ទុទំនុកចិត្ត (confidence score) ហើយជ្រើសរើសប្រអប់ដែលត្រឹមត្រូវបំផុត។
+            ប្រអប់ស្ទួនៗនឹងត្រូវបានលុបចេញដោយប្រើវិធី Non-Max Suppression (NMS)។
+          </p>
+          <p class="text-slate-500 text-xs mt-2">
+            <i class="fa-solid fa-arrow-trend-up text-red-500"></i> សរុប៖ Bounding Box គឺជារបៀបដែល AI “គូសប្រអប់” ជុំវិញវត្ថុ ដើម្បីកំណត់ទីតាំង និងទំហំរបស់វាឲ្យច្បាស់លាស់។
+          </p>
+        </div>
+        <div class="glass glass-card p-6" data-aos="fade-left">
+          <div class="relative w-full aspect-square bg-bg-2/60 rounded-xl overflow-hidden" id="bboxStage">
+            <svg viewBox="0 0 300 300" class="absolute inset-0 w-full h-full">
+              <rect width="300" height="300" fill="#0b1222" />
+              <circle cx="150" cy="150" r="60" fill="#1e293b" />
+            </svg>
+            <div id="bboxRect" class="bbox"
+              style="left:90px; top:90px; width:120px; height:120px; border-color:#06B6D4;">
+              <div class="bbox-label" style="background:#06B6D4; color:#0f172a;">object</div>
+              <div class="absolute -right-2 -bottom-2 w-4 h-4 rounded-full bg-accent cursor-nwse-resize"
+                id="bboxHandle"></div>
+            </div>
+          </div>
+          <div class="grid grid-cols-4 gap-2 mt-4 text-center font-mono text-xs">
+            <div class="glass rounded-lg py-2"><span class="text-primary">x</span><br><span id="valX">150</span></div>
+            <div class="glass rounded-lg py-2"><span class="text-secondary">y</span><br><span id="valY">150</span></div>
+            <div class="glass rounded-lg py-2"><span class="text-accent">w</span><br><span id="valW">120</span></div>
+            <div class="glass rounded-lg py-2"><span class="text-warning">h</span><br><span id="valH">120</span></div>
+          </div>
+          <p class="text-center text-xs text-slate-500 mt-2">drag the bottom-right handle</p>
+        </div>
+
+      </div>
+    </section>
+    <!-- ============ SECTION 12: CONFIDENCE SCORE ============ -->
+    <section class="relative py-24 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-14 items-center">
+        <div class="glass glass-card p-6 order-2 lg:order-1" data-aos="fade-right">
+          <div class="relative w-full aspect-video bg-bg-2/60 rounded-xl overflow-hidden" id="confStage">
+            <!-- boxes with varying confidence -->
+            <div class="bbox conf-box" data-conf="0.97"
+              style="left:8%; top:15%; width:22%; height:60%; border-color:#10B981;">
+              <div class="bbox-label" style="background:#10B981;color:#0f172a;">person 97%</div>
+            </div>
+            <div class="bbox conf-box" data-conf="0.71"
+              style="left:38%; top:35%; width:26%; height:38%; border-color:#F59E0B;">
+              <div class="bbox-label" style="background:#F59E0B;color:#0f172a;">dog 71%</div>
+            </div>
+            <div class="bbox conf-box" data-conf="0.42"
+              style="left:70%; top:20%; width:22%; height:30%; border-color:#EF4444;">
+              <div class="bbox-label" style="background:#EF4444;color:#fff;">bird 42%</div>
+            </div>
+            <div class="bbox conf-box" data-conf="0.88"
+              style="left:64%; top:55%; width:28%; height:35%; border-color:#3B82F6;">
+              <div class="bbox-label" style="background:#3B82F6;color:#fff;">car 88%</div>
+            </div>
+          </div>
+          <div class="mt-5">
+            <div class="flex justify-between text-xs font-mono text-slate-400 mb-2">
+              <span>Confidence Threshold</span><span id="threshVal">0.50</span>
+            </div>
+            <input id="threshSlider" type="range" min="0" max="1" step="0.01" value="0.5" class="w-full slider-accent">
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2" data-aos="fade-left">
+          <span class="text-xs font-mono text-accent section-eyebrow">HOW SURE IS THE MODEL?</span>
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">Confidence Score</h2>
+
+          <p class="text-slate-400 mt-4">
+            Confidence Score គឺជាតម្លៃលេខ (0 ដល់ 1) ដែល AI ប្រើដើម្បីវាស់កម្រិត “ភាពជឿជាក់”
+            ក្នុងការទស្សន៍ទាយវត្ថុមួយនៅក្នុងរូបភាព។
+            តម្លៃកាន់តែខ្ពស់ មានន័យថា ម៉ូដែលកាន់តែប្រាកដថាការទស្សន៍ទាយរបស់វាត្រឹមត្រូវ។
+          </p>
+
+          <p class="text-slate-400 mt-4">
+            ក្នុង Object Detection ដូចជា YOLO រាល់ Bounding Box មួយមិនមែនមានតែទីតាំងទេ
+            ប៉ុន្តែវាក៏ភ្ជាប់ជាមួយ “ពិន្ទុភាពជឿជាក់” ផងដែរ។
+            ពិន្ទុនេះគឺជាការរួមបញ្ចូលរវាងការស្គាល់ថា “មានវត្ថុឬអត់” និង “វត្ថុនោះជាអ្វី”។
+          </p>
+
+          <p class="text-slate-400 mt-4">
+            ដំណើរការនេះកើតឡើងដោយម៉ូដែល Neural Network ដែលរៀនពី data រាប់លានរូបភាព។
+            ពេលវាមើលរូបភាពថ្មី វាប្រៀបធៀបលក្ខណៈ (features) ដែលវាធ្លាប់រៀន
+            ហើយប៉ាន់ស្មានថា តើវត្ថុនោះស្រដៀងនឹងអ្វីដែលវាធ្លាប់ឃើញ។
+          </p>
+
+          <ul class="mt-6 space-y-3 text-sm text-slate-300">
+
+            <li class="glass rounded-lg p-3">
+              <span class="text-success font-semibold">1. Objectness Score (មានវត្ថុឬអត់)</span>
+              <br />
+              វាជាតម្លៃដែលបង្ហាញថា ក្នុង Bounding Box មួយ មានវត្ថុពិតប្រាកដឬអត់។
+              បើ score ខ្ពស់ → មានវត្ថុច្បាស់លាស់
+              បើ score ទាប → អាចជាផ្ទៃទទេ ឬ noise
+            </li>
+
+            <li class="glass rounded-lg p-3">
+              <span class="text-warning font-semibold">2. Class Probability (ប្រភេទវត្ថុ)</span>
+              <br />
+              បន្ទាប់ពីដឹងថាមានវត្ថុហើយ ម៉ូដែលនឹងទស្សន៍ទាយថាវាជាអ្វី
+              ដូចជា person, car, dog, bicycle...
+              វាបង្ហាញ “សក្តានុពល” នៃប្រភេទនីមួយៗ។
+            </li>
+
+            <li class="glass rounded-lg p-3">
+              <span class="text-primary font-semibold">3. Final Confidence Score</span>
+              <br />
+              គឺការបូកបញ្ចូល Objectness × Class Probability
+              ដើម្បីទទួលបានពិន្ទុចុងក្រោយសម្រាប់ Bounding Box មួយ។
+              នេះជាតម្លៃដែល YOLO ប្រើសម្រាប់សម្រេចថាត្រូវបង្ហាញ ឬលុបចោល។
+            </li>
+
+            <li class="glass rounded-lg p-3">
+              <span class="text-danger font-semibold">4. Confidence Threshold (កម្រិតកាត់ចោល)</span>
+              <br />
+              ជាកម្រិតកំណត់សម្រាប់បង្ហាញលទ្ធផល។
+              ប្រអប់ដែលមាន confidence ទាបជាង threshold នឹងត្រូវបដិសេធ។
+              វាជួយកាត់បន្ថយ false detection និង noise។
+            </li>
+
+          </ul>
+
+          <p class="text-slate-400 mt-6">
+            នៅក្នុងការប្រើប្រាស់ពិតប្រាកដ (real-world application) ការកំណត់ threshold មានសារៈសំខាន់ខ្លាំង។
+            បើកំណត់ខ្ពស់ពេក → អាចបាត់ detection ខ្លះ
+            បើទាបពេក → អាចមានការទស្សន៍ទាយខុសច្រើន។
+          </p>
+
+          <p class="text-slate-500 text-xs mt-3">
+            👉 សរុប៖ Confidence Score គឺជាមេកានិចសំខាន់ដែលធ្វើឲ្យ AI អាចសម្រេចចិត្តថា “តើវាដឹងច្បាស់ប៉ុណ្ណា”
+            អំពីវត្ថុមួយ។
+          </p>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- ============ SECTION 13: YOLO VERSIONS ============ -->
+    <section class="relative py-24 border-t border-white/5 bg-white/[0.02]">
+      <div class="max-w-7xl mx-auto px-5 md:px-8">
+        <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+          <span class="text-xs font-mono text-accent section-eyebrow">EVOLUTION</span>
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">YOLO Versions</h2>
+          <p class="text-slate-400 mt-4">Each generation pushed speed and accuracy further. Figures are representative,
+            illustrating overall trends across releases.</p>
+        </div>
+
+        <div id="versionGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-14"></div>
+
+        <div class="glass glass-card p-6 mt-10" data-aos="fade-up">
+          <canvas id="versionChart" height="90"></canvas>
+        </div>
+      </div>
+    </section>
+    <!-- ============ SECTION 14: YOLO VERSIONS ============ -->
+    <section class="relative py-24 border-t border-white/5 bg-white/[0.02]">
+      <div class="max-w-7xl mx-auto px-5 md:px-8">
+        <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+          <span class="text-xs font-mono text-accent section-eyebrow">Making Model</span>
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">Get Start</h2>
+          <p class="text-slate-400 mt-4">Each generation pushed speed and accuracy further. Figures are representative,
+            illustrating overall trends across releases.</p>
+        </div>
+
+        <div id="versionGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-14"></div>
+        <!-- ===== TABS ===== -->
+        <nav class="flex flex-wrap gap-2 bg-[#0f172a] p-3 rounded-xl border border-[#2a3450] mb-8 justify-center"
+          id="tabNav">
+          <button
+            class="tab-btn px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 bg-transparent text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#e8edf5] active-tab:bg-[#4f46e5] active-tab:text-white active-tab:shadow-lg active-tab:shadow-[#4f46e5]/30"
+            data-tab="tab3">
+            📊 ទិន្នន័យ
+          </button>
+          <button
+            class="tab-btn px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 bg-transparent text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#e8edf5] active-tab:bg-[#4f46e5] active-tab:text-white active-tab:shadow-lg active-tab:shadow-[#4f46e5]/30"
+            data-tab="tab4">
+            ⚙️ Training
+          </button>
+          <button
+            class="tab-btn px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 bg-transparent text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#e8edf5] active-tab:bg-[#4f46e5] active-tab:text-white active-tab:shadow-lg active-tab:shadow-[#4f46e5]/30"
+            data-tab="tab5">
+            📈 Metrics
+          </button>
+          <button
+            class="tab-btn px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 bg-transparent text-[#94a3b8] hover:bg-[#1e293b] hover:text-[#e8edf5] active-tab:bg-[#4f46e5] active-tab:text-white active-tab:shadow-lg active-tab:shadow-[#4f46e5]/30"
+            data-tab="tab6">
+            🧪 Testing
+          </button>
+        </nav>
+        <!-- ============================================================ -->
+        <!-- TAB 3: DATA -->
+        <!-- ============================================================ -->
+        <div class="tab-content" id="tab3">
+
+          <!-- HEADER -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 md:p-8 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">📂</span>
+              <h2 class="text-xl md:text-2xl font-bold">ការរៀបចំទិន្នន័យ (YOLO Dataset Preparation)</h2>
+            </div>
+            <p class="text-[#c8d0e0] leading-relaxed">
+              <span class="text-[#f472b6] font-semibold">សំខាន់បំផុត!</span>
+              YOLO មិនអាច train បានទេ បើគ្មានទិន្នន័យដែលបានដាក់ស្លាក (Labeled Data) ត្រឹមត្រូវ។
+              ដំណើរការនេះគឺជាជំហានមូលដ្ឋានសម្រាប់ AI Object Detection ទាំងមូល។
+            </p>
+          </div>
+
+          <!-- STEP 1 -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-2xl">1️⃣</span>
+              <h3 class="text-xl font-bold">ប្រមូលទិន្នន័យ (Image Collection)</h3>
+            </div>
+
+            <p class="text-[#c8d0e0] mb-4">
+              ជំហានដំបូងគឺប្រមូលរូបភាពដែល AI ត្រូវរៀន។ ទិន្នន័យកាន់តែច្រើន និងចម្រុះ → ម៉ូដែលកាន់តែឆ្លាត។
+            </p>
+
+            <ul class="list-disc list-inside text-sm text-[#c8d0e0] space-y-2">
+              <li>ប្រមូលយ៉ាងហោចណាស់ <span class="text-[#a78bfa] font-semibold">1000–2000 រូបភាព / class</span></li>
+              <li>ត្រូវមានភាពចម្រុះ (ពន្លឺ, មុំថត, background, distance)</li>
+              <li>ប្រើទិន្នន័យពី៖ camera, internet, dataset public</li>
+            </ul>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 md:p-8 mb-6">
+
+            <!-- TITLE -->
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl">✏️</span>
+              <h2 class="text-xl md:text-2xl font-bold text-white">
+                2️⃣ ដាក់ស្លាក (Annotation) — លម្អិត
+              </h2>
+            </div>
+
+            <!-- INTRO -->
+            <p class="text-[#c8d0e0] leading-relaxed mb-6">
+              Annotation គឺជាដំណាក់កាលដែលយើង <span class="text-[#f472b6] font-semibold">បង្រៀន AI</span>
+              ថាវត្ថុនីមួយៗក្នុងរូបភាពជាអ្វី និងវាស្ថិតនៅទីណា។
+              👉 និយាយងាយៗ៖ គូសប្រអប់ + ដាក់ឈ្មោះវត្ថុ
+            </p>
+
+            <!-- WHY IMPORTANT -->
+            <div class="bg-[#0b0e1a] border border-[#2a3450] rounded-lg p-4 mb-6">
+              <h3 class="text-lg font-bold mb-2">🧠 ហេតុអ្វី Annotation សំខាន់?</h3>
+              <ul class="list-disc list-inside text-sm text-[#c8d0e0] space-y-2">
+                <li>AI មិនដឹងអ្វីទាំងអស់នៅដំបូង (មើលតែ pixel)</li>
+                <li>Annotation ប្រែ pixel → meaning</li>
+                <li>គ្មាន label → model រៀនមិនបាន</li>
+              </ul>
+            </div>
+
+            <!-- TOOLS -->
+            <div class="grid md:grid-cols-3 gap-4 mb-6">
+
+              <div class="bg-[#0b0e1a] border border-[#4f46e5] rounded-lg p-4">
+                <div class="text-2xl">🟣</div>
+                <h4 class="font-bold mt-2">LabelImg</h4>
+                <p class="text-sm text-[#94a3b8]">ងាយប្រើ + export YOLO format</p>
+              </div>
+
+              <div class="bg-[#0b0e1a] border border-[#a78bfa] rounded-lg p-4">
+                <div class="text-2xl">🔵</div>
+                <h4 class="font-bold mt-2">CVAT</h4>
+                <p class="text-sm text-[#94a3b8]">Professional + team work</p>
+              </div>
+
+              <div class="bg-[#0b0e1a] border border-[#34d399] rounded-lg p-4">
+                <div class="text-2xl">🟢</div>
+                <h4 class="font-bold mt-2">Roboflow</h4>
+                <p class="text-sm text-[#94a3b8]">Online + auto labeling</p>
+              </div>
+
+            </div>
+
+            <!-- STEP BY STEP -->
+            <div class="bg-[#0b0e1a] border border-[#2a3450] rounded-lg p-5 mb-6">
+              <h3 class="text-lg font-bold mb-3">🧭 ជំហានក្នុង Annotation</h3>
+
+              <ol class="list-decimal list-inside text-[#c8d0e0] space-y-2 text-sm">
+                <li>បើករូបភាព dataset ក្នុង tool</li>
+                <li>គូស bounding box ជុំវិញវត្ថុ</li>
+                <li>ដាក់ class name (cat, dog, car...)</li>
+                <li>Save ជា YOLO format (.txt)</li>
+              </ol>
+            </div>
+
+            <!-- FORMAT -->
+            <div class="bg-[#0b0e1a] border border-[#2a3450] rounded-lg p-5 mb-6">
+              <h3 class="text-lg font-bold mb-3">📄 YOLO Format</h3>
+
+              <div class="font-mono text-sm text-[#e2e8f0] bg-[#0f172a] p-4 rounded-lg border border-[#2a3450]">
+                class_id x_center y_center width height<br><br>
+                0 0.45 0.62 0.12 0.18
+              </div>
+
+              <p class="text-sm text-[#94a3b8] mt-3">
+                👉 តម្លៃទាំងអស់គឺ normalized (0 → 1)
+              </p>
+            </div>
+
+            <!-- EXAMPLE -->
+            <div class="bg-[#0b0e1a] border border-[#2a3450] rounded-lg p-5 mb-6">
+              <h3 class="text-lg font-bold mb-3">🐱 ឧទាហរណ៍</h3>
+
+              <p class="text-sm text-[#c8d0e0] mb-2">
+                រូបភាពមានឆ្មា 1 ក្បាល → class = 0
+              </p>
+
+              <div class="font-mono text-sm text-[#34d399]">
+                0 0.50 0.50 0.20 0.25
+              </div>
+            </div>
+
+            <!-- MISTAKES -->
+            <div class="bg-[#0b0e1a] border border-red-500 rounded-lg p-5">
+              <h3 class="text-lg font-bold mb-3 text-red-400">⚠️ កំហុសដែលគួរជៀសវាង</h3>
+
+              <ul class="list-disc list-inside text-sm text-[#c8d0e0] space-y-2">
+                <li>គូស box មិនត្រឹមត្រូវ</li>
+                <li>ដាក់ label ខុស class</li>
+                <li>skip object មួយចំនួន</li>
+                <li>មិន normalize តម្លៃ</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-2xl">3️⃣</span>
+              <h3 class="text-xl font-bold">Format ទិន្នន័យ YOLO (.txt)</h3>
+            </div>
+
+            <p class="text-[#c8d0e0] mb-4">
+              YOLO ប្រើ bounding box format ដែល normalize ទៅ 0–1។
+            </p>
+
+            <div class="bg-[#0b0e1a] rounded-lg p-4 border border-[#2a3450] text-sm font-mono text-[#e2e8f0]">
+              class_id x_center y_center width height<br><br>
+              0 0.45 0.62 0.12 0.18
+            </div>
+
+            <p class="text-sm text-[#94a3b8] mt-3">
+              👉 តម្លៃទាំងអស់គឺជា % នៃទំហំរូបភាព (normalized)
+            </p>
+          </div>
+
+          <!-- STEP 4 -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-2xl">4️⃣</span>
+              <h3 class="text-xl font-bold">រៀបចំ Folder Structure</h3>
+            </div>
+
+            <p class="text-[#c8d0e0] mb-4">
+              YOLO ត្រូវការរចនាសម្ព័ន្ធថតច្បាស់លាស់ ដើម្បី train និង validate។
+            </p>
+
+            <div class="bg-[#0b0e1a] rounded-lg p-4 border border-[#2a3450] text-sm font-mono text-[#e2e8f0]">
+              dataset/<br>
+              ├── images/<br>
+              │ ├── train/<br>
+              │ └── val/<br>
+              ├── labels/<br>
+              │ ├── train/<br>
+              │ └── val/<br>
+              └── dataset.yaml
+            </div>
+          </div>
+
+          <!-- STEP 5 -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-2xl">5️⃣</span>
+              <h3 class="text-xl font-bold">កំណត់ dataset.yaml</h3>
+            </div>
+
+            <p class="text-[#c8d0e0] mb-4">
+              File នេះប្រាប់ YOLO ថា dataset នៅទីណា និងមាន class ប៉ុន្មាន។
+            </p>
+            <div class="bg-[#0b0e1a] rounded-lg p-4 border border-[#2a3450] text-sm font-mono text-[#e2e8f0]">
+              path: /dataset<br>
+              train: images/train<br>
+              val: images/val<br>
+              nc: 2<br>
+              names: ['cat', 'dog']
+            </div>
+          </div>
+          <!-- STEP 6 -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">6️⃣</span>
+              <h3 class="text-xl font-bold">Split Dataset (បែងចែកទិន្នន័យ)</h3>
+            </div>
+
+            <p class="text-[#c8d0e0] mb-6">
+              បែងចែកទិន្នន័យដើម្បីធ្វើឲ្យ model មានសមត្ថភាពទូទៅ (Generalization)។
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+
+              <div class="bg-[#0b0e1a] border border-[#4f46e5] rounded-lg p-4">
+                <div class="text-3xl">📚</div>
+                <div class="text-xl font-bold">70–80%</div>
+                <div class="text-sm text-[#94a3b8]">Training</div>
+              </div>
+
+              <div class="bg-[#0b0e1a] border border-[#a78bfa] rounded-lg p-4">
+                <div class="text-3xl">✅</div>
+                <div class="text-xl font-bold">10–15%</div>
+                <div class="text-sm text-[#94a3b8]">Validation</div>
+              </div>
+
+              <div class="bg-[#0b0e1a] border border-[#34d399] rounded-lg p-4">
+                <div class="text-3xl">🧪</div>
+                <div class="text-xl font-bold">10–15%</div>
+                <div class="text-sm text-[#94a3b8]">Testing</div>
+              </div>
+            </div>
+          </div>
+          <iframe width="1200px" height="500px" src="https://www.youtube.com/embed/s02vKDar0Go?si=ucgEw4i8nlO4fbdD"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <!-- ============================================================ -->
+        <!-- TAB 4: TRAINING (DETAILED VERSION) -->
+        <!-- ============================================================ -->
+        <div class="tab-content" id="tab4">
+
+          <!-- ===== HEADER ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 md:p-8 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl">⚙️</span>
+              <h2 class="text-xl md:text-2xl font-bold">
+                ការហ្វឹកហាត់ម៉ូដែល (YOLO Training Process)
+              </h2>
+              <span class="ml-auto text-xs bg-[#4f46e5] text-white px-3 py-1 rounded-full font-semibold">លម្អិត</span>
+            </div>
+            <p class="text-[#c8d0e0] leading-relaxed">
+              Training គឺជាដំណាក់កាលដែលម៉ូដែល AI
+              <span class="text-[#a78bfa] font-semibold">រៀនពីទិន្នន័យដែលបានដាក់ស្លាក</span>
+              ដើម្បីអាចទស្សន៍ទាយវត្ថុនៅក្នុងរូបភាពថ្មីបាន។
+            </p>
+          </div>
+
+          <!-- ===== 1. ENVIRONMENT SETUP ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">🖥️</span>
+              <h3 class="text-xl font-bold">1️⃣ ការដំឡើងបរិស្ថាន (Environment Setup)</h3>
+              <span class="ml-auto text-xs bg-[#1e293b] text-[#94a3b8] px-2 py-0.5 rounded-full"> prerequisite</span>
+            </div>
+
+            <p class="text-[#c8d0e0] mb-4">
+              មុន training អ្នកត្រូវតែតំឡើង environment ដើម្បីឲ្យ Python + GPU អាចដំណើរការ YOLO បាន។
+            </p>
+
+            <!-- Requirements -->
+            <div class="grid md:grid-cols-2 gap-4 mb-4">
+              <div class="bg-[#0b0e1a] rounded-lg p-4 border border-[#1e293b]">
+                <div class="font-semibold text-[#60a5fa] mb-2">📦 Hardware Requirements</div>
+                <ul class="text-[#94a3b8] text-sm space-y-1 list-disc list-inside">
+                  <li>GPU: NVIDIA (CUDA 11.8+)</li>
+                  <li>VRAM: យ៉ាងតិច 8GB (សម្រាប់ batch=16)</li>
+                  <li>RAM: 16GB+ សម្រាប់ dataset ធំ</li>
+                  <li>Storage: 50GB+ សម្រាប់រូបភាព</li>
+                </ul>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-4 border border-[#1e293b]">
+                <div class="font-semibold text-[#f472b6] mb-2">📚 Software Requirements</div>
+                <ul class="text-[#94a3b8] text-sm space-y-1 list-disc list-inside">
+                  <li>Python 3.8+</li>
+                  <li>PyTorch 2.0+ (CUDA version)</li>
+                  <li>Ultralytics YOLOv8</li>
+                  <li>OpenCV, NumPy, Matplotlib</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Code Block -->
+            <div
+              class="bg-[#0b0e1a] p-4 rounded-lg border border-[#2a3450] font-mono text-sm text-[#e2e8f0] overflow-x-auto relative">
+              <span
+                class="text-xs bg-[#4f46e5] text-white px-3 py-1 rounded-full absolute -top-3 right-4 font-sans font-semibold">Bash</span>
+              <span class="comment"># 1. បង្កើត virtual environment</span><br>
+              python -m venv yolo_env<br>
+              <span class="comment"># Activate (Linux / Mac)</span><br>
+              source yolo_env/bin/activate<br>
+              <span class="comment"># Activate (Windows)</span><br>
+              yolo_env\Scripts\activate<br><br>
+              <span class="comment"># 2. ដំឡើង PyTorch (GPU support)</span><br>
+              pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118<br><br>
+              <span class="comment"># 3. ដំឡើង YOLOv8</span><br>
+              pip install ultralytics<br><br>
+              <span class="comment"># 4. ផ្ទៀងផ្ទាត់ការដំឡើង</span><br>
+              python -c "import torch; print(f'CUDA: {torch.cuda.is_available()}')"
+            </div>
+          </div>
+
+          <!-- ===== 2. DATA LOADING ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">📂</span>
+              <h3 class="text-xl font-bold">2️⃣ ការផ្ទុកទិន្នន័យ (Data Loading)</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <p class="text-[#c8d0e0] text-sm mb-3">
+                  YOLO ផ្ទុកទិន្នន័យតាមរយៈ <span class="text-[#a78bfa] font-semibold">DataLoader</span> ដែលធ្វើការ៖
+                </p>
+                <ul class="list-disc list-inside text-[#94a3b8] text-sm space-y-1">
+                  <li>អានរូបភាពពីថត train/val</li>
+                  <li>អានឯកសារ .txt ស្លាក</li>
+                  <li>បំលែងរូបភាពជា Tensor</li>
+                  <li>អនុវត្ត Data Augmentation</li>
+                  <li>បង្កើត Batch សម្រាប់ training</li>
+                </ul>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-4 border border-[#1e293b]">
+                <div class="text-[#60a5fa] font-semibold text-sm mb-2">📊 Batch Construction</div>
+                <div class="text-[#94a3b8] text-sm font-mono">
+                  batch = [<br>
+                  &nbsp;&nbsp;{<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;"images": tensor([16, 3, 640, 640]),<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;"labels": tensor([16, max_boxes, 5]),<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;"paths": [...],<br>
+                  &nbsp;&nbsp;}<br>
+                  ]
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ===== 3. TRAINING CODE ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">📝</span>
+              <h3 class="text-xl font-bold">3️⃣ កូដហ្វឹកហាត់ YOLO (Full Code)</h3>
+            </div>
+
+            <div class="code-block">
+              <span class="tag">Python</span>
+
+              <span class="comment"># 👉 នាំចូល YOLO library ពី ultralytics</span><br>
+              <span class="keyword">from</span> ultralytics <span class="keyword">import</span> <span
+                class="func">YOLO</span><br><br>
+
+              <span class="comment"># 👉 Load model ដែលបាន train ជាមុន (pretrained model)</span><br>
+              <span class="comment"># YOLOv8n = version តូច លឿន សម្រាប់ testing</span><br>
+              model = <span class="func">YOLO</span>(<span class="string">"yolov8n.pt"</span>)<br><br>
+
+              <span class="comment"># 👉 ចាប់ផ្តើមដំណើរការ training</span><br>
+              results = model.<span class="func">train</span>(<br><br>
+
+              <span class="comment"># ================= DATA =================</span><br>
+              &nbsp;&nbsp;data=<span class="string">"dataset/dataset.yaml"</span>,
+              <span class="comment"># 👉 path ទៅ dataset config (បញ្ជាក់ images + labels)</span><br>
+
+              &nbsp;&nbsp;cache=<span class="keyword">False</span>,
+              <span class="comment"># 👉 មិន cache images ក្នុង RAM (សន្សំ memory)</span><br><br>
+
+              <span class="comment"># ================= TRAINING =================</span><br>
+              &nbsp;&nbsp;epochs=<span class="number">150</span>,
+              <span class="comment"># 👉 ចំនួនដងដែល model មើល dataset ទាំងមូល</span><br>
+
+              &nbsp;&nbsp;batch=<span class="number">16</span>,
+              <span class="comment"># 👉 ចំនួន images ក្នុង 1 step (GPU memory ពាក់ព័ន្ធ)</span><br>
+
+              &nbsp;&nbsp;imgsz=<span class="number">640</span>,
+              <span class="comment"># 👉 resize image ទំហំ 640x640</span><br>
+
+              &nbsp;&nbsp;device=<span class="number">0</span>,
+              <span class="comment"># 👉 ប្រើ GPU (0 = GPU 1, "cpu" = CPU only)</span><br>
+
+              &nbsp;&nbsp;workers=<span class="number">8</span>,
+              <span class="comment"># 👉 ចំនួន thread សម្រាប់ load data</span><br><br>
+
+              <span class="comment"># ================= OPTIMIZER =================</span><br>
+              &nbsp;&nbsp;optimizer=<span class="string">"auto"</span>,
+              <span class="comment"># 👉 YOLO ជ្រើស optimizer ដោយស្វ័យប្រវត្តិ</span><br>
+
+              &nbsp;&nbsp;lr0=<span class="number">0.01</span>,
+              <span class="comment"># 👉 learning rate ដំបូង (speed learning)</span><br>
+
+              &nbsp;&nbsp;lrf=<span class="number">0.01</span>,
+              <span class="comment"># 👉 final learning rate decay</span><br>
+
+              &nbsp;&nbsp;momentum=<span class="number">0.937</span>,
+              <span class="comment"># 👉 ជួយឲ្យ training stable</span><br>
+
+              &nbsp;&nbsp;weight_decay=<span class="number">0.0005</span>,
+              <span class="comment"># 👉 កាត់បន្ថយ overfitting</span><br><br>
+
+              <span class="comment"># ================= LOSS FUNCTION =================</span><br>
+              &nbsp;&nbsp;box=<span class="number">7.5</span>,
+              <span class="comment"># 👉 កំហុស bounding box (position accuracy)</span><br>
+
+              &nbsp;&nbsp;cls=<span class="number">0.5</span>,
+              <span class="comment"># 👉 កំហុស class prediction</span><br>
+
+              &nbsp;&nbsp;dfl=<span class="number">1.5</span>,
+              <span class="comment"># 👉 improve box precision (Distribution Focal Loss)</span><br><br>
+
+              <span class="comment"># ================= DATA AUGMENTATION =================</span><br>
+              &nbsp;&nbsp;hsv_h=<span class="number">0.015</span>,
+              <span class="comment"># 👉 ប្ដូរពណ៌ hue</span><br>
+
+              &nbsp;&nbsp;hsv_s=<span class="number">0.7</span>,
+              <span class="comment"># 👉 ប្ដូរ saturation</span><br>
+
+              &nbsp;&nbsp;hsv_v=<span class="number">0.4</span>,
+              <span class="comment"># 👉 ប្ដូរ brightness</span><br>
+
+              &nbsp;&nbsp;fliplr=<span class="number">0.5</span>,
+              <span class="comment"># 👉 flip រូបភាពឆ្វេង-ស្ដាំ</span><br>
+
+              &nbsp;&nbsp;mosaic=<span class="number">1.0</span>,
+              <span class="comment"># 👉 combine 4 images (strong learning)</span><br><br>
+
+              <span class="comment"># ================= OUTPUT =================</span><br>
+              &nbsp;&nbsp;project=<span class="string">"runs/train"</span>,
+              <span class="comment"># 👉 folder save result</span><br>
+
+              &nbsp;&nbsp;name=<span class="string">"my_yolo_model"</span>,
+              <span class="comment"># 👉 project name</span><br>
+
+              &nbsp;&nbsp;exist_ok=<span class="keyword">True</span>,
+              <span class="comment"># 👉 overwrite folder ប្រសិនបើមានរួច</span><br>
+
+              &nbsp;&nbsp;plots=<span class="keyword">True</span>,
+              <span class="comment"># 👉 បង្ហាញ graph loss</span><br>
+
+              &nbsp;&nbsp;save=<span class="keyword">True</span>,
+              <span class="comment"># 👉 save model checkpoint</span><br>
+
+              &nbsp;&nbsp;seed=<span class="number">42</span>,
+              <span class="comment"># 👉 random seed (reproducible result)</span><br>
+
+              &nbsp;&nbsp;verbose=<span class="keyword">True</span>
+              <span class="comment"># 👉 បង្ហាញ training log</span><br>
+
+              )
+            </div>
+          </div>
+
+          <!-- ===== 4. WHAT HAPPENS IN 1 EPOCH ===== -->
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+
+            <!-- EPOCH PROCESS -->
+            <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">🔄</span>
+                <h3 class="text-xl font-bold">4️⃣ អ្វីកើតឡើងក្នុង ១ Epoch</h3>
+              </div>
+
+              <ol class="list-decimal list-inside text-[#c8d0e0] text-sm space-y-3">
+                <li>
+                  <strong>Shuffle Data</strong>
+                  <p class="text-[#94a3b8] text-xs ml-4">លាយលំដាប់រូបភាព ដើម្បីកុំឲ្យ model ចងចាំលំដាប់</p>
+                </li>
+                <li>
+                  <strong>Forward Pass</strong>
+                  <p class="text-[#94a3b8] text-xs ml-4">បញ្ចូលរូប → model ទស្សន៍ទាយ bounding boxes + classes</p>
+                </li>
+                <li>
+                  <strong>Compute Loss</strong>
+                  <ul class="list-disc list-inside ml-4 mt-1 text-[#c8d0e0] text-xs space-y-1">
+                    <li><span class="text-[#a78bfa]">Box Loss (CIoU)</span> → កំហុសទីតាំង និងទំហំប្រអប់</li>
+                    <li><span class="text-[#60a5fa]">Class Loss (BCE)</span> → កំហុសប្រភេទ Class</li>
+                    <li><span class="text-[#f472b6]">DFL Loss</span> → កំហុសក្នុងការកែតម្រូវប្រអប់</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Backward Pass (Backpropagation)</strong>
+                  <p class="text-[#94a3b8] text-xs ml-4">គណនា gradient ដោយប្រើ Chain Rule ពី Calculus</p>
+                </li>
+                <li>
+                  <strong>Optimizer Step</strong>
+                  <p class="text-[#94a3b8] text-xs ml-4">កែតម្រូវ weights ដោយប្រើ SGD/Adam</p>
+                </li>
+                <li>
+                  <strong>Validation</strong>
+                  <p class="text-[#94a3b8] text-xs ml-4">ពិនិត្យលទ្ធផលលើ validation set (រៀងរាល់ epoch)</p>
+                </li>
+              </ol>
+            </div>
+
+            <!-- LOSS FUNCTIONS DETAIL -->
+            <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">📐</span>
+                <h3 class="text-xl font-bold">5️⃣ Loss Functions លម្អិត</h3>
+              </div>
+
+              <div class="space-y-4 text-sm">
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border-l-4 border-[#a78bfa]">
+                  <div class="font-bold text-[#a78bfa]">Box Loss (CIoU)</div>
+                  <div class="text-[#94a3b8] text-xs font-mono mt-1">
+                    CIoU = 1 - IoU + (ρ²(b,b_gt)/c²) + αv
+                  </div>
+                  <div class="text-[#94a3b8] text-xs mt-1">
+                    <span class="text-[#60a5fa]">IoU</span> = Intersection over Union<br>
+                    <span class="text-[#f472b6]">ρ</span> = distance between centers<br>
+                    <span class="text-[#34d399]">αv</span> = aspect ratio penalty
+                  </div>
+                </div>
+
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border-l-4 border-[#60a5fa]">
+                  <div class="font-bold text-[#60a5fa]">Class Loss (BCE)</div>
+                  <div class="text-[#94a3b8] text-xs font-mono mt-1">
+                    BCE = -[y·log(ŷ) + (1-y)·log(1-ŷ)]
+                  </div>
+                  <div class="text-[#94a3b8] text-xs mt-1">
+                    វាស់កំហុសរវាង Class ពិត និងទស្សន៍ទាយ
+                  </div>
+                </div>
+
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border-l-4 border-[#f472b6]">
+                  <div class="font-bold text-[#f472b6]">DFL Loss</div>
+                  <div class="text-[#94a3b8] text-xs font-mono mt-1">
+                    DFL = -Σ(y_i · log(ŷ_i))
+                  </div>
+                  <div class="text-[#94a3b8] text-xs mt-1">
+                    ផ្តោតលើប្រអប់ដែលពិបាកទស្សន៍ទាយ (hard examples)
+                  </div>
+                </div>
+
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border-l-4 border-[#34d399]">
+                  <div class="font-bold text-[#34d399]">Total Loss</div>
+                  <div class="text-[#94a3b8] text-xs font-mono mt-1">
+                    Loss = α·BoxLoss + β·ClsLoss + γ·DFLLoss
+                  </div>
+                  <div class="text-[#94a3b8] text-xs mt-1">
+                    α=7.5, β=0.5, γ=1.5 (default weights)
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ===== 6. OPTIMIZERS & LR SCHEDULE ===== -->
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+
+            <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">🎯</span>
+                <h3 class="text-xl font-bold">6️⃣ Optimizers</h3>
+              </div>
+
+              <div class="space-y-4 text-sm">
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                  <div class="font-bold text-white">SGD (Stochastic Gradient Descent)</div>
+                  <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1 space-y-0.5">
+                    <li>ប្រើ momentum 0.937</li>
+                    <li>ល្អសម្រាប់ Object Detection</li>
+                    <li>Convergence ល្អជាង Adam</li>
+                    <li>ត្រូវការ Learning Rate tuning</li>
+                  </ul>
+                </div>
+
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                  <div class="font-bold text-white">Adam / AdamW</div>
+                  <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1 space-y-0.5">
+                    <li>Adaptive learning rate</li>
+                    <li>Converge លឿនជាង SGD</li>
+                    <li>អាច Overfit បើគ្មាន weight decay</li>
+                    <li>YOLO ប្រើ SGD ជាស្តង់ដារ</li>
+                  </ul>
+                </div>
+
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                  <div class="font-bold text-white">⚡ Recommendation</div>
+                  <div class="text-[#94a3b8] text-xs">ប្រើ <span class="text-[#34d399]">optimizer="auto"</span> → YOLO
+                    ជ្រើស SGD</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">📉</span>
+                <h3 class="text-xl font-bold">7️⃣ Learning Rate Schedule</h3>
+              </div>
+
+              <div class="space-y-4 text-sm">
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                  <div class="font-bold text-white">Warmup Phase</div>
+                  <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1 space-y-0.5">
+                    <li>warmup_epochs = 3</li>
+                    <li>warmup_momentum = 0.8</li>
+                    <li>warmup_bias_lr = 0.1</li>
+                    <li>LR កើនឡើងពី 0 → lr0</li>
+                  </ul>
+                </div>
+
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                  <div class="font-bold text-white">Main Training</div>
+                  <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1 space-y-0.5">
+                    <li>lr0 = 0.01 (initial)</li>
+                    <li>lrf = 0.01 (final factor)</li>
+                    <li>Cosine Annealing Schedule</li>
+                    <li>LR decays from 0.01 → 0.0001</li>
+                  </ul>
+                </div>
+
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                  <div class="font-bold text-white">📊 LR Formula</div>
+                  <div class="text-[#94a3b8] text-xs font-mono mt-1">
+                    lr = lr0 · (1 - cos(π·epoch/epochs)) · (1 - lrf) + lrf
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ===== 8. DATA AUGMENTATION ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">🎨</span>
+              <h3 class="text-xl font-bold">8️⃣ Data Augmentation Techniques</h3>
+              <span
+                class="ml-auto text-xs bg-[#34d399] text-[#0b0e1a] px-2 py-0.5 rounded-full font-semibold">Regularization</span>
+            </div>
+
+            <p class="text-[#c8d0e0] text-sm mb-4">
+              Data Augmentation ជួយបង្កើន <span class="text-[#34d399] font-semibold">Generalization</span> និងកាត់បន្ថយ
+              Overfitting។
+            </p>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#60a5fa] text-sm">HSV Augmentation</div>
+                <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1">
+                  <li>hsv_h = 0.015 (Hue)</li>
+                  <li>hsv_s = 0.7 (Saturation)</li>
+                  <li>hsv_v = 0.4 (Value/Brightness)</li>
+                </ul>
+              </div>
+
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#f472b6] text-sm">Geometric</div>
+                <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1">
+                  <li>fliplr = 0.5 (horizontal flip)</li>
+                  <li>translate = 0.1 (shift)</li>
+                  <li>scale = 0.5 (zoom)</li>
+                </ul>
+              </div>
+
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#a78bfa] text-sm">Advanced</div>
+                <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1">
+                  <li>mosaic = 1.0 (4 images)</li>
+                  <li>mixup = 0.0 (image mixing)</li>
+                  <li>copy_paste = 0.0</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Mosaic Visualization -->
+            <div class="mt-4 bg-[#0b0e1a] rounded-lg p-4 border border-[#2a3450]">
+              <div class="text-sm text-[#94a3b8] font-mono">
+                <span class="text-[#34d399]">Mosaic Augmentation</span> → បញ្ចូល 4 រូបភាពចូលគ្នា<br>
+                <span class="text-[#94a3b8] text-xs">ជួយ model រៀនវត្ថុក្នុងបរិបទផ្សេងៗ និងបង្កើន dataset
+                  ដោយស្វ័យប្រវត្តិ</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== 9. TRAINING LOGS & METRICS ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">📊</span>
+              <h3 class="text-xl font-bold">9️⃣ ការអាន Training Logs</h3>
+            </div>
+
+            <div
+              class="bg-[#0b0e1a] p-4 rounded-lg border border-[#2a3450] font-mono text-xs text-[#e2e8f0] overflow-x-auto">
+              <span class="text-[#94a3b8]">Epoch GPU_mem box_loss cls_loss dfl_loss Instances Size</span><br>
+              <span class="text-[#34d399]">1/150 5.62G 1.234 1.456 1.123 16 640: 100% 100/100 [01:23&lt;00:00,
+                1.20it/s]</span><br>
+              <span class="text-[#94a3b8]"> Class Images Instances P R mAP50 mAP50-95</span><br>
+              <span class="text-[#60a5fa]"> all 50 100 0.612 0.543 0.587 0.345</span>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-3 mt-4">
+              <div class="bg-[#0b0e1a] rounded-lg p-3 text-center border border-[#1e293b]">
+                <div class="text-[#94a3b8] text-xs">Box Loss</div>
+                <div class="text-white font-bold">↓ 1.234 → 0.05</div>
+                <div class="text-[#34d399] text-xs">កំពុងថយចុះ</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 text-center border border-[#1e293b]">
+                <div class="text-[#94a3b8] text-xs">mAP50</div>
+                <div class="text-white font-bold">↑ 0.587</div>
+                <div class="text-[#34d399] text-xs">កំពុងកើនឡើង</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 text-center border border-[#1e293b]">
+                <div class="text-[#94a3b8] text-xs">Precision</div>
+                <div class="text-white font-bold">0.612</div>
+                <div class="text-[#fbbf24] text-xs">មធ្យម</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 text-center border border-[#1e293b]">
+                <div class="text-[#94a3b8] text-xs">Recall</div>
+                <div class="text-white font-bold">0.543</div>
+                <div class="text-[#fbbf24] text-xs">ត្រូវកែលម្អ</div>
+              </div>
+            </div>
+
+            <div class="mt-3 bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+              <div class="text-[#94a3b8] text-xs">
+                <span class="text-[#60a5fa] font-semibold">Interpretation:</span>
+                Box Loss ថយចុះ → model រៀនប្រអប់កាន់តែត្រឹមត្រូវ<br>
+                mAP កើនឡើង → model កាន់តែល្អ
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== 10. HYPERPARAMETER TUNING ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">🔧</span>
+              <h3 class="text-xl font-bold">🔟 Hyperparameter Tuning Guide</h3>
+              <span
+                class="ml-auto text-xs bg-[#fbbf24] text-[#0b0e1a] px-2 py-0.5 rounded-full font-semibold">Advanced</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-bold text-white text-sm">🔼 Learning Rate</div>
+                <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1 space-y-0.5">
+                  <li>lr0 = 0.01 → default (recommended)</li>
+                  <li>lr0 = 0.001 → dataset តូច (slow)</li>
+                  <li>lr0 = 0.1 → dataset ធំ (risk divergence)</li>
+                </ul>
+              </div>
+
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-bold text-white text-sm">📦 Batch Size</div>
+                <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1 space-y-0.5">
+                  <li>batch=16 → default (8GB VRAM)</li>
+                  <li>batch=32 → ត្រូវការ 12GB+ VRAM</li>
+                  <li>batch=8 → VRAM តូច</li>
+                </ul>
+              </div>
+
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-bold text-white text-sm">🔄 Epochs</div>
+                <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1 space-y-0.5">
+                  <li>100-300 epochs → dataset តូច</li>
+                  <li>50-150 epochs → dataset មធ្យម</li>
+                  <li>តាមដាន validation loss → បញ្ឈប់ពេល loss plateau</li>
+                </ul>
+              </div>
+
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-bold text-white text-sm">📐 Image Size</div>
+                <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1 space-y-0.5">
+                  <li>imgsz=640 → default (balance)</li>
+                  <li>imgsz=1280 → វត្ថុតូច (យឺត)</li>
+                  <li>imgsz=320 → លឿន (លះបង់ accuracy)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== 11. COMMON ISSUES & SOLUTIONS ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">🚨</span>
+              <h3 class="text-xl font-bold">1️⃣1️⃣ បញ្ហាទូទៅ និងដំណោះស្រាយ</h3>
+            </div>
+
+            <div class="space-y-3">
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border-l-4 border-[#f472b6]">
+                <div class="font-bold text-[#f472b6] text-sm">⚠️ Out of Memory (CUDA OOM)</div>
+                <div class="text-[#94a3b8] text-xs mt-1">
+                  <span class="text-white">ដំណោះស្រាយ:</span> បន្ថយ batch (16→8) ឬ imgsz (640→320) <br>
+                  ឬប្រើ gradient accumulation
+                </div>
+              </div>
+
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border-l-4 border-[#fbbf24]">
+                <div class="font-bold text-[#fbbf24] text-sm">⚠️ Overfitting (Loss ថយ, Val Loss ឡើង)</div>
+                <div class="text-[#94a3b8] text-xs mt-1">
+                  <span class="text-white">ដំណោះស្រាយ:</span> បង្កើន data augmentation, reduce epochs,<br>
+                  បន្ថែម dropout, ឬ weight decay
+                </div>
+              </div>
+
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border-l-4 border-[#60a5fa]">
+                <div class="font-bold text-[#60a5fa] text-sm">⚠️ mAP ទាប</div>
+                <div class="text-[#94a3b8] text-xs mt-1">
+                  <span class="text-white">ដំណោះស្រាយ:</span> ពិនិត្យ dataset quality, បង្កើន epochs,<br>
+                  ផ្ទៀងផ្ទាត់ labels, ប្រើ pretrained weights
+                </div>
+              </div>
+
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border-l-4 border-[#34d399]">
+                <div class="font-bold text-[#34d399] text-sm">⚠️ Training Slow</div>
+                <div class="text-[#94a3b8] text-xs mt-1">
+                  <span class="text-white">ដំណោះស្រាយ:</span> បង្កើន workers=8, ប្រើ cache=True,<br>
+                  ប្រើ GPU, បន្ថយ imgsz
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ===== 12. OUTPUT FILES ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">📦</span>
+              <h3 class="text-xl font-bold">1️⃣2️⃣ ឯកសារទិន្នផលក្រោយ Training</h3>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#34d399]">best.pt</div>
+                <div class="text-[#94a3b8] text-xs">Model weights with best mAP</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#60a5fa]">last.pt</div>
+                <div class="text-[#94a3b8] text-xs">Model weights from last epoch</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#a78bfa]">results.csv</div>
+                <div class="text-[#94a3b8] text-xs">Training history (loss, metrics)</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#f472b6]">confusion_matrix.png</div>
+                <div class="text-[#94a3b8] text-xs">Class confusion visualization</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#fbbf24]">labels.jpg</div>
+                <div class="text-[#94a3b8] text-xs">Training sample visualization</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#34d399]">results.png</div>
+                <div class="text-[#94a3b8] text-xs">Training curves (loss, metrics)</div>
+              </div>
+            </div>
+
+            <div
+              class="mt-4 bg-[#0b0e1a] p-4 rounded-lg border border-[#2a3450] font-mono text-sm text-[#34d399] text-center">
+              ✅ Training Complete → Model Ready for Inference 🚀
+            </div>
+
+            <div class="mt-3 bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+              <div class="text-[#94a3b8] text-xs">
+                <span class="text-white font-semibold">💡 Tip:</span> ប្រើ <span class="text-[#34d399]">best.pt</span>
+                សម្រាប់ production ព្រោះវាជា model ល្អបំផុត
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ===== END TAB 4 ===== -->
+        <!-- ============================================================ -->
+        <!-- TAB 5: METRICS -->
+        <!-- ============================================================ -->
+        <div class="tab-content" id="tab5">
+
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 md:p-8 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">📈</span>
+              <h2 class="text-xl md:text-2xl font-bold">Metrics សម្រាប់វាយតម្លៃ</h2>
+            </div>
+            <p class="text-[#c8d0e0]">កំឡុងពេលហ្វឹកហាត់ អ្នកនឹងឃើញតម្លៃទាំងនេះ៖</p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">🎯</span>
+                <h3 class="text-lg font-bold">Precision (P)</h3>
+              </div>
+              <div class="metric-box mb-3">
+                <div class="text-[#94a3b8] text-xs uppercase font-semibold">រូបមន្ត</div>
+                <div class="text-xl font-bold">P = TP / (TP + FP)</div>
+              </div>
+              <p class="text-[#c8d0e0] text-sm">
+                <span class="text-[#60a5fa]">TP</span> = True Positive (ទស្សន៍ទាយត្រឹមត្រូវ)<br>
+                <span class="text-[#f472b6]">FP</span> = False Positive (ទស្សន៍ទាយខុស)
+              </p>
+              <p class="text-[#94a3b8] text-sm mt-2">→ ចំនួនទស្សន៍ទាយត្រឹមត្រូវក្នុងចំណោមទស្សន៍ទាយទាំងអស់</p>
+            </div>
+
+            <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">🔍</span>
+                <h3 class="text-lg font-bold">Recall (R)</h3>
+              </div>
+              <div class="metric-box mb-3">
+                <div class="text-[#94a3b8] text-xs uppercase font-semibold">រូបមន្ត</div>
+                <div class="text-xl font-bold">R = TP / (TP + FN)</div>
+              </div>
+              <p class="text-[#c8d0e0] text-sm">
+                <span class="text-[#60a5fa]">TP</span> = True Positive<br>
+                <span class="text-[#34d399]">FN</span> = False Negative (ខកខានមិនឃើញ)
+              </p>
+              <p class="text-[#94a3b8] text-sm mt-2">→ ចំនួនទស្សន៍ទាយឃើញវត្ថុពិតទាំងអស់</p>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6 mt-6">
+            <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">📊</span>
+                <h3 class="text-lg font-bold">mAP50</h3>
+              </div>
+              <div class="metric-box border-l-[#a78bfa] mb-3">
+                <div class="text-[#94a3b8] text-xs uppercase font-semibold">Mean Average Precision @ IoU=0.5</div>
+                <div class="text-2xl font-bold text-[#a78bfa]">mAP50 = 0.587</div>
+              </div>
+              <p class="text-[#94a3b8] text-sm">ស្តង់ដារវាស់ភាពត្រឹមត្រូវ <span class="text-[#a78bfa]">នៅ IoU threshold
+                  0.5</span></p>
+            </div>
+
+            <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">📊</span>
+                <h3 class="text-lg font-bold">mAP50-95</h3>
+              </div>
+              <div class="metric-box border-l-[#34d399] mb-3">
+                <div class="text-[#94a3b8] text-xs uppercase font-semibold">mAP ជាមធ្យមលើ IoU 0.5–0.95</div>
+                <div class="text-2xl font-bold text-[#34d399]">mAP50-95 = 0.345</div>
+              </div>
+              <p class="text-[#94a3b8] text-sm"><span class="text-[#34d399]">កាន់តែតឹងតែង</span> – វាស់លើ thresholds
+                ច្រើនកម្រិត</p>
+            </div>
+          </div>
+
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mt-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">📋</span>
+              <h3 class="text-lg font-bold">ឧទាហរណ៍ទិន្នផលកំឡុងហ្វឹកហាត់</h3>
+            </div>
+            <div class="code-block">
+              <span
+                class="text-xs bg-[#4f46e5] text-white px-3 py-1 rounded-full absolute -top-3 right-4 font-sans font-semibold">Terminal</span>
+              Epoch GPU_mem box_loss cls_loss dfl_loss Instances Size<br>
+              1/150 5.62G 1.234 1.456 1.123 16 640: 100% 100/100 [01:23&lt;00:00, 1.20it/s]<br>
+              Class Images Instances P R mAP50 mAP50-95<br>
+              all 50 100 0.612 0.543 0.587 0.345
+            </div>
+          </div>
+        </div>
+        <!-- ============================================================ -->
+        <!-- TAB 6: TESTING / INFERENCE (DETAILED VERSION) -->
+        <!-- ============================================================ -->
+        <div class="tab-content" id="tab6">
+          <!-- ===== HEADER ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 md:p-8 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl">🧪</span>
+              <h2 class="text-xl md:text-2xl font-bold">ការសាកល្បង និងដាក់ឱ្យប្រើប្រាស់ (Testing & Deployment)</h2>
+              <span class="ml-auto text-xs bg-[#4f46e5] text-white px-3 py-1 rounded-full font-semibold">លម្អិត</span>
+            </div>
+            <p class="text-[#c8d0e0] leading-relaxed">
+              បន្ទាប់ពីហ្វឹកហាត់រួច យើងត្រូវ
+              <span class="text-[#a78bfa] font-semibold">សាកល្បង (Test)</span>,
+              <span class="text-[#60a5fa] font-semibold">វាយតម្លៃ (Evaluate)</span> និង
+              <span class="text-[#34d399] font-semibold">ដាក់ឱ្យប្រើប្រាស់ (Deploy)</span>
+              ម៉ូដែលរបស់យើង។
+            </p>
+          </div>
+
+          <!-- ===== 1. VALIDATION VS TESTING ===== -->
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+
+            <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">📊</span>
+                <h3 class="text-lg font-bold">1️⃣ Validation</h3>
+              </div>
+              <ul class="list-disc list-inside text-[#c8d0e0] text-sm space-y-2">
+                <li>ប្រើ <span class="text-[#60a5fa]">Validation Set</span> (10-15% of data)</li>
+                <li>ធ្វើកំឡុងពេល training (each epoch)</li>
+                <li>គណនា <span class="text-[#a78bfa]">mAP, Precision, Recall</span></li>
+                <li>ជួយតាមដាន <span class="text-[#34d399]">overfitting</span></li>
+                <li>អាចធ្វើបានច្រើនដង</li>
+              </ul>
+              <div class="mt-3 bg-[#0b0e1a] rounded-lg p-2 border border-[#1e293b] text-xs text-[#94a3b8]">
+                💡 ប្រើ <span class="text-[#60a5fa]">model.val()</span> ក្នុងពេល training
+              </div>
+            </div>
+
+            <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">✅</span>
+                <h3 class="text-lg font-bold">2️⃣ Testing (Inference)</h3>
+              </div>
+              <ul class="list-disc list-inside text-[#c8d0e0] text-sm space-y-2">
+                <li>ប្រើ <span class="text-[#34d399]">Test Set</span> (unseen data)</li>
+                <li>ធ្វើ <span class="text-[#f472b6]">តែម្តង</span> ក្រោយ training</li>
+                <li>វាស់ <span class="text-[#a78bfa]">performance ពិតប្រាកដ</span></li>
+                <li>មិនប្រើសម្រាប់ tuning</li>
+                <li>ផ្តល់លទ្ធផលចុងក្រោយ</li>
+              </ul>
+              <div class="mt-3 bg-[#0b0e1a] rounded-lg p-2 border border-[#1e293b] text-xs text-[#94a3b8]">
+                💡 ប្រើ <span class="text-[#34d399]">model.predict()</span> សម្រាប់ inference
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ===== 3. EVALUATION CODE ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">📝</span>
+              <h3 class="text-lg font-bold">3️⃣ កូដវាយតម្លៃលើ Validation Set</h3>
+            </div>
+
+            <div
+              class="bg-[#0b0e1a] p-4 rounded-lg border border-[#2a3450] font-mono text-sm text-[#e2e8f0] overflow-x-auto relative">
+              <span
+                class="text-xs bg-[#4f46e5] text-white px-3 py-1 rounded-full absolute -top-3 right-4 font-sans font-semibold">Python</span>
+              <span class="keyword">from</span> ultralytics <span class="keyword">import</span> <span
+                class="func">YOLO</span><br><br>
+              <span class="comment"># ផ្ទុកម៉ូដែលដែលបានហ្វឹកហាត់</span><br>
+              model = <span class="func">YOLO</span>(<span
+                class="string">"runs/train/my_yolo_model/weights/best.pt"</span>)<br><br>
+              <span class="comment"># ===== VALIDATION =====</span><br>
+              metrics = model.<span class="func">val</span>(<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;data=<span class="string">"dataset/dataset.yaml"</span>, <span class="comment">#
+                dataset config</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;batch=<span class="number">16</span>, <span class="comment"># batch
+                size</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;imgsz=<span class="number">640</span>, <span class="comment"># input
+                size</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;conf=<span class="number">0.25</span>, <span class="comment"># confidence
+                threshold</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;iou=<span class="number">0.45</span>, <span class="comment"># NMS IoU
+                threshold</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;device=<span class="number">0</span>, <span class="comment"># GPU
+                device</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;save_json=<span class="keyword">True</span>, <span class="comment"># save results
+                as JSON</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;save_txt=<span class="keyword">True</span>, <span class="comment"># save labels as
+                .txt</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;plots=<span class="keyword">True</span> <span class="comment"># save
+                plots</span><br>
+              )<br><br>
+              <span class="comment"># បោះពុម្ពលទ្ធផល</span><br>
+              <span class="keyword">print</span>(<span class="string">f"mAP50: {metrics.box.maps[0]:.4f}"</span>) <span
+                class="comment"># mAP at IoU=0.5</span><br>
+              <span class="keyword">print</span>(<span class="string">f"mAP50-95: {metrics.box.maps.mean():.4f}"</span>)
+              <span class="comment"># mean mAP</span>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-3 mt-4">
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b] text-center">
+                <div class="text-[#94a3b8] text-xs">mAP50</div>
+                <div class="text-[#34d399] font-bold text-lg">0.587</div>
+                <div class="text-[#94a3b8] text-xs">@ IoU=0.5</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b] text-center">
+                <div class="text-[#94a3b8] text-xs">mAP50-95</div>
+                <div class="text-[#60a5fa] font-bold text-lg">0.345</div>
+                <div class="text-[#94a3b8] text-xs">@ IoU=0.5-0.95</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b] text-center">
+                <div class="text-[#94a3b8] text-xs">F1-Score</div>
+                <div class="text-[#f472b6] font-bold text-lg">0.576</div>
+                <div class="text-[#94a3b8] text-xs">@ conf=0.25</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== 4. INFERENCE MODES ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">📂</span>
+              <h3 class="text-lg font-bold">4️⃣ ប្រភេទនៃការសាកល្បង (Inference Modes)</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <!-- Image Inference -->
+              <div class="bg-[#0b0e1a] rounded-lg p-4 border border-[#1e293b]">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-xl">🖼️</span>
+                  <div class="font-semibold text-white">Image Inference</div>
+                  <span class="ml-auto text-xs bg-[#4f46e5] text-white px-2 py-0.5 rounded-full">Single</span>
+                </div>
+                <div class="text-[#94a3b8] text-xs font-mono">
+                  results = model("image.jpg")<br>
+                  results[0].show()
+                </div>
+                <p class="text-[#94a3b8] text-xs mt-2">សម្រាប់រូបភាពតែមួយ</p>
+              </div>
+
+              <!-- Video Inference -->
+              <div class="bg-[#0b0e1a] rounded-lg p-4 border border-[#1e293b]">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-xl">🎬</span>
+                  <div class="font-semibold text-white">Video Inference</div>
+                  <span class="ml-auto text-xs bg-[#a78bfa] text-white px-2 py-0.5 rounded-full">Stream</span>
+                </div>
+                <div class="text-[#94a3b8] text-xs font-mono">
+                  results = model("video.mp4")<br>
+                  for r in results: r.show()
+                </div>
+                <p class="text-[#94a3b8] text-xs mt-2">សម្រាប់វីដេអូ ឬ webcam</p>
+              </div>
+
+              <!-- Batch Inference -->
+              <div class="bg-[#0b0e1a] rounded-lg p-4 border border-[#1e293b]">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-xl">📁</span>
+                  <div class="font-semibold text-white">Batch Inference</div>
+                  <span class="ml-auto text-xs bg-[#34d399] text-[#0b0e1a] px-2 py-0.5 rounded-full">Multiple</span>
+                </div>
+                <div class="text-[#94a3b8] text-xs font-mono">
+                  results = model(["img1.jpg", "img2.jpg"])<br>
+                  for r in results: r.save()
+                </div>
+                <p class="text-[#94a3b8] text-xs mt-2">សម្រាប់រូបភាពច្រើនក្នុងពេលតែមួយ</p>
+              </div>
+
+              <!-- Directory Inference -->
+              <div class="bg-[#0b0e1a] rounded-lg p-4 border border-[#1e293b]">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-xl">🗂️</span>
+                  <div class="font-semibold text-white">Directory Inference</div>
+                  <span class="ml-auto text-xs bg-[#f472b6] text-white px-2 py-0.5 rounded-full">Folder</span>
+                </div>
+                <div class="text-[#94a3b8] text-xs font-mono">
+                  results = model("images/", save=True)
+                </div>
+                <p class="text-[#94a3b8] text-xs mt-2">សម្រាប់ថតដែលមានរូបភាពច្រើន</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== 5. FULL INFERENCE CODE ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">🖼️</span>
+              <h3 class="text-lg font-bold">5️⃣ កូដសាកល្បងលើរូបភាពថ្មី (Full Inference)</h3>
+            </div>
+
+            <div
+              class="bg-[#0b0e1a] p-4 rounded-lg border border-[#2a3450] font-mono text-sm text-[#e2e8f0] overflow-x-auto relative">
+              <span
+                class="text-xs bg-[#4f46e5] text-white px-3 py-1 rounded-full absolute -top-3 right-4 font-sans font-semibold">Python</span>
+              <span class="comment"># ===== SINGLE IMAGE INFERENCE =====</span><br>
+              results = model(<span class="string">"test.jpg"</span>, conf=<span class="number">0.25</span>, iou=<span
+                class="number">0.45</span>)<br><br>
+              <span class="comment"># ===== SAVE RESULTS =====</span><br>
+              results[<span class="number">0</span>].<span class="func">save</span>(<span
+                class="string">"output.jpg"</span>) <span class="comment"># save with boxes</span><br>
+              results[<span class="number">0</span>].<span class="func">show</span>() <span class="comment"># display
+                image</span><br><br>
+              <span class="comment"># ===== EXTRACT DETECTIONS =====</span><br>
+              <span class="keyword">for</span> box <span class="keyword">in</span> results[<span
+                class="number">0</span>].boxes:<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;cls_id = <span class="keyword">int</span>(box.cls)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;conf = <span class="keyword">float</span>(box.conf)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;x1, y1, x2, y2 = <span class="keyword">map</span>(<span
+                class="keyword">int</span>, box.xyxy[<span class="number">0</span>])<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">print</span>(<span class="string">f"{model.names[cls_id]}
+                {conf:.3f} ({x1},{y1},{x2},{y2})"</span>)<br><br>
+              <span class="comment"># ===== SAVE AS TEXT =====</span><br>
+              results[<span class="number">0</span>].<span class="func">save_txt</span>(<span
+                class="string">"output.txt"</span>) <span class="comment"># save detections as YOLO format</span><br>
+              <span class="comment"># ===== SAVE AS JSON =====</span><br>
+              results[<span class="number">0</span>].<span class="func">save_json</span>(<span
+                class="string">"output.json"</span>) <span class="comment"># save as JSON</span>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-3 mt-4">
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="text-[#94a3b8] text-xs">📁 output.jpg</div>
+                <div class="text-white text-sm font-semibold">Image with boxes</div>
+                <div class="text-[#94a3b8] text-xs">បង្ហាញប្រអប់ និងស្លាក</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="text-[#94a3b8] text-xs">📄 output.txt</div>
+                <div class="text-white text-sm font-semibold">YOLO format</div>
+                <div class="text-[#94a3b8] text-xs">class x y w h (normalized)</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="text-[#94a3b8] text-xs">📊 output.json</div>
+                <div class="text-white text-sm font-semibold">JSON format</div>
+                <div class="text-[#94a3b8] text-xs">class, confidence, bbox</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== 6. POST-PROCESSING ===== -->
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+
+            <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">🔧</span>
+                <h3 class="text-lg font-bold">6️⃣ Post-Processing</h3>
+              </div>
+
+              <div class="space-y-4">
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                  <div class="font-semibold text-white text-sm">Confidence Threshold</div>
+                  <div class="text-[#94a3b8] text-xs">conf = 0.25 (default)</div>
+                  <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1">
+                    <li>កាត់បន្ថយ false positives</li>
+                    <li>បង្កើន threshold → fewer detections</li>
+                    <li>បន្ថយ threshold → more detections</li>
+                  </ul>
+                </div>
+
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                  <div class="font-semibold text-white text-sm">NMS (Non-Maximum Suppression)</div>
+                  <div class="text-[#94a3b8] text-xs">iou = 0.45 (default)</div>
+                  <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1">
+                    <li>ដកប្រអប់ដែលត្រួតគ្នា</li>
+                    <li>iou ធំ → fewer boxes</li>
+                    <li>iou តូច → more boxes</li>
+                  </ul>
+                </div>
+
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                  <div class="font-semibold text-white text-sm">Max Detections</div>
+                  <div class="text-[#94a3b8] text-xs">max_det = 300 (default)</div>
+                  <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1">
+                    <li>កំណត់ចំនួនប្រអប់អតិបរមា</li>
+                    <li>កាត់បន្ថយពេលវេលាដំណើរការ</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-2xl">⚡</span>
+                <h3 class="text-lg font-bold">7️⃣ Performance Optimization</h3>
+              </div>
+
+              <div class="space-y-4">
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                  <div class="font-semibold text-[#34d399] text-sm">FP16 (Half Precision)</div>
+                  <div class="text-[#94a3b8] text-xs font-mono">results = model("image.jpg", half=True)</div>
+                  <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1">
+                    <li>លឿនជាង 2x</li>
+                    <li>ប្រើ VRAM តិច</li>
+                    <li>accuracy ថយបន្តិច</li>
+                  </ul>
+                </div>
+
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                  <div class="font-semibold text-[#60a5fa] text-sm">TensorRT</div>
+                  <div class="text-[#94a3b8] text-xs font-mono">model.export(format="engine")</div>
+                  <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1">
+                    <li>NVIDIA GPU optimization</li>
+                    <li>លឿនជាង 3-5x</li>
+                    <li>សម្រាប់ production</li>
+                  </ul>
+                </div>
+
+                <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                  <div class="font-semibold text-[#f472b6] text-sm">ONNX</div>
+                  <div class="text-[#94a3b8] text-xs font-mono">model.export(format="onnx")</div>
+                  <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-1">
+                    <li>Cross-platform</li>
+                    <li>Open Neural Network Exchange</li>
+                    <li>សម្រាប់ CPU inference</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ===== 8. EXPORT FORMATS ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">📦</span>
+              <h3 class="text-lg font-bold">8️⃣ ការ Export ម៉ូដែលទៅជាទម្រង់ផ្សេងៗ</h3>
+              <span
+                class="ml-auto text-xs bg-[#34d399] text-[#0b0e1a] px-2 py-0.5 rounded-full font-semibold">Deployment</span>
+            </div>
+
+            <div
+              class="bg-[#0b0e1a] p-4 rounded-lg border border-[#2a3450] font-mono text-sm text-[#e2e8f0] overflow-x-auto relative">
+              <span
+                class="text-xs bg-[#4f46e5] text-white px-3 py-1 rounded-full absolute -top-3 right-4 font-sans font-semibold">Python</span>
+              <span class="comment"># Export to different formats</span><br>
+              model = <span class="func">YOLO</span>(<span class="string">"best.pt"</span>)<br><br>
+              <span class="comment"># 1. ONNX (CPU/Cross-platform)</span><br>
+              model.<span class="func">export</span>(format=<span class="string">"onnx"</span>, imgsz=<span
+                class="number">640</span>)<br><br>
+              <span class="comment"># 2. TensorRT (NVIDIA GPU)</span><br>
+              model.<span class="func">export</span>(format=<span class="string">"engine"</span>, device=<span
+                class="number">0</span>)<br><br>
+              <span class="comment"># 3. CoreML (Apple devices)</span><br>
+              model.<span class="func">export</span>(format=<span class="string">"coreml"</span>)<br><br>
+              <span class="comment"># 4. TFLite (Mobile/Edge)</span><br>
+              model.<span class="func">export</span>(format=<span class="string">"tflite"</span>)<br><br>
+              <span class="comment"># 5. OpenVINO (Intel)</span><br>
+              model.<span class="func">export</span>(format=<span class="string">"openvino"</span>)
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mt-4">
+              <div class="bg-[#0b0e1a] rounded-lg p-3 text-center border border-[#1e293b]">
+                <div class="text-xl">📦</div>
+                <div class="text-white font-semibold text-sm">ONNX</div>
+                <div class="text-[#94a3b8] text-xs">CPU/Cloud</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 text-center border border-[#1e293b]">
+                <div class="text-xl">🚀</div>
+                <div class="text-white font-semibold text-sm">TensorRT</div>
+                <div class="text-[#94a3b8] text-xs">NVIDIA GPU</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 text-center border border-[#1e293b]">
+                <div class="text-xl">🍎</div>
+                <div class="text-white font-semibold text-sm">CoreML</div>
+                <div class="text-[#94a3b8] text-xs">iOS/macOS</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 text-center border border-[#1e293b]">
+                <div class="text-xl">📱</div>
+                <div class="text-white font-semibold text-sm">TFLite</div>
+                <div class="text-[#94a3b8] text-xs">Android/Edge</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 text-center border border-[#1e293b]">
+                <div class="text-xl">💻</div>
+                <div class="text-white font-semibold text-sm">OpenVINO</div>
+                <div class="text-[#94a3b8] text-xs">Intel CPU</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== 9. DEPLOYMENT OPTIONS ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">🌐</span>
+              <h3 class="text-lg font-bold">9️⃣ ការដាក់ឱ្យប្រើប្រាស់ (Deployment Options)</h3>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4">
+              <div class="bg-[#0b0e1a] rounded-lg p-4 border border-[#1e293b]">
+                <div class="text-2xl mb-2">🌐</div>
+                <div class="font-semibold text-white">Web API</div>
+                <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-2 space-y-1">
+                  <li>Flask / FastAPI</li>
+                  <li>REST API endpoint</li>
+                  <li>Process images/videos</li>
+                </ul>
+                <div class="mt-2 text-[#94a3b8] text-xs font-mono bg-[#0f172a] p-2 rounded">
+                  POST /detect → JSON
+                </div>
+              </div>
+
+              <div class="bg-[#0b0e1a] rounded-lg p-4 border border-[#1e293b]">
+                <div class="text-2xl mb-2">📱</div>
+                <div class="font-semibold text-white">Mobile App</div>
+                <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-2 space-y-1">
+                  <li>Android (TFLite)</li>
+                  <li>iOS (CoreML)</li>
+                  <li>Real-time detection</li>
+                </ul>
+                <div class="mt-2 text-[#94a3b8] text-xs font-mono bg-[#0f172a] p-2 rounded">
+                  Camera → Model → Display
+                </div>
+              </div>
+
+              <div class="bg-[#0b0e1a] rounded-lg p-4 border border-[#1e293b]">
+                <div class="text-2xl mb-2">🖥️</div>
+                <div class="font-semibold text-white">Edge Device</div>
+                <ul class="text-[#94a3b8] text-xs list-disc list-inside mt-2 space-y-1">
+                  <li>Jetson Nano / Xavier</li>
+                  <li>Raspberry Pi</li>
+                  <li>TensorRT optimized</li>
+                </ul>
+                <div class="mt-2 text-[#94a3b8] text-xs font-mono bg-[#0f172a] p-2 rounded">
+                  30+ FPS on Jetson
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== 10. RESULT ANALYSIS ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">📊</span>
+              <h3 class="text-lg font-bold">🔟 ការវិភាគលទ្ធផល (Result Analysis)</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-white text-sm">✅ Good Results</div>
+                <ul class="text-[#34d399] text-xs list-disc list-inside mt-2 space-y-1">
+                  <li>mAP50 > 0.7</li>
+                  <li>Precision > 0.8</li>
+                  <li>Recall > 0.7</li>
+                  <li>Low confidence detections are correct</li>
+                  <li>No false positives</li>
+                </ul>
+              </div>
+
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-white text-sm">⚠️ Issues to Fix</div>
+                <ul class="text-[#f472b6] text-xs list-disc list-inside mt-2 space-y-1">
+                  <li>mAP50 < 0.5 → need more data</li>
+                  <li>Precision < Recall → many false positives</li>
+                  <li>Recall < Precision → missed detections</li>
+                  <li>Overlapping boxes → adjust NMS</li>
+                  <li>Wrong classes → check labels</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-4 bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+              <div class="text-[#94a3b8] text-xs">
+                <span class="text-white font-semibold">💡 Tip:</span> Use <span class="text-[#60a5fa]">confusion
+                  matrix</span> to see which classes are confused<br>
+                ពិនិត្យមើលថា Class ណាខ្លះដែលម៉ូដែលច្រឡំគ្នា
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== 11. OUTPUT FILES ===== -->
+          <div class="card-hover bg-[#0f172a] border border-[#2a3450] rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-2xl">💾</span>
+              <h3 class="text-lg font-bold">1️⃣1️⃣ ឯកសារទិន្នផល (Output Files)</h3>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#34d399]">best.pt</div>
+                <div class="text-[#94a3b8] text-xs">Model weights with best mAP</div>
+                <div class="text-[#94a3b8] text-xs mt-1">← ប្រើសម្រាប់ production</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#60a5fa]">last.pt</div>
+                <div class="text-[#94a3b8] text-xs">Model from last epoch</div>
+                <div class="text-[#94a3b8] text-xs mt-1">← សម្រាប់ continue training</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#a78bfa]">results.csv</div>
+                <div class="text-[#94a3b8] text-xs">Training history (loss, metrics)</div>
+                <div class="text-[#94a3b8] text-xs mt-1">← សម្រាប់វិភាគ</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#f472b6]">confusion_matrix.png</div>
+                <div class="text-[#94a3b8] text-xs">Class confusion visualization</div>
+                <div class="text-[#94a3b8] text-xs mt-1">← មើលកំហុស Class</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#fbbf24]">results.png</div>
+                <div class="text-[#94a3b8] text-xs">Training curves (loss, metrics)</div>
+                <div class="text-[#94a3b8] text-xs mt-1">← តាមដានការរៀន</div>
+              </div>
+              <div class="bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+                <div class="font-semibold text-[#34d399]">labels.jpg</div>
+                <div class="text-[#94a3b8] text-xs">Training sample visualization</div>
+                <div class="text-[#94a3b8] text-xs mt-1">← ពិនិត្យទិន្នន័យ</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== 12. PRO TIPS ===== -->
+          <div class="card-hover bg-[#0f172a] border-2 border-[#34d399] rounded-xl p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🌟</span>
+              <h3 class="text-lg font-bold">គន្លឹះសម្រាប់អ្នកចាប់ផ្តើម និងអ្នកជំនាញ</h3>
+              <span class="ml-auto text-xs bg-[#34d399] text-[#0b0e1a] px-3 py-1 rounded-full font-semibold">Pro
+                Tips</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <ol class="list-decimal list-inside text-[#c8d0e0] space-y-3 text-sm">
+                  <li>
+                    <span class="text-[#a78bfa] font-semibold">Start Small</span>
+                    <p class="text-[#94a3b8] text-xs ml-4">ចាប់ផ្តើមពីម៉ូដែលតូច (nano/small) ដើម្បីសន្សំពេល និងធនធាន</p>
+                  </li>
+                  <li>
+                    <span class="text-[#60a5fa] font-semibold">Transfer Learning</span>
+                    <p class="text-[#94a3b8] text-xs ml-4">ប្រើ Pretrained Weights ដើម្បីរៀនលឿន ទោះបីទិន្នន័យតិចក៏ដោយ
+                    </p>
+                  </li>
+                  <li>
+                    <span class="text-[#34d399] font-semibold">Balanced Dataset</span>
+                    <p class="text-[#94a3b8] text-xs ml-4">ត្រូវប្រាកដថាចំនួនរូបភាពក្នុង Class នីមួយៗមានតុល្យភាព</p>
+                  </li>
+                  <li>
+                    <span class="text-[#f472b6] font-semibold">Use Google Colab</span>
+                    <p class="text-[#94a3b8] text-xs ml-4">បើគ្មាន GPU ប្រើ Google Colab (ឥតគិតថ្លៃ) ជាមួយ GPU T4</p>
+                  </li>
+                </ol>
+              </div>
+              <div>
+                <ol class="list-decimal list-inside text-[#c8d0e0] space-y-3 text-sm" start="5">
+                  <li>
+                    <span class="text-[#a78bfa] font-semibold">Monitor mAP</span>
+                    <p class="text-[#94a3b8] text-xs ml-4">តាមដាន mAP ជានិច្ច ដើម្បីដឹងថាម៉ូដែលកំពុងរៀនបានល្អឬអត់</p>
+                  </li>
+                  <li>
+                    <span class="text-[#60a5fa] font-semibold">Test Different Thresholds</span>
+                    <p class="text-[#94a3b8] text-xs ml-4">សាកល្បង confidence (0.1-0.9) និង iou (0.3-0.7)
+                      ដើម្បីរកតម្លៃល្អបំផុត</p>
+                  </li>
+                  <li>
+                    <span class="text-[#34d399] font-semibold">Export for Production</span>
+                    <p class="text-[#94a3b8] text-xs ml-4">Export ទៅ ONNX/TensorRT សម្រាប់ deployment លឿនជាងមុន</p>
+                  </li>
+                  <li>
+                    <span class="text-[#f472b6] font-semibold">Version Control</span>
+                    <p class="text-[#94a3b8] text-xs ml-4">រក្សាទុក model versions ផ្សេងៗ ដើម្បីអាចត្រលប់មកវិញបាន</p>
+                  </li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="mt-4 bg-[#0b0e1a] rounded-lg p-3 border border-[#1e293b]">
+              <div class="text-[#94a3b8] text-xs text-center">
+                🚀 <span class="text-white font-semibold">Ready for Production!</span>
+                ឥឡូវអ្នកអាចដាក់ម៉ូដែលរបស់អ្នកឱ្យដំណើរការជាក់ស្តែងបានហើយ
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ===== END TAB 6 ===== -->
+    </section>
+  </div>
+  <div id="demo" class="page">
+    <!-- ============ SECTION 15: LIVE DEMO ============ -->
+    <section id="de" class="relative py-24 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-5 md:px-8">
+        <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+          <span class="text-xs font-mono text-accent section-eyebrow">SEE IT WORK</span>
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">Real-Time Demo</h2>
+          <p class="text-slate-400 mt-4">A preview of what a YOLO detection interface looks like — upload an image or
+            open your camera to run inference.</p>
+        </div>
+        <div class="glass glass-card p-6 md:p-8 mt-12 max-w-4xl mx-auto" data-aos="zoom-in">
+          <div class="flex flex-wrap gap-4 justify-center">
+            
+            <label for="file" id="btnUpload" class="btn-primary text-white font-semibold px-6 py-3 rounded-xl">
+              <i class="fa-solid fa-upload mr-2"></i>Upload Image
+            </label>
+            <input onchange="showImage();" id="file" type="file" class="hidden">
+            <button  id="btnCamera" class="btn-outline glass font-semibold px-6 py-3 rounded-xl" onclick="openCamera();">
+              <i class="fa-solid fa-camera mr-2"></i>Open Camera
+            </button>
+            <!-- Hidden video for camera -->
+            <video id="video" autoplay playsinline hidden></video>
+          </div>
+          <div class="mt-10">
+            <div>
+              <p class="text-xs font-mono text-slate-400 mb-2 text-center">DETECTION RESULT</p>
+              <div class="relative aspect-video rounded-xl overflow-hidden border border-accent/40 bg-bg-2/60" id="demoResult">
+                  <canvas id="canvas-image" class="w-full h-full" width="500" height="500"></canvas>
+              </div>
+            </div>
+          </div>
+          <p class="text-center text-xs text-slate-500 mt-6"><i class="fa-solid fa-circle-info mr-1"></i>This is a
+            styled preview interface for learning purposes — no image is actually processed.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- ============ SECTION 19: RESOURCES ============ -->
+  <section id="resources" class="relative py-24 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+        <span class="text-xs font-mono text-accent section-eyebrow">GO DEEPER</span>
+        <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">Resources</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-14">
+        <a href="https://arxiv.org/abs/1506.02640" target="_blank" rel="noopener"
+          class="glass glass-card frame-corners p-5 hover:-translate-y-1 transition" data-aos="fade-up">
+          <span class="fc-tr"></span><span class="fc-br"></span>
+          <i class="fa-solid fa-file-lines text-2xl text-primary"></i>
+          <h4 class="font-semibold text-sm mt-3">Research Papers</h4>
+          <p class="text-xs text-slate-400 mt-1">Original YOLO paper on arXiv</p>
+        </a>
+        <a href="https://docs.ultralytics.com/" target="_blank" rel="noopener"
+          class="glass glass-card frame-corners p-5 hover:-translate-y-1 transition" data-aos="fade-up"
+          data-aos-delay="80">
+          <span class="fc-tr"></span><span class="fc-br"></span>
+          <i class="fa-solid fa-book text-2xl text-secondary"></i>
+          <h4 class="font-semibold text-sm mt-3">Documentation</h4>
+          <p class="text-xs text-slate-400 mt-1">Ultralytics YOLO docs</p>
+        </a>
+        <a href="https://github.com/ultralytics/ultralytics" target="_blank" rel="noopener"
+          class="glass glass-card frame-corners p-5 hover:-translate-y-1 transition" data-aos="fade-up"
+          data-aos-delay="160">
+          <span class="fc-tr"></span><span class="fc-br"></span>
+          <i class="fa-brands fa-github text-2xl text-accent"></i>
+          <h4 class="font-semibold text-sm mt-3">GitHub</h4>
+          <p class="text-xs text-slate-400 mt-1">Official YOLO source code</p>
+        </a>
+        <a href="https://roboflow.com/" target="_blank" rel="noopener"
+          class="glass glass-card frame-corners p-5 hover:-translate-y-1 transition" data-aos="fade-up"
+          data-aos-delay="240">
+          <span class="fc-tr"></span><span class="fc-br"></span>
+          <i class="fa-solid fa-chalkboard-user text-2xl text-warning"></i>
+          <h4 class="font-semibold text-sm mt-3">Tutorials</h4>
+          <p class="text-xs text-slate-400 mt-1">Hands-on Roboflow guides</p>
+        </a>
+        <a href="https://cocodataset.org/" target="_blank" rel="noopener"
+          class="glass glass-card frame-corners p-5 hover:-translate-y-1 transition" data-aos="fade-up"
+          data-aos-delay="320">
+          <span class="fc-tr"></span><span class="fc-br"></span>
+          <i class="fa-solid fa-database text-2xl text-success"></i>
+          <h4 class="font-semibold text-sm mt-3">Datasets</h4>
+          <p class="text-xs text-slate-400 mt-1">COCO — the standard benchmark</p>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- ============20 ABOUT ============ -->
+  <section id="about" class="relative py-24 border-t border-white/5 bg-white/[0.02]">
+    <div class="max-w-4xl mx-auto px-5 md:px-8 text-center" data-aos="fade-up">
+      <span class="text-xs font-mono text-accent section-eyebrow">ABOUT THE ACADEMY</span>
+      <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">Built for Curious Minds</h2>
+      <p class="text-slate-400 mt-4 max-w-2xl mx-auto">AI Vision Academy is a self-contained learning platform that
+        walks beginners from the basics of artificial intelligence all the way to understanding how YOLO detects objects
+        in real time — through explanations, diagrams, and hands-on interactions.</p>
+    </div>
+  </section>
+  <!-- ============ FOOTER ============ -->
+  <footer class="relative border-t border-white/10 py-16 bg-[#0b0e1a] text-white/90">
+
+    <div class="max-w-7xl mx-auto px-5 md:px-8 grid md:grid-cols-4 gap-12">
+
+      <!-- BRAND -->
+      <div>
+        <div class="flex items-center gap-3 font-bold text-xl">
+          <span
+            class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 grid place-items-center shadow-lg">
+            <i class="fa-solid fa-eye text-white text-sm"></i>
+          </span>
+          AI Vision Academy
+        </div>
+
+        <p class="text-sm text-slate-400 mt-4 leading-relaxed">
+          Learn how AI sees the world, one bounding box at a time.
+        </p>
+
+        <div class="mt-5 text-xs text-slate-500">
+          <p>🏫 RUPP University</p>
+          <p>📚 Class: M4</p>
+          <p>👨‍🏫 Supervisor: Mr. Ouk Polyvan</p>
+        </div>
+      </div>
+      <!-- EXPLORE -->
+      <div>
+        <h5 class="font-semibold text-sm mb-4 text-white">Explore</h5>
+        <ul class="space-y-2 text-sm text-slate-400">
+          <li><a href="#about" class="hover:text-indigo-400 transition">About</a></li>
+          <li><a href="#resources" class="hover:text-indigo-400 transition">Resources</a></li>
+          <li><a href="#quiz" class="hover:text-indigo-400 transition">Quiz</a></li>
+        </ul>
+      </div>
+      <!-- CONTACT -->
+      <div>
+        <h5 class="font-semibold text-sm mb-4 text-white">Contact</h5>
+        <ul class="space-y-2 text-sm text-slate-400">
+          <li class="flex items-center gap-2">
+            <i class="fa-solid fa-envelope"></i>
+            hello@aivisionacademy.example
+          </li>
+        </ul>
+      </div>
+
+      <!-- TEAM -->
+      <div>
+        <h5 class="font-semibold text-sm mb-4 text-white">Team Members</h5>
+
+        <div class="grid grid-cols-1 gap-2 text-sm text-slate-400">
+          <p>• Ny Menghong</p>
+          <p>• Po Chanvisal</p>
+          <p>• Try Srypov</p>
+          <p>• Pang Polyna</p>
+          <p>• Pav Lyda</p>
+          <p>• Ban Serivisoth</p>
+          <p>• Ngan Soknaii</p>
+          <p>• Heang Malyhorng</p>
+        </div>
+
+        <!-- social -->
+        <div class="flex gap-3 mt-5">
+          <a href="#" class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 grid place-items-center transition">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 grid place-items-center transition">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 grid place-items-center transition">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- BOTTOM BAR -->
+    <div class="max-w-7xl mx-auto px-5 md:px-8 mt-12 pt-6 border-t border-white/10 text-xs text-slate-500 text-center">
+      © 2026 AI Vision Academy — RUPP M4 Project | Built with passion for AI education 🚀
     </div>
 
-</div>
+  </footer>
 
-<video id="video" autoplay></video>
+  <!-- ============ SCRIPTS ============ -->
+   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+  <script>
+    AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic' });
+    window.onload = function () {
+      document.getElementById('btn-home').click();
+    };
+    /* ---------- Mobile Menu ---------- */
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      const open = mobileMenu.style.maxHeight && mobileMenu.style.maxHeight !== '0px';
+      mobileMenu.style.maxHeight = open ? '0px' : mobileMenu.scrollHeight + 'px';
+      menuBtn.innerHTML = open ? '<i class="fa-solid fa-bars"></i>' : '<i class="fa-solid fa-xmark"></i>';
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      mobileMenu.style.maxHeight = '0px';
+      menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    }));
+    // 🔁 function switch page
+    function showPage(page) {
+      // remove active from all nav links
+      document.querySelectorAll('.nav-link').forEach(p => {
+        p.classList.remove('active');
+      });
+      document.querySelectorAll('.page').forEach(p => {
+        p.style.display = "none";
+      });
+      // show selected page
+      document.getElementById(page).style.display = "block";
+      // add active to clicked button
+      event.target.classList.add('active');
+    }
+    /* ---------- Typing effect ---------- */
+    const typingText = "Build Your IT Skill";
+    const typingTarget = document.getElementById('typingTarget');
+    let ti = 0;
+    function typeLoop() {
+      if (ti <= typingText.length) {
+        typingTarget.textContent = typingText.slice(0, ti);
+        ti++;
+        setTimeout(typeLoop, 45);
+      } else {
+        typingTarget.classList.remove('typing-cursor');
+        setTimeout(() => typingTarget.classList.add('typing-cursor'), 400);
+      }
+    }
+    typeLoop();
+    /* ---------- Number counters ---------- */
+    const counters = document.querySelectorAll('.counter');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseFloat(el.dataset.target);
+          let cur = 0;
+          const step = target / 60;
+          const isDecimal = target % 1 !== 0;
+          const tick = () => {
+            cur += step;
+            if (cur >= target) { el.textContent = isDecimal ? target.toFixed(1) : target; return; }
+            el.textContent = isDecimal ? cur.toFixed(1) : Math.floor(cur);
+            requestAnimationFrame(tick);
+          };
+          tick();
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => counterObserver.observe(c));
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+    /* ---------- Interactive neural network diagram (Deep Learning section) ---------- */
+    const nnCanvas = document.getElementById('nnCanvas');
+    const nnctx = nnCanvas.getContext('2d');
+    function sizeNN() { nnCanvas.width = nnCanvas.clientWidth; nnCanvas.height = 360; }
+    sizeNN(); window.addEventListener('resize', sizeNN);
+    const layers = [4, 6, 6, 3];
+    let pulse = 0;
+    function layerPositions() {
+      const w = nnCanvas.width, h = nnCanvas.height;
+      return layers.map((count, li) => {
+        const x = (w / (layers.length + 1)) * (li + 1);
+        return Array.from({ length: count }, (_, i) => ({
+          x, y: (h / (count + 1)) * (i + 1)
+        }));
+      });
+    }
+    function drawNN() {
+      const w = nnCanvas.width, h = nnCanvas.height;
+      nnctx.clearRect(0, 0, w, h);
+      const pos = layerPositions();
+      for (let l = 0; l < pos.length - 1; l++) {
+        pos[l].forEach((a, ai) => {
+          pos[l + 1].forEach((b, bi) => {
+            const active = ((pulse + ai + bi) % 14) < 2;
+            nnctx.strokeStyle = active ? 'rgba(6,182,212,0.85)' : 'rgba(148,163,184,0.12)';
+            nnctx.lineWidth = active ? 1.6 : 1;
+            nnctx.beginPath(); nnctx.moveTo(a.x, a.y); nnctx.lineTo(b.x, b.y); nnctx.stroke();
+          });
+        });
+      }
+      pos.forEach((layer, li) => {
+        layer.forEach(n => {
+          const grad = nnctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 10);
+          const colors = ['#3B82F6', '#8B5CF6', '#8B5CF6', '#06B6D4'];
+          grad.addColorStop(0, colors[li]);
+          grad.addColorStop(1, 'rgba(15,23,42,0)');
+          nnctx.fillStyle = grad;
+          nnctx.beginPath(); nnctx.arc(n.x, n.y, 9, 0, Math.PI * 2); nnctx.fill();
+          nnctx.fillStyle = colors[li];
+          nnctx.beginPath(); nnctx.arc(n.x, n.y, 4, 0, Math.PI * 2); nnctx.fill();
+        });
+      });
+      pulse++;
+      requestAnimationFrame(drawNN);
+    }
+    drawNN();
+    /* ---------- YOLO Architecture pulse ---------- */
+    const archEls = document.querySelectorAll('.arch-pulse');
+    let archIndex = 0;
+    setInterval(() => {
+      archEls.forEach(el => el.style.opacity = 0);
+      archEls[archIndex % archEls.length].style.opacity = 1;
+      archIndex++;
+    }, 900);
+
+    /* ---------- Pipeline (Section 5) ---------- */
+    const pipelineSteps = [
+      {
+        label: 'រូបភាពចូល (Input Image)',
+        desc: 'បញ្ចូលរូបភាពដើមទៅក្នុងប្រព័ន្ធ AI',
+        icon: 'fa-image',
+        color: '#3B82F6'
+      },
+      {
+        label: 'បម្លែងទំហំ (Resize)',
+        desc: 'កាត់បន្ថយ ឬបម្លែងរូបភាពទៅទំហំស្តង់ដារ ដើម្បីងាយដំណើរការ',
+        icon: 'fa-expand',
+        color: '#3B82F6'
+      },
+      {
+        label: 'CNN Backbone',
+        desc: 'បណ្តាញ Convolutional Neural Network សម្រាប់រៀនលក្ខណៈសំខាន់ៗពីរូបភាព',
+        icon: 'fa-microchip',
+        color: '#8B5CF6'
+      },
+      {
+        label: 'ទាញយក Feature (Feature Extraction)',
+        desc: 'ស្វែងរកលក្ខណៈពិសេស ដូចជា edges, shapes និង patterns',
+        icon: 'fa-layer-group',
+        color: '#8B5CF6'
+      },
+      {
+        label: 'Head ព្យាករណ៍ (Prediction Head)',
+        desc: 'ផ្នែកដែលទាយទីតាំង និងប្រភេទវត្ថុក្នុងរូបភាព',
+        icon: 'fa-crosshairs',
+        color: '#06B6D4'
+      },
+      {
+        label: 'ប្រអប់ចាប់វត្ថុ (Bounding Boxes)',
+        desc: 'គូសប្រអប់ជុំវិញវត្ថុដែលត្រូវបានរកឃើញ',
+        icon: 'fa-vector-square',
+        color: '#06B6D4'
+      },
+      {
+        label: 'កម្រិតទំនុកចិត្ត (Confidence Score)',
+        desc: 'បង្ហាញភាគរយភាពប្រាកដថាវត្ថុត្រូវបានទាយត្រឹមត្រូវ',
+        icon: 'fa-gauge-high',
+        color: '#F59E0B'
+      },
+      {
+        label: 'NMS (Non-Maximum Suppression)',
+        desc: 'ដកចេញប្រអប់ដែលស្ទួនគ្នា ហើយរក្សាទុកតែការទាយល្អបំផុត',
+        icon: 'fa-filter',
+        color: '#F59E0B'
+      },
+      {
+        label: 'លទ្ធផលចុងក្រោយ (Final Detection)',
+        desc: 'បង្ហាញលទ្ធផលចុងក្រោយនៃការចាប់វត្ថុទាំងអស់',
+        icon: 'fa-circle-check',
+        color: '#10B981'
+      },
+    ];
+
+    const pipelineEl = document.getElementById('pipeline');
+    pipelineSteps.forEach((s, i) => {
+      const node = document.createElement('div');
+      node.className = 'flow-node';
+      node.setAttribute('data-aos', 'fade-up');
+      node.setAttribute('data-aos-delay', (i % 3) * 80);
+      node.innerHTML = `
+    <div class="glass glass-card frame-corners flex flex-col gap-2 px-6 py-4 w-80">
+      <span class="fc-tr"></span><span class="fc-br"></span>
+
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg grid place-items-center"
+             style="background:${s.color}22; color:${s.color};">
+          <i class="fa-solid ${s.icon}"></i>
+        </div>
+
+        <span class="text-sm font-semibold">${s.label}</span>
+      </div>
+
+      <p class="text-xs text-gray-400 leading-relaxed pl-12">
+        ${s.desc}
+      </p>
+    </div>
+  `;
+
+      pipelineEl.appendChild(node);
+
+      if (i < pipelineSteps.length - 1) {
+        const connector = document.createElement('div');
+        connector.className = 'flow-connector h-8';
+        pipelineEl.appendChild(connector);
+      }
+    });
+
+    /* ---------- How YOLO Detects steps (Section 7) ---------- */
+    const detectSteps = [
+      "១. បញ្ចូលរូបភាព (Input Image) — រូបភាព ឬវីដេអូត្រូវបានផ្ទុកចូលទៅក្នុងម៉ូដែល YOLO ដើម្បីចាប់ផ្តើមដំណើរការ។",
+
+      "២. កែទំហំរូបភាព (Resize Image) — រូបភាពត្រូវបានបម្លែងទៅទំហំស្តង់ដារដែលម៉ូដែលអាចយល់បាន ដើម្បីធានាភាពត្រឹមត្រូវ។",
+
+      "៣. ទាញយកលក្ខណៈ (Feature Extraction — CNN) — Convolutional Neural Network វិភាគរូបភាព និងបង្កើត Feature Map ដើម្បីយល់ពីរូបភាព។",
+
+      "៤. បែងចែក Grid និងទស្សន៍ទាយ Bounding Boxes — រូបភាពត្រូវបានបែងចែកជា Grid ហើយក្រឡានីមួយៗទស្សន៍ទាយទីតាំងវត្ថុ។",
+
+      "៥. គណនាពិន្ទុទំនុកចិត្ត (Confidence Score) — រាល់ Bounding Box នីមួយៗទទួលបានពិន្ទុបង្ហាញថាវត្ថុនោះមាននៅទីនោះពិតប្រាកដប៉ុន្មាន។",
+
+      "៦. កំណត់ប្រភេទវត្ថុ (Class Prediction) — ម៉ូដែលទស្សន៍ទាយថាវត្ថុនោះជាអ្វី ដូចជា មនុស្ស រថយន្ត ឬសត្វ។",
+
+      "៧. ការលុបបំបាត់ប្រអប់ស្ទួន (Non-Max Suppression - NMS) — លុប Bounding Boxes ដែលស្ទួនគ្នា ដើម្បីទុកតែការទស្សន៍ទាយដែលមានភាពត្រឹមត្រូវខ្ពស់បំផុត។",
+
+      "៨. បង្ហាញលទ្ធផលចុងក្រោយ (Final Output) — វត្ថុដែលបានរកឃើញត្រូវបានគូស Bounding Boxes និងបង្ហាញលើរូបភាព ឬវីដេអូ។"
+    ];
+    const stepsList = document.getElementById('stepsList');
+    detectSteps.forEach((text, i) => {
+      const div = document.createElement('div');
+      div.className = 'glass glass-card frame-corners p-5 flex gap-4 items-start';
+      div.setAttribute('data-aos', 'fade-up');
+      div.setAttribute('data-aos-delay', (i % 4) * 80);
+      div.innerHTML = `
+    <span class="fc-tr"></span><span class="fc-br"></span>
+    <div class="w-9 h-9 shrink-0 rounded-lg bg-gradient-to-br from-primary to-accent grid place-items-center font-mono text-xs font-bold text-white">${i + 1}</div>
+    <p class="text-sm text-slate-300">${text}</p>`;
+      stepsList.appendChild(div);
+    });
+
+    /* ---------- Bounding Box interactive (Section 8) ---------- */
+    const bboxRect = document.getElementById('bboxRect');
+    const bboxHandle = document.getElementById('bboxHandle');
+    const bboxStage = document.getElementById('bboxStage');
+    let dragging = false;
+    bboxHandle.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
+    bboxHandle.addEventListener('touchstart', e => { dragging = true; }, { passive: true });
+    function updateBBox(clientX, clientY) {
+      const stageRect = bboxStage.getBoundingClientRect();
+      const rectLeft = bboxRect.offsetLeft, rectTop = bboxRect.offsetTop;
+      let w = Math.max(30, Math.min(clientX - stageRect.left - rectLeft, stageRect.width - rectLeft));
+      let h = Math.max(30, Math.min(clientY - stageRect.top - rectTop, stageRect.height - rectTop));
+      bboxRect.style.width = w + 'px';
+      bboxRect.style.height = h + 'px';
+      document.getElementById('valX').textContent = Math.round(rectLeft + w / 2);
+      document.getElementById('valY').textContent = Math.round(rectTop + h / 2);
+      document.getElementById('valW').textContent = Math.round(w);
+      document.getElementById('valH').textContent = Math.round(h);
+    }
+    window.addEventListener('mousemove', e => { if (dragging) updateBBox(e.clientX, e.clientY); });
+    window.addEventListener('touchmove', e => { if (dragging && e.touches[0]) updateBBox(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+    window.addEventListener('mouseup', () => dragging = false);
+    window.addEventListener('touchend', () => dragging = false);
+
+    /* ---------- Confidence Threshold slider (Section 9) ---------- */
+    const threshSlider = document.getElementById('threshSlider');
+    const threshVal = document.getElementById('threshVal');
+    const confBoxes = document.querySelectorAll('.conf-box');
+    function applyThreshold() {
+      const t = parseFloat(threshSlider.value);
+      threshVal.textContent = t.toFixed(2);
+      confBoxes.forEach(b => {
+        const c = parseFloat(b.dataset.conf);
+        b.style.opacity = c >= t ? '1' : '0.08';
+      });
+    }
+    threshSlider.addEventListener('input', applyThreshold);
+    applyThreshold();
+
+    /* ---------- YOLO Versions (Section 10) ---------- */
+    const versions = [
+      {
+        name: 'YOLOv1',
+        year: '2016',
+        feat: 'ស្ថាបត្យកម្មដំបូង (First version) ប្រើ Single Neural Network ដើម្បីទស្សន៍ទាយ bounding boxes និង class ក្នុងមួយដង (one-stage detection)។ ល្បឿនលឿនជាង R-CNN ប៉ុន្តែ accuracy នៅទាបជាងបន្តិច',
+        speed: 45,
+        acc: 63.4
+      },
+      {
+        name: 'YOLOv2',
+        year: '2017',
+        feat: 'បន្ថែម Anchor Boxes ដើម្បីកែលម្អការទស្សន៍ទាយ object ទំហំខុសៗគ្នា។ ប្រើ Batch Normalization និង higher resolution training ដើម្បីបង្កើនភាពត្រឹមត្រូវ',
+        speed: 67,
+        acc: 76.8
+      },
+      {
+        name: 'YOLOv3',
+        year: '2018',
+        feat: 'ប្រើ Multi-scale prediction (3 scales) ដើម្បីចាប់វត្ថុតូច និងធំបានល្អ។ ប្រើ backbone Darknet-53 ដែលមានល្បឿន និង accuracy សមតុល្យគ្នា',
+        speed: 65,
+        acc: 80.2
+      },
+      {
+        name: 'YOLOv4',
+        year: '2020',
+        feat: 'កែលម្អ backbone CSPDarknet និងប្រើ PANet + SPP + Mosaic augmentation ដើម្បីបង្កើន accuracy ខ្លាំង ខណៈដែលនៅតែលឿនសម្រាប់ real-time',
+        speed: 65,
+        acc: 88.3
+      },
+      {
+        name: 'YOLOv5',
+        year: '2020',
+        feat: 'អភិវឌ្ឍដោយ PyTorch ងាយ train និង deploy។ មាន model size ច្រើន (n/s/m/l/x) សមស្របសម្រាប់ device ខុសៗគ្នា និងមាន community support ខ្លាំង',
+        speed: 140,
+        acc: 88.9
+      },
+      {
+        name: 'YOLOv6',
+        year: '2022',
+        feat: 'រចនាសម្រាប់ industry deployment ដោយ optimize hardware performance (GPU/CPU) និង latency ទាប។ សមស្របសម្រាប់ production system',
+        speed: 150,
+        acc: 89.5
+      },
+      {
+        name: 'YOLOv7',
+        year: '2022',
+        feat: 'ប្រើ trainable bag-of-freebies និង architecture optimization ដើម្បីបង្កើន efficiency និង accuracy ដោយមិនបន្ថែម compute ច្រើន',
+        speed: 161,
+        acc: 90.1
+      },
+      {
+        name: 'YOLOv8',
+        year: '2023',
+        feat: 'Anchor-free detection head, សម្រួល pipeline ទាំង detect/segment/pose ក្នុង framework តែមួយ។ ងាយប្រើ និង modern API',
+        speed: 170,
+        acc: 90.8
+      },
+      {
+        name: 'YOLOv9',
+        year: '2024',
+        feat: 'ប្រើ Programmable Gradient Information (PGI) ដើម្បីកាត់បន្ថយ information loss ក្នុង training និងបង្កើន accuracy',
+        speed: 172,
+        acc: 91.3
+      },
+      {
+        name: 'YOLOv10',
+        year: '2024',
+        feat: 'NMS-free architecture (មិនចាំបាច់ Non-Max Suppression) ដើម្បីកាត់បន្ថយ latency និងធ្វើ inference ឲ្យលឿនជាងមុន',
+        speed: 180,
+        acc: 91.6
+      },
+      {
+        name: 'YOLO11',
+        year: '2024',
+        feat: 'កែលម្អ backbone និង neck ឲ្យមាន balance ល្អរវាង speed និង accuracy។ សមស្របសម្រាប់ real-time AI system ទំនើប',
+        speed: 185,
+        acc: 92.1
+      },
+    ];
+    const versionGrid = document.getElementById('versionGrid');
+    versions.forEach((v, i) => {
+      const card = document.createElement('div');
+      card.className = 'glass glass-card frame-corners p-5';
+      card.setAttribute('data-aos', 'fade-up');
+      card.setAttribute('data-aos-delay', (i % 3) * 80);
+      card.innerHTML = `
+    <span class="fc-tr"></span><span class="fc-br"></span>
+    <div class="flex items-center justify-between">
+      <h4 class="font-display font-bold text-lg">${v.name}</h4>
+      <span class="text-xs font-mono text-accent pill glass px-2 py-0.5">${v.year}</span>
+    </div>
+    <p class="text-sm text-slate-400 mt-2">${v.feat}</p>
+    <div class="flex gap-4 mt-4 text-xs font-mono">
+      <div><i class="fa-solid fa-gauge-high text-primary mr-1"></i>${v.speed} FPS</div>
+      <div><i class="fa-solid fa-bullseye text-secondary mr-1"></i>${v.acc}% mAP</div>
+    </div>`;
+      versionGrid.appendChild(card);
+    });
+    new Chart(document.getElementById('versionChart'), {
+      type: 'line',
+      data: {
+        labels: versions.map(v => v.name),
+        datasets: [
+          { label: 'Speed (FPS)', data: versions.map(v => v.speed), borderColor: '#3B82F6', backgroundColor: 'rgba(59,130,246,0.15)', tension: 0.35, fill: true, yAxisID: 'y' },
+          { label: 'Accuracy (mAP %)', data: versions.map(v => v.acc), borderColor: '#8B5CF6', backgroundColor: 'rgba(139,92,246,0.15)', tension: 0.35, fill: true, yAxisID: 'y1' },
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: { legend: { labels: { color: '#cbd5e1' } } },
+        scales: {
+          x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.08)' } },
+          y: { position: 'left', ticks: { color: '#3B82F6' }, grid: { color: 'rgba(148,163,184,0.08)' }, title: { display: true, text: 'FPS', color: '#3B82F6' } },
+          y1: { position: 'right', ticks: { color: '#8B5CF6' }, grid: { display: false }, title: { display: true, text: 'mAP %', color: '#8B5CF6' } },
+        }
+      }
+    });
+
+    // ===== TAB SYSTEM =====
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    // Function to activate tab
+    function activateTab(tabId) {
+      // Remove active from all
+      tabBtns.forEach(btn => {
+        btn.classList.remove('bg-[#4f46e5]', 'text-white', 'shadow-lg', 'shadow-[#4f46e5]/30');
+        btn.classList.add('text-[#94a3b8]');
+      });
+      tabContents.forEach(content => content.classList.remove('active'));
+      // Activate target
+      const targetBtn = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
+      const targetContent = document.getElementById(tabId);
+      if (targetBtn) {
+        targetBtn.classList.add('bg-[#4f46e5]', 'text-white', 'shadow-lg', 'shadow-[#4f46e5]/30');
+      }
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+
+      // Save to localStorage
+      try {
+        localStorage.setItem('yoloActiveTab', tabId);
+      } catch (e) { /* ignore */ }
+    }
+
+    // Add click listeners
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', function () {
+        const tabId = this.getAttribute('data-tab');
+        activateTab(tabId);
+      });
+    });
+    // Restore last active tab
+    try {
+      const savedTab = localStorage.getItem('yoloActiveTab');
+      if (savedTab) {
+        const exists = document.getElementById(savedTab);
+        if (exists) {
+          activateTab(savedTab);
+        } else {
+          activateTab('tab1');
+        }
+      } else {
+        activateTab('tab1');
+      }
+    } catch (e) {
+      activateTab('tab1');
+    }
+
+const file = document.getElementById("file");
+const canvas = document.getElementById("canvas-image");
+const ctx = canvas.getContext("2d");
+const video = document.getElementById("video");
+video.style.display="none";
+const CANVAS_SIZE = 500;
+canvas.width = CANVAS_SIZE;
+canvas.height = CANVAS_SIZE;
+let isClick=false;
+const cameraBtn = document.getElementById('btnCamera');
+async function openCamera() {
+  isClick=!isClick;
+    if(isClick){
+        cameraBtn.innerHTML="Stop";
+        stream = await navigator.mediaDevices.getUserMedia({
+            video: true
+        });
+    
+        video.srcObject = stream;
+        video.play();
+        detectFromCamera(); // 🚀 start YOLO loop
+    }else{
+        // Stop camera stream
+        ctx.clearRect(0, 0, 500, 500);//clear box
+        cameraBtn.innerHTML="Use Camera";
+        if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+        stream = null;
+        }
+        video.srcObject = null;
+    }
+}
+
+function showImage(){
+    const selectedFile = file.files[0];
+    if (!selectedFile) return;
+    const image = new Image();
+    image.src = URL.createObjectURL(selectedFile);
+    image.onload = async () => {
+        // Clear canvas
+        ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+        // White background
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+        // Calculate image scale
+        const scale = Math.min(
+            CANVAS_SIZE / image.width,
+            CANVAS_SIZE / image.height
+        );
+
+        const newWidth = image.width * scale;
+        const newHeight = image.height * scale;
+
+        const offsetX = (CANVAS_SIZE - newWidth) / 2;
+        const offsetY = (CANVAS_SIZE - newHeight) / 2;
+
+        // Draw resized image
+        ctx.drawImage(
+            image,
+            offsetX,
+            offsetY,
+            newWidth,
+            newHeight
+        );
+        // Send image to Flask
+        const form = new FormData();
+        console.log(form);
+        form.append("image", selectedFile);
+        const response = await fetch("/detect", {
+            method: "POST",
+            body: form
+        });
+        const boxes = await response.json();
+        console.log(response.body);
+
+        // Draw bounding boxes
+        boxes.forEach(box => {
+
+            const x = box.x1 * scale + offsetX;
+            const y = box.y1 * scale + offsetY;
+            const w = (box.x2 - box.x1) * scale;
+            const h = (box.y2 - box.y1) * scale;
+
+            ctx.strokeStyle = "#ff0000";
+            ctx.lineWidth = 2;
+
+            ctx.strokeRect(x, y, w, h);
+
+            const label =
+                `${box.class} ${(box.confidence * 100).toFixed(1)}%`;
+
+            ctx.font = "16px Arial";
+
+            const textWidth = ctx.measureText(label).width;
+
+            ctx.fillStyle = "#ff0000";
+            ctx.fillRect(
+                x,
+                y - 24,
+                textWidth + 10,
+                24
+            );
+
+            ctx.fillStyle = "#ffffff";
+            ctx.fillText(
+                label,
+                x + 5,
+                y - 7
+            );
+        });
+
+    };
+}
+let stream = null;
+async function detectFromCamera() {
+    if (!stream) return;
+    const tempCanvas = document.createElement("canvas");
+    tempCanvas.width = 500;
+    tempCanvas.height = 500;
+    const tctx = tempCanvas.getContext("2d");
+    tctx.drawImage(video, 0, 0, 500, 500);
+
+    const blob = await new Promise(resolve =>
+        tempCanvas.toBlob(resolve, "image/jpeg")
+    );
+
+    const form = new FormData();
+    form.append("image", blob, "frame.jpg");
+
+    const response = await fetch("/detect", {
+        method: "POST",
+        body: form
+    });
+
+    const boxes = await response.json();
+
+    // draw real-time boxes on main canvas
+    ctx.clearRect(0, 0, 500, 500);
+    ctx.drawImage(video, 0, 0, 500, 500);
+
+    boxes.forEach(box => {
+
+        const x = box.x1;
+        const y = box.y1;
+        const w = box.x2 - box.x1;
+        const h = box.y2 - box.y1;
+
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x, y, w, h);
+
+        const label = `${box.class} ${(box.confidence * 100).toFixed(1)}%`;
+
+        ctx.fillStyle = "red";
+        ctx.fillRect(x, y - 20, ctx.measureText(label).width + 10, 20);
+
+        ctx.fillStyle = "white";
+        ctx.fillText(label, x + 5, y - 5);
+    });
+
+    requestAnimationFrame(detectFromCamera);
+}
+    
+  </script>
 </body>
+
 </html>

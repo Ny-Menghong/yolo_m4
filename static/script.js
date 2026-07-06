@@ -12,7 +12,6 @@ canvas.width = CANVAS_SIZE;
 canvas.height = CANVAS_SIZE;
 
 file.addEventListener("change", () => {
-
     const selectedFile = file.files[0];
     if (!selectedFile) return;
 

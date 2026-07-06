@@ -16,6 +16,9 @@ model = YOLO("yolo11n.pt")
 def index():
     return render_template("index.html")
 
+@app.route("/in.html")
+def ind():
+    return render_template("in.html")
 
 @app.route("/detect", methods=["POST"])
 def detect():
@@ -78,8 +81,8 @@ def server_info():
         "api": f"http://{local_ip}:5000"
     })
 # for local
-# if __name__ == "__main__":
-#     app.run(debug=True)
-#for deploy
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(debug=True)
+#for deploy
+# if __name__ == "__main__":
+#     app.run(host="0.0.0.0", port=5000)
