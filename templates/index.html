@@ -40,9 +40,6 @@
         <button id="btn-ai" class="nav-link" onclick="showPage('ai')">AI Lesson</button>
         <button class="nav-link" onclick="showPage('yolol')">Yolo Lesson</button>
         <button id="btn-demo" class="nav-link" onclick="showPage('demo')">Demo</button>
-        <button class="nav-link" onclick="showPage('yolol')">Train</button>
-        <button class="nav-link" onclick="showPage('yolol')">Dataset</button>
-        <button class="nav-link" onclick="showPage('yolol')">Model</button>
       </nav>
       <div class="flex items-center gap-3">
         <!--  Icon menu for mobile -->
@@ -666,11 +663,9 @@
           <!-- 1 -->
           <div class="frame-corners border border-slate-700 bg-slate-900/40 p-6 md:p-8 rounded-sm shadow-lg"
             data-aos="fade-up">
-
             <h3 class="font-display text-xl font-semibold text-slate-100">
-              1. 🤖 Narrow AI (AI តូច / AI មានកម្រិត)
+             <i class="fa-solid fa-robot"></i><pre>Narrow AI (AI តូច / AI មានកម្រិត)</pre>
             </h3>
-
             <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
               Narrow AI គឺជា AI ដែលត្រូវបានបង្កើតឡើងសម្រាប់ការងារតែមួយប៉ុណ្ណោះ។
               វាមិនអាចគិតក្រៅពីភារកិច្ចដែលវាត្រូវបានបណ្តុះបណ្តាល។
@@ -683,7 +678,7 @@
           <div class="border border-slate-700 bg-slate-900/40 p-6 md:p-8 rounded-sm shadow-lg" data-aos="fade-up">
 
             <h3 class="font-display text-xl font-semibold text-slate-100">
-              2. 🧠 General AI (AI ទូទៅ)
+                <i class="fa-solid fa-brain text-pink-400"></i> <br>General AI (AI ទូទៅ)
             </h3>
 
             <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
@@ -698,7 +693,7 @@
           <div class="border border-slate-700 bg-slate-900/40 p-6 md:p-8 rounded-sm shadow-lg" data-aos="fade-up">
 
             <h3 class="font-display text-xl font-semibold text-slate-100">
-              3. ⚡ Super AI (AI លើសមនុស្ស)
+                <i class="fa-solid fa-bolt-lightning text-orange-500"></i><br>​Super AI (AI លើសមនុស្ស)
             </h3>
 
             <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
@@ -718,193 +713,204 @@
 
       </div>
     </section>
-    <!-- ============ SECTION 5: MACHINE LEARNING ============ -->
-    <section id="ml" class="relative py-24 border-t border-white/5 bg-white/[0.02]">
-      <div class="max-w-7xl mx-auto px-5 md:px-8">
+<!-- ============ SECTION 5: MACHINE LEARNING ============ -->
+<section id="ml" class="relative py-24 border-t border-white/5 bg-white/[0.02]">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
         <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
-          <span class="text-xs font-mono text-accent section-eyebrow">LEARNING FROM DATA</span>
-          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">Machine Learning</h2>
-          <p class="text-slate-400 mt-4">Machine Learning gives computers the ability to improve at a task by learning
-            from examples, instead of following hand-written rules.</p>
+            <span class="text-xs font-mono text-accent section-eyebrow">រៀនពីទិន្នន័យ</span>
+            <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">ម៉ាស៊ីនរៀន (Machine Learning)</h2>
+            <p class="text-slate-400 mt-4">ម៉ាស៊ីនរៀនផ្តល់ឱ្យកុំព្យូទ័រនូវសមត្ថភាពក្នុងការកែលម្អភារកិច្ចដោយការរៀនពីឧទាហរណ៍ ជំនួសឱ្យការធ្វើតាមច្បាប់ដែលសរសេរដោយមនុស្ស។</p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-6 mt-14">
-          <div class="glass glass-card frame-corners p-6 text-center" data-aos="fade-up">
-            <span class="fc-tr"></span><span class="fc-br"></span>
-            <div
-              class="w-14 h-14 mx-auto rounded-xl bg-gradient-to-br from-primary to-accent grid place-items-center mb-4">
-              <i class="fa-solid fa-tags text-white text-xl"></i>
+            <div class="glass glass-card frame-corners p-6 text-center" data-aos="fade-up">
+                <span class="fc-tr"></span><span class="fc-br"></span>
+                <div class="w-14 h-14 mx-auto rounded-xl bg-gradient-to-br from-primary to-accent grid place-items-center mb-4">
+                    <i class="fa-solid fa-tags text-white text-xl"></i>
+                </div>
+                <h3 class="font-display font-semibold text-lg">ការរៀនដោយមានគ្រូ (Supervised Learning)</h3>
+                <p class="text-sm text-slate-400 mt-2">រៀនពីឧទាហរណ៍ដែលមានស្លាក — ធាតុចូលផ្គូផ្គងជាមួយចម្លើយត្រឹមត្រូវ — ដើម្បីទស្សន៍ទាយស្លាកសម្រាប់ទិន្នន័យថ្មី។</p>
+                <div class="mt-3 text-xs font-mono text-primary">ឧទា. ការច្រោះស្ប៉ាម, ការហ្វឹកហាត់ YOLO</div>
             </div>
-            <h3 class="font-display font-semibold text-lg">Supervised Learning</h3>
-            <p class="text-sm text-slate-400 mt-2">Learns from labeled examples — inputs paired with correct answers —
-              to predict labels for new data.</p>
-            <div class="mt-3 text-xs font-mono text-primary">e.g. spam detection, YOLO training</div>
-          </div>
-          <div class="glass glass-card frame-corners p-6 text-center" data-aos="fade-up" data-aos-delay="100">
-            <span class="fc-tr"></span><span class="fc-br"></span>
-            <div
-              class="w-14 h-14 mx-auto rounded-xl bg-gradient-to-br from-secondary to-primary grid place-items-center mb-4">
-              <i class="fa-solid fa-shapes text-white text-xl"></i>
+            <div class="glass glass-card frame-corners p-6 text-center" data-aos="fade-up" data-aos-delay="100">
+                <span class="fc-tr"></span><span class="fc-br"></span>
+                <div class="w-14 h-14 mx-auto rounded-xl bg-gradient-to-br from-secondary to-primary grid place-items-center mb-4">
+                    <i class="fa-solid fa-shapes text-white text-xl"></i>
+                </div>
+                <h3 class="font-display font-semibold text-lg">ការរៀនដោយគ្មានគ្រូ (Unsupervised Learning)</h3>
+                <p class="text-sm text-slate-400 mt-2">ស្វែងរករចនាសម្ព័ន្ធលាក់កំបាំងនៅក្នុងទិន្នន័យដែលគ្មានស្លាក ដោយដាក់ជាក្រុមឧទាហរណ៍ស្រដៀងគ្នាជាមួយគ្នា។</p>
+                <div class="mt-3 text-xs font-mono text-secondary">ឧទា. ការបែងចែកអតិថិជនជាក្រុម</div>
             </div>
-            <h3 class="font-display font-semibold text-lg">Unsupervised Learning</h3>
-            <p class="text-sm text-slate-400 mt-2">Finds hidden structure in unlabeled data by grouping similar examples
-              together.</p>
-            <div class="mt-3 text-xs font-mono text-secondary">e.g. customer segmentation</div>
-          </div>
-          <div class="glass glass-card frame-corners p-6 text-center" data-aos="fade-up" data-aos-delay="200">
-            <span class="fc-tr"></span><span class="fc-br"></span>
-            <div
-              class="w-14 h-14 mx-auto rounded-xl bg-gradient-to-br from-accent to-secondary grid place-items-center mb-4">
-              <i class="fa-solid fa-gamepad text-white text-xl"></i>
+            <div class="glass glass-card frame-corners p-6 text-center" data-aos="fade-up" data-aos-delay="200">
+                <span class="fc-tr"></span><span class="fc-br"></span>
+                <div class="w-14 h-14 mx-auto rounded-xl bg-gradient-to-br from-accent to-secondary grid place-items-center mb-4">
+                    <i class="fa-solid fa-gamepad text-white text-xl"></i>
+                </div>
+                <h3 class="font-display font-semibold text-lg">ការរៀនដោយការពង្រឹង (Reinforcement Learning)</h3>
+                <p class="text-sm text-slate-400 mt-2">ភ្នាក់ងាររៀនដោយការសាកល្បងនិងកំហុស ទទួលបានរង្វាន់ ឬពិន័យចំពោះសកម្មភាពរបស់ខ្លួន។</p>
+                <div class="mt-3 text-xs font-mono text-accent">ឧទា. ភ្នាក់ងារលេងហ្គេម, មនុស្សយន្ត</div>
             </div>
-            <h3 class="font-display font-semibold text-lg">Reinforcement Learning</h3>
-            <p class="text-sm text-slate-400 mt-2">An agent learns by trial and error, receiving rewards or penalties
-              for its actions.</p>
-            <div class="mt-3 text-xs font-mono text-accent">e.g. game-playing agents, robotics</div>
-          </div>
         </div>
 
         <!-- diagram -->
         <div class="glass glass-card p-8 mt-10" data-aos="fade-up">
-          <svg viewBox="0 0 800 160" class="w-full h-auto">
-            <rect x="20" y="60" width="140" height="46" rx="10" fill="none" stroke="#3B82F6" stroke-width="2" />
-            <text x="90" y="88" text-anchor="middle" fill="#cbd5e1" font-size="13" font-family="Inter">Raw Data</text>
-            <line x1="160" y1="83" x2="230" y2="83" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
-            <rect x="230" y="20" width="160" height="46" rx="10" fill="none" stroke="#8B5CF6" stroke-width="2" />
-            <text x="310" y="48" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Inter">Model
-              Training</text>
-            <line x1="390" y1="43" x2="460" y2="43" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
-            <rect x="230" y="94" width="160" height="46" rx="10" fill="none" stroke="#06B6D4" stroke-width="2" />
-            <text x="310" y="122" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Inter">Pattern
-              Discovery</text>
-            <line x1="390" y1="117" x2="460" y2="117" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
-            <rect x="460" y="60" width="160" height="46" rx="10" fill="none" stroke="#10B981" stroke-width="2" />
-            <text x="540" y="88" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Inter">Trained
-              Model</text>
-            <line x1="620" y1="83" x2="690" y2="83" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
-            <rect x="690" y="60" width="90" height="46" rx="10" fill="none" stroke="#F59E0B" stroke-width="2" />
-            <text x="735" y="88" text-anchor="middle" fill="#cbd5e1" font-size="12"
-              font-family="Inter">Predictions</text>
-            <defs>
-              <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                <path d="M0,0 L8,4 L0,8 z" fill="#475569" />
-              </marker>
-            </defs>
-          </svg>
+            <svg viewBox="0 0 800 160" class="w-full h-auto">
+                <rect x="20" y="60" width="140" height="46" rx="10" fill="none" stroke="#3B82F6" stroke-width="2" />
+                <text x="90" y="88" text-anchor="middle" fill="#cbd5e1" font-size="13" font-family="Inter">ទិន្នន័យឆៅ</text>
+                <line x1="160" y1="83" x2="230" y2="83" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+                <rect x="230" y="20" width="160" height="46" rx="10" fill="none" stroke="#8B5CF6" stroke-width="2" />
+                <text x="310" y="48" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Inter">ការហ្វឹកហាត់គំរូ</text>
+                <line x1="390" y1="43" x2="460" y2="43" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+                <rect x="230" y="94" width="160" height="46" rx="10" fill="none" stroke="#06B6D4" stroke-width="2" />
+                <text x="310" y="122" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Inter">ការរកឃើញគំរូ</text>
+                <line x1="390" y1="117" x2="460" y2="117" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+                <rect x="460" y="60" width="160" height="46" rx="10" fill="none" stroke="#10B981" stroke-width="2" />
+                <text x="540" y="88" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Inter">គំរូដែលបានហ្វឹកហាត់</text>
+                <line x1="620" y1="83" x2="690" y2="83" stroke="#475569" stroke-width="2" marker-end="url(#arrow)" />
+                <rect x="690" y="60" width="90" height="46" rx="10" fill="none" stroke="#F59E0B" stroke-width="2" />
+                <text x="735" y="88" text-anchor="middle" fill="#cbd5e1" font-size="12" font-family="Inter">ការទស្សន៍ទាយ</text>
+                <defs>
+                    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                        <path d="M0,0 L8,4 L0,8 z" fill="#475569" />
+                    </marker>
+                </defs>
+            </svg>
         </div>
-      </div>
-    </section>
-    <!-- ============ SECTION 6: DEEP LEARNING ============ -->
-    <section id="dl" class="relative py-24 border-t border-white/5">
-      <div class="max-w-7xl mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-14 items-center">
-        <div data-aos="fade-right">
-          <span class="text-xs font-mono text-accent section-eyebrow">NEURAL NETWORKS</span>
-          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">Deep Learning</h2>
-          <p class="text-slate-400 mt-4">Deep Learning uses layered neural networks to automatically learn features
-            directly from raw data like pixels.</p>
+        <div class="text-xs text-slate-500 mt-4 text-center max-w-3xl mx-auto font-mono">
+            ដំណើរការម៉ាស៊ីនរៀន៖ ទិន្នន័យឆៅ → ហ្វឹកហាត់គំរូ / រកឃើញគំរូ → គំរូដែលបានហ្វឹកហាត់ → ទស្សន៍ទាយលទ្ធផល
+        </div>
+    </div>
+</section>
 
-          <div class="space-y-4 mt-8">
-            <div class="glass rounded-xl p-4 frame-corners">
-              <span class="fc-tr"></span><span class="fc-br"></span>
-              <h4 class="font-semibold text-sm text-primary"><i class="fa-solid fa-diagram-project mr-2"></i>Neural
-                Networks</h4>
-              <p class="text-sm text-slate-400 mt-1">Layers of connected nodes ("neurons") that transform input signals
-                into predictions.</p>
+<!-- ============ SECTION 6: DEEP LEARNING ============ -->
+<section id="dl" class="relative py-24 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-14 items-center">
+        <div data-aos="fade-right">
+            <span class="text-xs font-mono text-accent section-eyebrow">បណ្តាញសរសៃប្រសាទ</span>
+            <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">ការរៀនស៊ីជម្រៅ (Deep Learning)</h2>
+            <p class="text-slate-400 mt-4">ការរៀនស៊ីជម្រៅប្រើបណ្តាញសរសៃប្រសាទដែលមានស្រទាប់ជាច្រើន ដើម្បីរៀនលក្ខណៈដោយស្វ័យប្រវត្តិពីទិន្នន័យឆៅដូចជាភីកសែលជាដើម។</p>
+
+            <div class="space-y-4 mt-8">
+                <div class="glass rounded-xl p-4 frame-corners">
+                    <span class="fc-tr"></span><span class="fc-br"></span>
+                    <h4 class="font-semibold text-sm text-primary"><i class="fa-solid fa-diagram-project mr-2"></i>បណ្តាញសរសៃប្រសាទ</h4>
+                    <p class="text-sm text-slate-400 mt-1">ស្រទាប់នៃថ្នាំងដែលភ្ជាប់គ្នា ("ណឺរ៉ូន") ដែលបំលែងសញ្ញាបញ្ចូលទៅជាការទស្សន៍ទាយ។</p>
+                </div>
+                <div class="glass rounded-xl p-4 frame-corners">
+                    <span class="fc-tr"></span><span class="fc-br"></span>
+                    <h4 class="font-semibold text-sm text-secondary"><i class="fa-solid fa-layer-group mr-2"></i>ស្រទាប់កំបាំង</h4>
+                    <p class="text-sm text-slate-400 mt-1">ស្រទាប់កម្រិតមធ្យមរវាងធាតុចូល និងលទ្ធផល ដែលបង្កើតលក្ខណៈអរូបីកាន់តែខ្ពស់ឡើងៗ។</p>
+                </div>
+                <div class="glass rounded-xl p-4 frame-corners">
+                    <span class="fc-tr"></span><span class="fc-br"></span>
+                    <h4 class="font-semibold text-sm text-accent"><i class="fa-solid fa-scale-unbalanced mr-2"></i>ទំងន់ និង ប៊ីយ៉ាស</h4>
+                    <p class="text-sm text-slate-400 mt-1">ទំងន់កំណត់សារៈសំខាន់នៃធាតុចូលនីមួយៗ; ប៊ីយ៉ាសផ្លាស់ប្តូរលទ្ធផល — ទាំងពីរត្រូវបានរៀនកំឡុងពេលហ្វឹកហាត់។</p>
+                </div>
+                <div class="glass rounded-xl p-4 frame-corners">
+                    <span class="fc-tr"></span><span class="fc-br"></span>
+                    <h4 class="font-semibold text-sm text-warning"><i class="fa-solid fa-wave-square mr-2"></i>មុខងារសកម្មភាព</h4>
+                    <p class="text-sm text-slate-400 mt-1">មុខងារមិនមែនជាបន្ទាត់ (ដូចជា ReLU) ដែលអនុញ្ញាតឱ្យបណ្តាញធ្វើគំរូទំនាក់ទំនងស្មុគស្មាញបាន។</p>
+                </div>
             </div>
-            <div class="glass rounded-xl p-4 frame-corners">
-              <span class="fc-tr"></span><span class="fc-br"></span>
-              <h4 class="font-semibold text-sm text-secondary"><i class="fa-solid fa-layer-group mr-2"></i>Hidden Layers
-              </h4>
-              <p class="text-sm text-slate-400 mt-1">Intermediate layers between input and output that build
-                increasingly abstract features.</p>
-            </div>
-            <div class="glass rounded-xl p-4 frame-corners">
-              <span class="fc-tr"></span><span class="fc-br"></span>
-              <h4 class="font-semibold text-sm text-accent"><i class="fa-solid fa-scale-unbalanced mr-2"></i>Weights
-                &amp; Bias</h4>
-              <p class="text-sm text-slate-400 mt-1">Weights scale each input's importance; bias shifts the result —
-                both are learned during training.</p>
-            </div>
-            <div class="glass rounded-xl p-4 frame-corners">
-              <span class="fc-tr"></span><span class="fc-br"></span>
-              <h4 class="font-semibold text-sm text-warning"><i class="fa-solid fa-wave-square mr-2"></i>Activation
-                Functions</h4>
-              <p class="text-sm text-slate-400 mt-1">Non-linear functions (like ReLU) that let networks model complex
-                relationships.</p>
-            </div>
-          </div>
         </div>
 
         <div class="glass glass-card p-4" data-aos="fade-left">
-          <canvas id="nnCanvas" class="w-full" height="360"></canvas>
-          <p class="text-center text-xs text-slate-500 mt-2 font-mono">interactive signal propagation</p>
+            <canvas id="nnCanvas" class="w-full" height="360"></canvas>
+            <img src="https://blog.cellenza.com/wp-content/uploads/2022/09/Machine-Learning-vs-Deep-Learning-bis.png" alt="ប្រៀបធៀបម៉ាស៊ីនរៀន និងការរៀនស៊ីជម្រៅ" />
+            <p class="text-center text-xs text-slate-500 mt-2 font-mono">ការសាយភាយសញ្ញាអន្តរកម្ម (Interactive Signal Propagation)</p>
+            <div class="text-xs text-slate-400 mt-3 text-center max-w-md mx-auto">
+                <span class="inline-block w-3 h-3 bg-primary rounded-full mr-1"></span> ស្រទាប់បញ្ចូល 
+                <span class="inline-block w-3 h-3 bg-secondary rounded-full mr-1 ml-2"></span> ស្រទាប់កំបាំង 
+                <span class="inline-block w-3 h-3 bg-accent rounded-full mr-1 ml-2"></span> ស្រទាប់លទ្ធផល
+            </div>
         </div>
-      </div>
-    </section>
-    <!-- ============ SECTION 7: COMPUTER VISION ============ -->
-    <section id="cv" class="relative py-24 border-t border-white/5 bg-white/[0.02]">
-      <div class="max-w-7xl mx-auto px-5 md:px-8">
+    </div>
+</section>
+
+<!-- ============ SECTION 7: COMPUTER VISION ============ -->
+<section id="cv" class="relative py-24 border-t border-white/5 bg-white/[0.02]">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
         <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
-          <span class="text-xs font-mono text-accent section-eyebrow">TEACHING MACHINES TO SEE</span>
-          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">Computer Vision</h2>
-          <p class="text-slate-400 mt-4">A family of tasks that let machines interpret images and video — YOLO focuses
-            on one of them: object detection.</p>
+            <span class="text-xs font-mono text-accent section-eyebrow">បង្រៀនម៉ាស៊ីនឱ្យចេះមើល</span>
+            <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">ចក្ខុវិទ្យាកុំព្យូទ័រ (Computer Vision)</h2>
+            <p class="text-slate-400 mt-4">ក្រុមភារកិច្ចដែលអនុញ្ញាតឱ្យម៉ាស៊ីនបកប្រែរូបភាព និងវីដេអូ — YOLO ផ្តោតលើមួយក្នុងចំណោមពួកវា៖ ការរកឃើញវត្ថុ (Object Detection)។</p>
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-14">
-          <div class="glass glass-card frame-corners p-5" data-aos="zoom-in">
-            <span class="fc-tr"></span><span class="fc-br"></span>
-            <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
-              <rect width="100" height="70" rx="8" fill="#1e293b" />
-              <circle cx="50" cy="35" r="18" fill="#3B82F6" />
-            </svg>
-            <h4 class="font-semibold text-sm">Image Classification</h4>
-            <p class="text-xs text-slate-400 mt-1">"What is this image?" — one label for the whole image.</p>
-          </div>
-          <div class="glass glass-card frame-corners p-5 ring-1 ring-accent/40" data-aos="zoom-in" data-aos-delay="80">
-            <span class="fc-tr"></span><span class="fc-br"></span>
-            <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
-              <rect width="100" height="70" rx="8" fill="#1e293b" />
-              <circle cx="50" cy="35" r="16" fill="#8B5CF6" />
-              <rect x="30" y="15" width="40" height="40" fill="none" stroke="#06B6D4" stroke-width="2" rx="4" />
-            </svg>
-            <h4 class="font-semibold text-sm">Object Detection</h4>
-            <p class="text-xs text-slate-400 mt-1">Locates &amp; labels multiple objects with bounding boxes — YOLO's
-              specialty.</p>
-          </div>
-          <div class="glass glass-card frame-corners p-5" data-aos="zoom-in" data-aos-delay="160">
-            <span class="fc-tr"></span><span class="fc-br"></span>
-            <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
-              <rect width="100" height="70" rx="8" fill="#1e293b" />
-              <path d="M30 50 Q50 10 70 50 Z" fill="#10B981" opacity="0.7" />
-            </svg>
-            <h4 class="font-semibold text-sm">Image Segmentation</h4>
-            <p class="text-xs text-slate-400 mt-1">Classifies every pixel, tracing an object's exact outline.</p>
-          </div>
-          <div class="glass glass-card frame-corners p-5" data-aos="zoom-in" data-aos-delay="240">
-            <span class="fc-tr"></span><span class="fc-br"></span>
-            <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
-              <rect width="100" height="70" rx="8" fill="#1e293b" />
-              <circle cx="50" cy="20" r="7" fill="#F59E0B" />
-              <line x1="50" y1="27" x2="50" y2="50" stroke="#F59E0B" stroke-width="3" />
-              <line x1="50" y1="35" x2="35" y2="45" stroke="#F59E0B" stroke-width="3" />
-              <line x1="50" y1="35" x2="65" y2="45" stroke="#F59E0B" stroke-width="3" />
-            </svg>
-            <h4 class="font-semibold text-sm">Pose Estimation</h4>
-            <p class="text-xs text-slate-400 mt-1">Maps skeletal keypoints to understand body position and movement.</p>
-          </div>
-          <div class="glass glass-card frame-corners p-5" data-aos="zoom-in" data-aos-delay="320">
-            <span class="fc-tr"></span><span class="fc-br"></span>
-            <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
-              <rect width="100" height="70" rx="8" fill="#1e293b" /><text x="50" y="42" text-anchor="middle"
-                fill="#06B6D4" font-family="JetBrains Mono" font-size="16">A19</text>
-            </svg>
-            <h4 class="font-semibold text-sm">OCR</h4>
-            <p class="text-xs text-slate-400 mt-1">Reads and extracts text characters straight out of images.</p>
-          </div>
+            <div class="glass glass-card frame-corners p-5" data-aos="zoom-in">
+                <span class="fc-tr"></span><span class="fc-br"></span>
+                <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
+                    <rect width="100" height="70" rx="8" fill="#1e293b" />
+                    <circle cx="50" cy="35" r="18" fill="#3B82F6" />
+                </svg>
+                <h4 class="font-semibold text-sm">ការចាត់ថ្នាក់រូបភាព</h4>
+                <p class="text-xs text-slate-400 mt-1">"រូបភាពនេះជាអ្វី?" — ស្លាកមួយសម្រាប់រូបភាពទាំងមូល។</p>
+            </div>
+            <div class="glass glass-card frame-corners p-5 ring-1 ring-accent/40" data-aos="zoom-in" data-aos-delay="80">
+                <span class="fc-tr"></span><span class="fc-br"></span>
+                <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
+                    <rect width="100" height="70" rx="8" fill="#1e293b" />
+                    <circle cx="50" cy="35" r="16" fill="#8B5CF6" />
+                    <rect x="30" y="15" width="40" height="40" fill="none" stroke="#06B6D4" stroke-width="2" rx="4" />
+                </svg>
+                <h4 class="font-semibold text-sm">ការរកឃើញវត្ថុ</h4>
+                <p class="text-xs text-slate-400 mt-1">កំណត់ទីតាំង និងដាក់ស្លាកវត្ថុច្រើនដោយប្រអប់ព្រំដែន — ជំនាញរបស់ YOLO។</p>
+            </div>
+            <div class="glass glass-card frame-corners p-5" data-aos="zoom-in" data-aos-delay="160">
+                <span class="fc-tr"></span><span class="fc-br"></span>
+                <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
+                    <rect width="100" height="70" rx="8" fill="#1e293b" />
+                    <path d="M30 50 Q50 10 70 50 Z" fill="#10B981" opacity="0.7" />
+                </svg>
+                <h4 class="font-semibold text-sm">ការបំបែករូបភាព</h4>
+                <p class="text-xs text-slate-400 mt-1">ចាត់ថ្នាក់គ្រប់ភីកសែល តាមដានគ្រោងពិតប្រាកដរបស់វត្ថុ។</p>
+            </div>
+            <div class="glass glass-card frame-corners p-5" data-aos="zoom-in" data-aos-delay="240">
+                <span class="fc-tr"></span><span class="fc-br"></span>
+                <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
+                    <rect width="100" height="70" rx="8" fill="#1e293b" />
+                    <circle cx="50" cy="20" r="7" fill="#F59E0B" />
+                    <line x1="50" y1="27" x2="50" y2="50" stroke="#F59E0B" stroke-width="3" />
+                    <line x1="50" y1="35" x2="35" y2="45" stroke="#F59E0B" stroke-width="3" />
+                    <line x1="50" y1="35" x2="65" y2="45" stroke="#F59E0B" stroke-width="3" />
+                </svg>
+                <h4 class="font-semibold text-sm">ការប៉ាន់ស្មានឥរិយាបថ</h4>
+                <p class="text-xs text-slate-400 mt-1">គូសផែនទីចំណុចសំខាន់ៗនៃគ្រោងឆ្អឹង ដើម្បីយល់ពីទីតាំង និងចលនារាងកាយ។</p>
+            </div>
+            <div class="glass glass-card frame-corners p-5" data-aos="zoom-in" data-aos-delay="320">
+                <span class="fc-tr"></span><span class="fc-br"></span>
+                <svg viewBox="0 0 100 70" class="w-full h-16 mb-3">
+                    <rect width="100" height="70" rx="8" fill="#1e293b" /><text x="50" y="42" text-anchor="middle"
+                        fill="#06B6D4" font-family="JetBrains Mono" font-size="16">ក19</text>
+                </svg>
+                <h4 class="font-semibold text-sm">ការស្គាល់អក្សរ (OCR)</h4>
+                <p class="text-xs text-slate-400 mt-1">អាន និងទាញយកអក្សរចេញពីរូបភាពដោយផ្ទាល់។</p>
+            </div>
         </div>
-      </div>
-    </section>
+
+        <!-- Additional detail: YOLO explanation in Khmer -->
+        <div class="mt-12 glass glass-card p-6 max-w-4xl mx-auto" data-aos="fade-up">
+            <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-full bg-accent/20 flex-shrink-0 grid place-items-center text-accent text-xl">
+                    <i class="fa-regular fa-eye"></i>
+                </div>
+                <div>
+                    <h4 class="font-display font-semibold text-lg text-accent">តើ YOLO ជាអ្វី? (You Only Look Once)</h4>
+                    <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+                        YOLO គឺជាបណ្តាញសរសៃប្រសាទស៊ីជម្រៅសម្រាប់ការរកឃើញវត្ថុតាមពេលវេលាជាក់ស្តែង (Real-time Object Detection)។ 
+                        វាខុសពីវិធីសាស្ត្រចាស់ៗ ដែលត្រូវរត់កាត់រូបភាពច្រើនដង — YOLO មើលរូបភាពទាំងមូលតែម្តង (មើលតែម្តង) ហើយទស្សន៍ទាយប្រអប់ព្រំដែន និងថ្នាក់វត្ថុទាំងអស់ក្នុងពេលតែមួយ។ 
+                        នេះធ្វើឱ្យវាលឿនរហ័ស និងស័ក្តិសមសម្រាប់កម្មវិធីដូចជា រថយន្តបើកបរដោយស្វ័យប្រវត្តិ ការឃ្លាំមើលសុវត្ថិភាព និងប្រព័ន្ធរាប់ចំនួនមនុស្ស។
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full">លឿន</span>
+                        <span class="text-xs bg-secondary/20 text-secondary px-3 py-1 rounded-full">ត្រឹមត្រូវ</span>
+                        <span class="text-xs bg-accent/20 text-accent px-3 py-1 rounded-full">អាចប្រើបានជាក់ស្តែង</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
   </div>
   <div id="yolol" class="page">
     <!-- ============ SECTION 8: YOLO DETECTION ============ -->
@@ -3142,51 +3148,51 @@
     counters.forEach(c => counterObserver.observe(c));
 
     /* ---------- Interactive neural network diagram (Deep Learning section) ---------- */
-    const nnCanvas = document.getElementById('nnCanvas');
-    const nnctx = nnCanvas.getContext('2d');
-    function sizeNN() { nnCanvas.width = nnCanvas.clientWidth; nnCanvas.height = 360; }
-    sizeNN(); window.addEventListener('resize', sizeNN);
-    const layers = [4, 6, 6, 3];
-    let pulse = 0;
-    function layerPositions() {
-      const w = nnCanvas.width, h = nnCanvas.height;
-      return layers.map((count, li) => {
-        const x = (w / (layers.length + 1)) * (li + 1);
-        return Array.from({ length: count }, (_, i) => ({
-          x, y: (h / (count + 1)) * (i + 1)
-        }));
-      });
-    }
-    function drawNN() {
-      const w = nnCanvas.width, h = nnCanvas.height;
-      nnctx.clearRect(0, 0, w, h);
-      const pos = layerPositions();
-      for (let l = 0; l < pos.length - 1; l++) {
-        pos[l].forEach((a, ai) => {
-          pos[l + 1].forEach((b, bi) => {
-            const active = ((pulse + ai + bi) % 14) < 2;
-            nnctx.strokeStyle = active ? 'rgba(6,182,212,0.85)' : 'rgba(148,163,184,0.12)';
-            nnctx.lineWidth = active ? 1.6 : 1;
-            nnctx.beginPath(); nnctx.moveTo(a.x, a.y); nnctx.lineTo(b.x, b.y); nnctx.stroke();
-          });
-        });
-      }
-      pos.forEach((layer, li) => {
-        layer.forEach(n => {
-          const grad = nnctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 10);
-          const colors = ['#3B82F6', '#8B5CF6', '#8B5CF6', '#06B6D4'];
-          grad.addColorStop(0, colors[li]);
-          grad.addColorStop(1, 'rgba(15,23,42,0)');
-          nnctx.fillStyle = grad;
-          nnctx.beginPath(); nnctx.arc(n.x, n.y, 9, 0, Math.PI * 2); nnctx.fill();
-          nnctx.fillStyle = colors[li];
-          nnctx.beginPath(); nnctx.arc(n.x, n.y, 4, 0, Math.PI * 2); nnctx.fill();
-        });
-      });
-      pulse++;
-      requestAnimationFrame(drawNN);
-    }
-    drawNN();
+    // const nnCanvas = document.getElementById('nnCanvas');
+    // const nnctx = nnCanvas.getContext('2d');
+    // function sizeNN() { nnCanvas.width = nnCanvas.clientWidth; nnCanvas.height = 360; }
+    // sizeNN(); window.addEventListener('resize', sizeNN);
+    // const layers = [4, 6, 6, 3];
+    // let pulse = 0;
+    // function layerPositions() {
+    //   const w = nnCanvas.width, h = nnCanvas.height;
+    //   return layers.map((count, li) => {
+    //     const x = (w / (layers.length + 1)) * (li + 1);
+    //     return Array.from({ length: count }, (_, i) => ({
+    //       x, y: (h / (count + 1)) * (i + 1)
+    //     }));
+    //   });
+    // }
+    // function drawNN() {
+    //   const w = nnCanvas.width, h = nnCanvas.height;
+    //   nnctx.clearRect(0, 0, w, h);
+    //   const pos = layerPositions();
+    //   for (let l = 0; l < pos.length - 1; l++) {
+    //     pos[l].forEach((a, ai) => {
+    //       pos[l + 1].forEach((b, bi) => {
+    //         const active = ((pulse + ai + bi) % 14) < 2;
+    //         nnctx.strokeStyle = active ? 'rgba(6,182,212,0.85)' : 'rgba(148,163,184,0.12)';
+    //         nnctx.lineWidth = active ? 1.6 : 1;
+    //         nnctx.beginPath(); nnctx.moveTo(a.x, a.y); nnctx.lineTo(b.x, b.y); nnctx.stroke();
+    //       });
+    //     });
+    //   }
+    //   pos.forEach((layer, li) => {
+    //     layer.forEach(n => {
+    //       const grad = nnctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 10);
+    //       const colors = ['#3B82F6', '#8B5CF6', '#8B5CF6', '#06B6D4'];
+    //       grad.addColorStop(0, colors[li]);
+    //       grad.addColorStop(1, 'rgba(15,23,42,0)');
+    //       nnctx.fillStyle = grad;
+    //       nnctx.beginPath(); nnctx.arc(n.x, n.y, 9, 0, Math.PI * 2); nnctx.fill();
+    //       nnctx.fillStyle = colors[li];
+    //       nnctx.beginPath(); nnctx.arc(n.x, n.y, 4, 0, Math.PI * 2); nnctx.fill();
+    //     });
+    //   });
+    //   pulse++;
+    //   requestAnimationFrame(drawNN);
+    // }
+    // drawNN();
     /* ---------- YOLO Architecture pulse ---------- */
     const archEls = document.querySelectorAll('.arch-pulse');
     let archIndex = 0;
@@ -3304,7 +3310,7 @@
 
       "៧. ការលុបបំបាត់ប្រអប់ស្ទួន (Non-Max Suppression - NMS) — លុប Bounding Boxes ដែលស្ទួនគ្នា ដើម្បីទុកតែការទស្សន៍ទាយដែលមានភាពត្រឹមត្រូវខ្ពស់បំផុត។",
 
-      "៨. បង្ហាញលទ្ធផលចុងក្រោយ (Final Output) — វត្ថុដែលបានរកឃើញត្រូវបានគូស Bounding Boxes និងបង្ហាញលើរូបភាព ឬវីដេអូ។"
+      "៨. បង្ហាញលទ្ធផលចុងក្រោយ (Final Output) —  វត្ថុដែលបានរកឃើញត្រូវបានគូស Bounding Boxes និងបង្ហាញលើរូបភាព ឬវីដេអូ។"
     ];
     const stepsList = document.getElementById('stepsList');
     detectSteps.forEach((text, i) => {
