@@ -9,7 +9,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Load model once
-model = YOLO("yolo11n.pt")
+model = YOLO("m4.pt")
 
 
 @app.route("/")
