@@ -21,7 +21,6 @@
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 <body class="bg-bg bg-grid">
   <!-- ============ NAV ============ -->
@@ -35,7 +34,7 @@
         M4 
         <span class="grad-text">AI Vision </span>
       </a>
-      <nav class="hidden lg:flex items-center gap-6 text-sm text-slate-300 font-medium">
+      <nav class="hidden lg:flex items-center gap-6 text-sm text-slate-600 font-medium">
         <button id="btn-home" class="nav-link" onclick="showPage('home')">Home</button>
         <button id="btn-ai" class="nav-link" onclick="showPage('ai')">AI Lesson</button>
         <button class="nav-link" onclick="showPage('yolol')">Yolo Lesson</button>
@@ -51,7 +50,7 @@
     </div>
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="lg:hidden max-h-0 overflow-hidden glass border-t border-white/5">
-      <nav class="flex flex-col px-5 py-3 text-sm text-slate-300">
+      <nav class="flex flex-col px-5 py-3 text-sm text-slate-600">
         <button id="btn-home" class="nav-link  py-2 border-b border-white/5" onclick="showPage('home')">Home</button>
         <button id="btn-ai" class="nav-link  py-2 border-b border-white/5" onclick="showPage('ai')">AI Lesson</button>
         <button class="nav-link  py-2 border-b border-white/5" onclick="showPage('yolol')">Yolo Lesson</button>
@@ -65,42 +64,26 @@
   <!-- ============ HERO ============ -->
 <div id="home" class="page">
     <section id="ho" class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
-      <div class="glow-orb w-[36rem] h-[36rem] bg-primary top-[-10rem] left-[-10rem]"></div>
-      <div class="glow-orb w-[30rem] h-[30rem] bg-secondary bottom-[-8rem] right-[-6rem]"></div>
       <div class="max-w-7xl mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-14 items-center relative z-10">
         <div data-aos="fade-up">
           <span
-            class="inline-flex items-center gap-2 text-xs font-mono pill px-3 py-1 glass text-accent section-eyebrow">
+            class="inline-flex items-center gap-2 text-xs font-mono px-3 py-1 glass text-accent section-eyebrow">
             <i class="fa-solid fa-microchip"></i> ការរកឃើញវត្ថុតាមពេលវេលាជាក់ស្តែង
           </span>
           <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl mt-6 leading-tight">
             <span id="typingTarget" class="typing-cursor"></span>
           </h1>
-          <p class="mt-6 text-slate-300 text-lg max-w-xl">
+          <p class="mt-6 text-slate-600 text-lg max-w-xl">
             ស្វែងយល់ពីរបៀបដែលបញ្ញាសិប្បនិម្មិតទំនើបអាចរកឃើញមនុស្ស រថយន្ត សត្វ និងវត្ថុរាប់រយផ្សេងទៀតក្នុងពេលវេលាជាក់ស្តែង — ពីណឺរ៉ូនរហូតដល់ប្រអប់ព្រំដែន។
           </p>
           <div class="mt-8 flex flex-wrap gap-4">
             <button onclick="document.getElementById('btn-ai').click();" class="btn-primary text-white font-semibold px-6 py-3 rounded-xl">
               <i class="fa-solid fa-graduation-cap mr-2"></i>ចាប់ផ្ដើមរៀន
             </button>
-            <button onclick="document.getElementById('btn-demo').click()" class="btn-outline glass text-slate-100 font-semibold px-6 py-3 rounded-xl">
+            <button onclick="document.getElementById('btn-demo').click()" class="btn-outline glass font-semibold px-6 py-3 rounded-xl">
               <i class="fa-solid fa-camera mr-2"></i>សាក Demo
             </button>
           </div>
-          <!-- <div class="grid grid-cols-3 gap-6 mt-12 max-w-md">
-            <div>
-              <div class="font-display font-bold text-3xl grad-text counter" data-target="99.5">0</div>
-              <div class="text-xs text-slate-400 mt-1">FPS ក្នុងពេលជាក់ស្តែង*</div>
-            </div>
-            <div>
-              <div class="font-display font-bold text-3xl grad-text counter" data-target="11">0</div>
-              <div class="text-xs text-slate-400 mt-1">កំណែ YOLO</div>
-            </div>
-            <div>
-              <div class="font-display font-bold text-3xl grad-text counter" data-target="80">0</div>
-              <div class="text-xs text-slate-400 mt-1">ថ្នាក់ COCO</div>
-            </div>
-          </div> -->
         </div>
         <!-- រូបភាពសម្រាប់បង្ហាញការរកឃើញ -->
         <div class="relative h-full" data-aos="fade-left">
@@ -119,21 +102,21 @@
             <h2 class="text-3xl md:text-4xl font-display font-bold mt-4">
               ស្វែងយល់ពី <span class="grad-text">ការស្វែងរក Object</span>
             </h2>
-            <p class="text-slate-300 mt-4 leading-relaxed">
+            <p class="text-slate-600 mt-4 leading-relaxed">
               គម្រោងអប់រំនេះស្វែងយល់ពីរបៀបដែលបញ្ញាសិប្បនិម្មិតអាចកំណត់អត្តសញ្ញាណ និងកំណត់ទីតាំងវត្ថុក្នុងរូបភាព និងវីដេអូ។ យើងបំបែកគំនិតស្មុគស្មាញទៅជាការពន្យល់សាមញ្ញ និងងាយយល់សម្រាប់សិស្សានុសិស្ស។
             </p>
             <ul class="mt-6 space-y-3">
               <li class="flex items-start gap-3">
                 <i class="fa-solid fa-check-circle text-primary mt-1"></i>
-                <span class="text-slate-300">រៀនពីរបៀបដែលកុំព្យូទ័រ "មើលឃើញ" និងស្គាល់វត្ថុ</span>
+                <span class="text-slate-600">រៀនពីរបៀបដែលកុំព្យូទ័រ "មើលឃើញ" និងស្គាល់វត្ថុ</span>
               </li>
               <li class="flex items-start gap-3">
                 <i class="fa-solid fa-check-circle text-secondary mt-1"></i>
-                <span class="text-slate-300">យល់ពីក្បួនដោះស្រាយ YOLO ជាជំហានៗ</span>
+                <span class="text-slate-600">យល់ពីក្បួនដោះស្រាយ YOLO ជាជំហានៗ</span>
               </li>
               <li class="flex items-start gap-3">
                 <i class="fa-solid fa-check-circle text-accent mt-1"></i>
-                <span class="text-slate-300">ស្វែងយល់ពីកម្មវិធី និងករណីប្រើប្រាស់ក្នុងពិភពពិត</span>
+                <span class="text-slate-600">ស្វែងយល់ពីកម្មវិធី និងករណីប្រើប្រាស់ក្នុងពិភពពិត</span>
               </li>
             </ul>
           </div>
@@ -148,7 +131,7 @@
                   <p class="font-semibold">វិទ្យាកុំព្យូទ័រ</p>
                 </div>
               </div>
-              <div class="items-center gap-4 p-3">
+              <div class="items-center gap-4 p-3 glass">
                 <div class="h-12 bg-secondary/20 rounded-full flex gap-7 items-center">
                   <i class="fa-solid fa-user text-secondary text-xl"></i>
                   <p class="text-sm text-slate-400">សមាជិក</p>
@@ -179,7 +162,7 @@
           <h2 class="text-3xl md:text-4xl font-display font-bold mt-4">
             អ្វីដែលអ្នកនឹង <span class="grad-text">រៀន</span>
           </h2>
-          <p class="text-slate-300 mt-4">ក្រោយពេលបញ្ចប់នៃគម្រោងនេះ អ្នកនឹងយល់ដឹងអំពី៖</p>
+          <p class="text-slate-600 mt-4">ក្រោយពេលបញ្ចប់នៃគម្រោងនេះ អ្នកនឹងយល់ដឹងអំពី៖</p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
@@ -242,16 +225,18 @@
             <h2 class="text-3xl md:text-4xl font-display font-bold">
               ត្រៀមខ្លួនចាប់ផ្តើមដំណើរ <span class="grad-text">AI របស់អ្នកហើយឬនៅ?</span>
             </h2>
-            <p class="text-slate-300 mt-4 max-w-xl mx-auto">
+            <p class="text-slate-600 mt-4 max-w-xl mx-auto">
               ចូលរួមជាមួយអ្នកអភិវឌ្ឍន៍រាប់ពាន់នាក់ក្នុងការស្ទាត់ជំនាញការរកឃើញវត្ថុ។ ចាប់ផ្តើមរៀនដោយឥតគិតថ្លៃថ្ងៃនេះ។
             </p>
             <div class="mt-8 flex flex-wrap gap-4 justify-center">
               <button  onclick="document.getElementById('btn-ai').click();"
                 class="btn-primary text-white font-semibold px-8 py-3 rounded-xl hover:scale-105 transition-transform">
-                <i class="fa-solid fa-graduation-cap mr-2"></i> ចាប់ផ្តើមរៀនឥឡូវនេះ
+                <i class="fa-solid fa-grad
+                
+                uation-cap mr-2"></i> ចាប់ផ្តើមរៀនឥឡូវនេះ
               </button>
               <a href="#"
-                class="btn-outline glass text-slate-100 font-semibold px-8 py-3 rounded-xl hover:scale-105 transition-transform">
+                class="text-slate-900 px-8 py-3 rounded-xl hover:scale-105 transition-transform">
                 <i class="fa-regular fa-circle-play mr-2"></i> មើល Demo
               </a>
             </div>
@@ -269,7 +254,7 @@
       <div class="max-w-7xl mx-auto px-5 md:px-8">
         <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
           <span class="text-xs font-mono text-accent section-eyebrow">មេរៀនទី១</span>
-          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3 grad-text">
             តើបញ្ញាសិប្បនិម្មិត (Artificial Intelligence - AI) គឺជាអ្វី?
           </h2>
           <p class="text-red-400 mt-4 leading-8 text-justify">
@@ -292,7 +277,7 @@
             <h3 class="font-display font-semibold text-xl mt-4">
               ប្រវត្តិនៃការអភិវឌ្ឍ AI
             </h3>
-            <ul class="mt-4 space-y-4 text-sm text-slate-300 leading-7">
+            <ul class="mt-4 space-y-4 text-sm text-slate-600 leading-7">
               <li>
                 <span class="font-mono text-accent">១៩៥០</span>
                 — លោក Alan Turing បានបង្កើត "Turing Test"
@@ -337,7 +322,6 @@
           </div>
           <!-- Applications -->
           <div class="glass glass-card frame-corners p-6" data-aos="fade-up" data-aos-delay="100">
-            <img width="200" src="https://lankasara.com/wp-content/uploads/2024/09/Featured-Image-1.jpg" alt="">
             <span class="fc-tr"></span>
             <span class="fc-br"></span>
             <i class="fa-solid fa-globe text-2xl text-secondary"></i>
@@ -345,7 +329,7 @@
               ការប្រើប្រាស់ AI ក្នុងជីវិតប្រចាំថ្ងៃ
             </h3>
 
-            <div class="grid grid-cols-2 gap-4 mt-5 text-sm text-slate-300">
+            <div class="grid grid-cols-2 gap-4 mt-5 text-sm text-slate-600">
 
               <div>
                 <i class="fa-solid fa-stethoscope text-accent mr-2"></i>
@@ -403,7 +387,7 @@
               អត្ថប្រយោជន៍របស់ AI
             </h4>
 
-            <ul class="mt-4 space-y-3 text-sm text-slate-300 list-disc list-inside leading-7">
+            <ul class="mt-4 space-y-3 text-sm text-slate-600 list-disc list-inside leading-7">
 
               <li>ជួយធ្វើការងារដដែលៗដោយស្វ័យប្រវត្តិ។</li>
 
@@ -428,7 +412,7 @@
               គុណវិបត្តិរបស់ AI
             </h4>
 
-            <ul class="mt-4 space-y-3 text-sm text-slate-300 list-disc list-inside leading-7">
+            <ul class="mt-4 space-y-3 text-sm text-slate-600 list-disc list-inside leading-7">
 
               <li>ត្រូវការទិន្នន័យច្រើន និងមានគុណភាពល្អ។</li>
 
@@ -477,7 +461,7 @@
             <h3 class="font-display font-semibold text-xl text-pink-500">
               <i class="fa-brands fa-cloudversify"></i> ១. ការរៀនពីទិន្នន័យ (Learning)
             </h3>
-            <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
+            <p class="mt-4 text-sm text-slate-600 leading-8 text-justify">
               មុខងារសំខាន់បំផុតរបស់ AI គឺការរៀនពីទិន្នន័យ (Data Learning)។
               AI ប្រើទិន្នន័យចាស់ៗដើម្បីស្វែងរកលំនាំ (patterns) ហើយបង្កើតចំណេះដឹងថ្មី។
               ឧទាហរណ៍៖ ប្រព័ន្ធ AI អាចរៀនស្គាល់មុខមនុស្សពីរូបថតរាប់ពាន់សន្លឹក
@@ -491,7 +475,7 @@
             <h3 class="font-display font-semibold text-xl text-green-200">
               <i class="fa-solid fa-hexagon-nodes-bolt"></i></i> ២. ការពិចារណា និងសម្រេចចិត្ត (Reasoning & Decision Making)
             </h3>
-            <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
+            <p class="mt-4 text-sm text-slate-600 leading-8 text-justify">
               AI អាចវិភាគព័ត៌មាន ហើយសម្រេចចិត្តដោយ Algorithm ដែលបានកំណត់ទុកនិង​ Model​ ដែលបានរៀបចំទិន្នន័យ។
               ឧទាហរណ៍៖ ប្រព័ន្ធធនាគារអាចសម្រេចថា តើប្រតិបត្តិការណាមួយមានហានិភ័យឬអត់។
               AI ក្នុងរថយន្តស្វ័យប្រវត្តិអាចសម្រេចថាត្រូវបត់ ឈប់ ឬបន្តដំណើរ។
@@ -506,7 +490,7 @@
               <i class="fa-solid fa-chart-pie"></i>
                ៣. ការវិភាគ (Analysis)
             </h3>
-            <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
+            <p class="mt-4 text-sm text-slate-600 leading-8 text-justify">
               AI អាចវិភាគទិន្នន័យដើម្បីរកលំនាំ និងទស្សន៍ទាយលទ្ធផល។
               វាត្រូវបានប្រើក្នុងការវិភាគអតិថិជន ទស្សន៍ទាយទីផ្សារ និងស្វែងរកការប្រព្រឹត្តបទល្មើស។
               ឧទាហរណ៍៖ ប្រព័ន្ធ AI អាចវិភាគទិន្នន័យអតិថិជនដើម្បីផ្តល់អនុសាសន៍ផលិតផលឬសេវាកម្មដែលពួកគេចូលចិត្ត។
@@ -518,7 +502,7 @@
             <h3 class="font-display font-semibold text-xl">
               <i class="fa-brands fa-keycdn"></i> ៤. ការអនុវត្តសកម្មភាព (Action & Automation)
             </h3>
-            <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
+            <p class="mt-4 text-sm text-slate-600 leading-8 text-justify">
               AI អាចធ្វើសកម្មភាពដោយស្វ័យប្រវត្តិ ដោយគ្មានការគ្រប់គ្រងពីមនុស្សដោយផ្អែកលើលទ្ធផលដែលបានពី
               Learning,Reasesioning,Analysis។
               ឧទាហរណ៍៖ Robot នៅរោងចក្រ, Self-driving car,
@@ -533,7 +517,7 @@
           <h4 class="font-display font-semibold text-lg text-primary">
             សរុប
           </h4>
-          <p class="mt-3 text-sm text-slate-300 leading-8 text-justify">
+          <p class="mt-3 text-sm text-slate-600 leading-8 text-justify">
             មុខងារសំខាន់ៗរបស់ AI រួមមាន ការរៀនពីទិន្នន័យ(Learning) + ការពិចារណា(Reasesioning)
             + ការវិភាគ(Analysing) + និងការអនុវត្តសកម្មភាព។
             មុខងារទាំងនេះធ្វើឲ្យ AI ក្លាយជាបច្ចេកវិទ្យាដ៏សំខាន់ក្នុងសម័យឌីជីថល
@@ -567,7 +551,7 @@
           <!-- 1 -->
           <div class="glass glass-card p-6 w-full md:w-2/3">
             <h3 class="font-semibold text-xl">1. 📊 ទិន្នន័យ (Data Collection)</h3>
-            <p class="text-sm text-slate-300 mt-3 leading-8 text-justify">
+            <p class="text-sm text-slate-600 mt-3 leading-8 text-justify">
               ដំណើរការរបស់ AI ចាប់ផ្តើមពីទិន្នន័យ។ ទិន្នន័យអាចជារូបភាព វីដេអូ សំឡេង អត្ថបទ
               ឬព័ត៌មានពីអ្នកប្រើប្រាស់។ ទិន្នន័យទាំងនេះត្រូវបានប្រមូលពីប្រភពផ្សេងៗ
               ហើយយកមកសម្អាត (cleaning) និងរៀបចំ (preprocessing) ដើម្បីឲ្យម៉ាស៊ីនអាចយល់បាន។
@@ -580,7 +564,7 @@
           <!-- 2 -->
           <div class="glass glass-card p-6 w-full md:w-2/3">
             <h3 class="font-semibold text-xl">2. 🧠 ការរៀន (Learning)</h3>
-            <p class="text-sm text-slate-300 mt-3 leading-8 text-justify">
+            <p class="text-sm text-slate-600 mt-3 leading-8 text-justify">
               នៅដំណាក់កាលនេះ AI ចាប់ផ្តើមស្វែងរកលំនាំ (patterns) និងទំនាក់ទំនងក្នុងទិន្នន័យ។
               វាប្រើ algorithm ដើម្បីយល់ថា តើអ្វីជាអ្វី។ ឧទាហរណ៍ AI អាចរៀនថា
               រូបភាពដែលមានភ្នែក ច្រមុះ និងមាត់ អាចជាមុខមនុស្ស។
@@ -593,7 +577,7 @@
           <!-- 3 -->
           <div class="glass glass-card p-6 w-full md:w-2/3">
             <h3 class="font-semibold text-xl">3. ⚙️ ការបណ្តុះបណ្តាលម៉ូដែល (Model Training)</h3>
-            <p class="text-sm text-slate-300 mt-3 leading-8 text-justify">
+            <p class="text-sm text-slate-600 mt-3 leading-8 text-justify">
               ម៉ូដែល (Model) គឺជាគណិតវិទ្យា ឬ algorithm ដែល AI ប្រើសម្រាប់ទស្សន៍ទាយ។
               ក្នុងដំណាក់កាលនេះ AI ត្រូវបានបណ្តុះបណ្តាលដោយទិន្នន័យច្រើនដង
               ដើម្បីកាត់បន្ថយកំហុស (error) និងបង្កើនភាពត្រឹមត្រូវ។
@@ -606,7 +590,7 @@
           <!-- 4 -->
           <div class="glass glass-card p-6 w-full md:w-2/3">
             <h3 class="font-semibold text-xl">4. 🎯 ការសម្រេចចិត្ត និងសកម្មភាព (Decision Making & Action)</h3>
-            <p class="text-sm text-slate-300 mt-3 leading-8 text-justify">
+            <p class="text-sm text-slate-600 mt-3 leading-8 text-justify">
               បន្ទាប់ពីម៉ូដែលត្រូវបានបណ្តុះបណ្តាល AI អាចប្រើវាដើម្បីសម្រេចចិត្ត។
               ឧទាហរណ៍ AI អាចស្គាល់រូបភាពថាជាឆ្មា ឬឆ្កែ,
               ឬសម្រេចថាប្រតិបត្តិការធនាគារមានសុវត្ថិភាពឬអត់។
@@ -622,7 +606,7 @@
             <h3 class="font-semibold text-xl text-primary">
               5. 🔄 ការកែលម្អជាបន្តបន្ទាប់ (Continuous Improvement)
             </h3>
-            <p class="text-sm text-slate-300 mt-3 leading-8 text-justify">
+            <p class="text-sm text-slate-600 mt-3 leading-8 text-justify">
               AI មិនឈប់រៀនទេ។ នៅពេលវាត្រូវបានប្រើប្រាស់ក្នុងពិភពពិត
               វានឹងទទួលបានទិន្នន័យថ្មីៗ និង feedback ពីអ្នកប្រើប្រាស់។
               ទិន្នន័យថ្មីៗនេះត្រូវបានយកទៅបន្ថែមក្នុងការបណ្តុះបណ្តាលវិញ
@@ -636,37 +620,33 @@
       </div>
     </section>
     <!-- ============ SECTION 4: ប្រភេទនៃបញ្ញាសិប្បនិម្មិត (Types of AI - Old Style) ============ -->
-    <section id="ai-types" class="relative py-24 border-t border-white/10 bg-slate-950">
+    <section id="ai-types" class="relative py-24 border-t border-white/10">
 
       <div class="max-w-6xl mx-auto px-5 md:px-8">
-
         <!-- Title -->
         <div class="text-center max-w-3xl mx-auto" data-aos="fade-up">
           <span class="text-xs font-mono text-accent section-eyebrow">
             មេរៀនទី៤
           </span>
 
-          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3 text-slate-100">
+          <h2 class="font-display font-bold text-3xl md:text-4xl mt-3 grad-text">
             ប្រភេទនៃបញ្ញាសិប្បនិម្មិត (Types of AI)
           </h2>
-
-          <p class="text-slate-400 mt-4 leading-8 text-justify">
+          <p class="text-slate-600 mt-4 leading-8 text-justify">
             បញ្ញាសិប្បនិម្មិត (AI) អាចត្រូវបានបែងចែកជាប្រភេទផ្សេងៗ
             ដោយផ្អែកលើកម្រិតនៃភាពឆ្លាត និងសមត្ថភាពក្នុងការគិត។
             ប្រភេទទាំងនេះបង្ហាញពីការវិវត្តន៍ពី AI សាមញ្ញទៅ AI ដែលមានសមត្ថភាពខ្ពស់។
           </p>
         </div>
-
         <!-- Old Style Cards -->
         <div class="mt-14 space-y-8">
-
           <!-- 1 -->
-          <div class="frame-corners border border-slate-700 bg-slate-900/40 p-6 md:p-8 rounded-sm shadow-lg"
+          <div class="glass p-6 md:p-8 "
             data-aos="fade-up">
             <h3 class="font-display text-xl font-semibold text-slate-100">
              <i class="fa-solid fa-robot"></i><pre>Narrow AI (AI តូច / AI មានកម្រិត)</pre>
             </h3>
-            <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
+            <p class="mt-4 text-sm text-slate-600 leading-8 text-justify">
               Narrow AI គឺជា AI ដែលត្រូវបានបង្កើតឡើងសម្រាប់ការងារតែមួយប៉ុណ្ណោះ។
               វាមិនអាចគិតក្រៅពីភារកិច្ចដែលវាត្រូវបានបណ្តុះបណ្តាល។
               ឧទាហរណ៍៖ Face Recognition, Google Translate, Chatbot និង YOLO Object Detection។
@@ -681,7 +661,7 @@
                 <i class="fa-solid fa-brain text-pink-400"></i> <br>General AI (AI ទូទៅ)
             </h3>
 
-            <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
+            <p class="mt-4 text-sm text-slate-600 leading-8 text-justify">
               General AI គឺជា AI ដែលមានសមត្ថភាពគិត និងរៀនដូចមនុស្ស។
               វាអាចធ្វើការងារជាច្រើនប្រភេទ មិនចាំបាច់កំណត់តែមួយភារកិច្ចទេ។
               ឧទាហរណ៍ វាអាចរៀនគណិតវិទ្យា សរសេរកូដ និងយល់ពីអារម្មណ៍មនុស្សបាន។
@@ -696,7 +676,7 @@
                 <i class="fa-solid fa-bolt-lightning text-orange-500"></i><br>​Super AI (AI លើសមនុស្ស)
             </h3>
 
-            <p class="mt-4 text-sm text-slate-300 leading-8 text-justify">
+            <p class="mt-4 text-sm text-slate-600 leading-8 text-justify">
               Super AI គឺជា AI ដែលមានសមត្ថភាពខ្ពស់ជាងមនុស្សក្នុងគ្រប់វិស័យ
               ដូចជា ការគិត វិភាគ សម្រេចចិត្ត និងការច្នៃប្រឌិត។
               វាអាចដោះស្រាយបញ្ហាស្មុគស្មាញបានលឿនជាងមនុស្សជាច្រើនដង។
@@ -813,9 +793,7 @@
                 </div>
             </div>
         </div>
-
         <div class="glass glass-card p-4" data-aos="fade-left">
-            <canvas id="nnCanvas" class="w-full" height="360"></canvas>
             <img src="https://blog.cellenza.com/wp-content/uploads/2022/09/Machine-Learning-vs-Deep-Learning-bis.png" alt="ប្រៀបធៀបម៉ាស៊ីនរៀន និងការរៀនស៊ីជម្រៅ" />
             <p class="text-center text-xs text-slate-500 mt-2 font-mono">ការសាយភាយសញ្ញាអន្តរកម្ម (Interactive Signal Propagation)</p>
             <div class="text-xs text-slate-400 mt-3 text-center max-w-md mx-auto">
@@ -896,7 +874,7 @@
                 </div>
                 <div>
                     <h4 class="font-display font-semibold text-lg text-accent">តើ YOLO ជាអ្វី? (You Only Look Once)</h4>
-                    <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
                         YOLO គឺជាបណ្តាញសរសៃប្រសាទស៊ីជម្រៅសម្រាប់ការរកឃើញវត្ថុតាមពេលវេលាជាក់ស្តែង (Real-time Object Detection)។ 
                         វាខុសពីវិធីសាស្ត្រចាស់ៗ ដែលត្រូវរត់កាត់រូបភាពច្រើនដង — YOLO មើលរូបភាពទាំងមូលតែម្តង (មើលតែម្តង) ហើយទស្សន៍ទាយប្រអប់ព្រំដែន និងថ្នាក់វត្ថុទាំងអស់ក្នុងពេលតែមួយ។ 
                         នេះធ្វើឱ្យវាលឿនរហ័ស និងស័ក្តិសមសម្រាប់កម្មវិធីដូចជា រថយន្តបើកបរដោយស្វ័យប្រវត្តិ ការឃ្លាំមើលសុវត្ថិភាព និងប្រព័ន្ធរាប់ចំនួនមនុស្ស។
@@ -984,15 +962,14 @@
             ដំណើរការទាំងមូល (Complete Pipeline)
           </h3>
           <div class="flex flex-col items-center">
-            <div id="pipeline" class="flex flex-col items-center"></div>
+            <div id="pipeline" class="flex flex-wrap items-center">
+              
+            </div>
           </div>
         </div>
 
       </div>
     </section>
-    <div class="p-10">
-      <img src="ChatGPT Image Jul 4, 2026, 12_09_42 AM.png" alt="">
-    </div>
     <!-- ============ SECTION 9: YOLO ARCHITECTURE (KHMER + DETAILED) ============ -->
     <section class="relative py-24 border-t border-white/5 bg-white/[0.02]">
       <div class="max-w-7xl mx-auto px-5 md:px-8">
@@ -1179,60 +1156,22 @@
           </p>
         </div>
         <div class="glass glass-card p-6" data-aos="fade-left">
-          <div class="relative w-full aspect-square bg-bg-2/60 rounded-xl overflow-hidden" id="bboxStage">
-            <svg viewBox="0 0 300 300" class="absolute inset-0 w-full h-full">
-              <rect width="300" height="300" fill="#0b1222" />
-              <circle cx="150" cy="150" r="60" fill="#1e293b" />
-            </svg>
-            <div id="bboxRect" class="bbox"
-              style="left:90px; top:90px; width:120px; height:120px; border-color:#06B6D4;">
-              <div class="bbox-label" style="background:#06B6D4; color:#0f172a;">object</div>
-              <div class="absolute -right-2 -bottom-2 w-4 h-4 rounded-full bg-accent cursor-nwse-resize"
-                id="bboxHandle"></div>
-            </div>
-          </div>
-          <div class="grid grid-cols-4 gap-2 mt-4 text-center font-mono text-xs">
-            <div class="glass rounded-lg py-2"><span class="text-primary">x</span><br><span id="valX">150</span></div>
-            <div class="glass rounded-lg py-2"><span class="text-secondary">y</span><br><span id="valY">150</span></div>
-            <div class="glass rounded-lg py-2"><span class="text-accent">w</span><br><span id="valW">120</span></div>
-            <div class="glass rounded-lg py-2"><span class="text-warning">h</span><br><span id="valH">120</span></div>
-          </div>
-          <p class="text-center text-xs text-slate-500 mt-2">drag the bottom-right handle</p>
-        </div>
+          <img src="https://imerit.ai/wp-content/uploads/2023/04/Embedded-7_Detecting-Objects-in-Images-Using-YOLO-TT.png" alt="">
 
+        </div>
       </div>
     </section>
     <!-- ============ SECTION 12: CONFIDENCE SCORE ============ -->
     <section class="relative py-24 border-t border-white/5">
       <div class="max-w-7xl mx-auto px-5 md:px-8 grid lg:grid-cols-2 gap-14 items-center">
         <div class="glass glass-card p-6 order-2 lg:order-1" data-aos="fade-right">
-          <div class="relative w-full aspect-video bg-bg-2/60 rounded-xl overflow-hidden" id="confStage">
-            <!-- boxes with varying confidence -->
-            <div class="bbox conf-box" data-conf="0.97"
-              style="left:8%; top:15%; width:22%; height:60%; border-color:#10B981;">
-              <div class="bbox-label" style="background:#10B981;color:#0f172a;">person 97%</div>
-            </div>
-            <div class="bbox conf-box" data-conf="0.71"
-              style="left:38%; top:35%; width:26%; height:38%; border-color:#F59E0B;">
-              <div class="bbox-label" style="background:#F59E0B;color:#0f172a;">dog 71%</div>
-            </div>
-            <div class="bbox conf-box" data-conf="0.42"
-              style="left:70%; top:20%; width:22%; height:30%; border-color:#EF4444;">
-              <div class="bbox-label" style="background:#EF4444;color:#fff;">bird 42%</div>
-            </div>
-            <div class="bbox conf-box" data-conf="0.88"
-              style="left:64%; top:55%; width:28%; height:35%; border-color:#3B82F6;">
-              <div class="bbox-label" style="background:#3B82F6;color:#fff;">car 88%</div>
-            </div>
-          </div>
+          <img src="https://b2633864.smushcdn.com/2633864/wp-content/uploads/2016/09/iou_equation.png?lossy=2&strip=1&webp=1" alt="">
           <div class="mt-5">
             <div class="flex justify-between text-xs font-mono text-slate-400 mb-2">
               <span>Confidence Threshold</span><span id="threshVal">0.50</span>
             </div>
-            <input id="threshSlider" type="range" min="0" max="1" step="0.01" value="0.5" class="w-full slider-accent">
           </div>
         </div>
-
         <div class="order-1 lg:order-2" data-aos="fade-left">
           <span class="text-xs font-mono text-accent section-eyebrow">HOW SURE IS THE MODEL?</span>
           <h2 class="font-display font-bold text-3xl md:text-4xl mt-3">Confidence Score</h2>
@@ -1255,7 +1194,7 @@
             ហើយប៉ាន់ស្មានថា តើវត្ថុនោះស្រដៀងនឹងអ្វីដែលវាធ្លាប់ឃើញ។
           </p>
 
-          <ul class="mt-6 space-y-3 text-sm text-slate-300">
+          <ul class="mt-6 space-y-3 text-sm text-slate-600">
 
             <li class="glass rounded-lg p-3">
               <span class="text-success font-semibold">1. Objectness Score (មានវត្ថុឬអត់)</span>
@@ -3076,7 +3015,6 @@
   </footer>
 
   <!-- ============ SCRIPTS ============ -->
-   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
   <script>
     AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic' });
@@ -3146,53 +3084,6 @@
       });
     }, { threshold: 0.5 });
     counters.forEach(c => counterObserver.observe(c));
-
-    /* ---------- Interactive neural network diagram (Deep Learning section) ---------- */
-    // const nnCanvas = document.getElementById('nnCanvas');
-    // const nnctx = nnCanvas.getContext('2d');
-    // function sizeNN() { nnCanvas.width = nnCanvas.clientWidth; nnCanvas.height = 360; }
-    // sizeNN(); window.addEventListener('resize', sizeNN);
-    // const layers = [4, 6, 6, 3];
-    // let pulse = 0;
-    // function layerPositions() {
-    //   const w = nnCanvas.width, h = nnCanvas.height;
-    //   return layers.map((count, li) => {
-    //     const x = (w / (layers.length + 1)) * (li + 1);
-    //     return Array.from({ length: count }, (_, i) => ({
-    //       x, y: (h / (count + 1)) * (i + 1)
-    //     }));
-    //   });
-    // }
-    // function drawNN() {
-    //   const w = nnCanvas.width, h = nnCanvas.height;
-    //   nnctx.clearRect(0, 0, w, h);
-    //   const pos = layerPositions();
-    //   for (let l = 0; l < pos.length - 1; l++) {
-    //     pos[l].forEach((a, ai) => {
-    //       pos[l + 1].forEach((b, bi) => {
-    //         const active = ((pulse + ai + bi) % 14) < 2;
-    //         nnctx.strokeStyle = active ? 'rgba(6,182,212,0.85)' : 'rgba(148,163,184,0.12)';
-    //         nnctx.lineWidth = active ? 1.6 : 1;
-    //         nnctx.beginPath(); nnctx.moveTo(a.x, a.y); nnctx.lineTo(b.x, b.y); nnctx.stroke();
-    //       });
-    //     });
-    //   }
-    //   pos.forEach((layer, li) => {
-    //     layer.forEach(n => {
-    //       const grad = nnctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 10);
-    //       const colors = ['#3B82F6', '#8B5CF6', '#8B5CF6', '#06B6D4'];
-    //       grad.addColorStop(0, colors[li]);
-    //       grad.addColorStop(1, 'rgba(15,23,42,0)');
-    //       nnctx.fillStyle = grad;
-    //       nnctx.beginPath(); nnctx.arc(n.x, n.y, 9, 0, Math.PI * 2); nnctx.fill();
-    //       nnctx.fillStyle = colors[li];
-    //       nnctx.beginPath(); nnctx.arc(n.x, n.y, 4, 0, Math.PI * 2); nnctx.fill();
-    //     });
-    //   });
-    //   pulse++;
-    //   requestAnimationFrame(drawNN);
-    // }
-    // drawNN();
     /* ---------- YOLO Architecture pulse ---------- */
     const archEls = document.querySelectorAll('.arch-pulse');
     let archIndex = 0;
@@ -3297,7 +3188,6 @@
     /* ---------- How YOLO Detects steps (Section 7) ---------- */
     const detectSteps = [
       "១. បញ្ចូលរូបភាព (Input Image) — រូបភាព ឬវីដេអូត្រូវបានផ្ទុកចូលទៅក្នុងម៉ូដែល YOLO ដើម្បីចាប់ផ្តើមដំណើរការ។",
-
       "២. កែទំហំរូបភាព (Resize Image) — រូបភាពត្រូវបានបម្លែងទៅទំហំស្តង់ដារដែលម៉ូដែលអាចយល់បាន ដើម្បីធានាភាពត្រឹមត្រូវ។",
 
       "៣. ទាញយកលក្ខណៈ (Feature Extraction — CNN) — Convolutional Neural Network វិភាគរូបភាព និងបង្កើត Feature Map ដើម្បីយល់ពីរូបភាព។",
@@ -3321,49 +3211,9 @@
       div.innerHTML = `
     <span class="fc-tr"></span><span class="fc-br"></span>
     <div class="w-9 h-9 shrink-0 rounded-lg bg-gradient-to-br from-primary to-accent grid place-items-center font-mono text-xs font-bold text-white">${i + 1}</div>
-    <p class="text-sm text-slate-300">${text}</p>`;
+    <p class="text-sm text-slate-600">${text}</p>`;
       stepsList.appendChild(div);
     });
-
-    /* ---------- Bounding Box interactive (Section 8) ---------- */
-    const bboxRect = document.getElementById('bboxRect');
-    const bboxHandle = document.getElementById('bboxHandle');
-    const bboxStage = document.getElementById('bboxStage');
-    let dragging = false;
-    bboxHandle.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
-    bboxHandle.addEventListener('touchstart', e => { dragging = true; }, { passive: true });
-    function updateBBox(clientX, clientY) {
-      const stageRect = bboxStage.getBoundingClientRect();
-      const rectLeft = bboxRect.offsetLeft, rectTop = bboxRect.offsetTop;
-      let w = Math.max(30, Math.min(clientX - stageRect.left - rectLeft, stageRect.width - rectLeft));
-      let h = Math.max(30, Math.min(clientY - stageRect.top - rectTop, stageRect.height - rectTop));
-      bboxRect.style.width = w + 'px';
-      bboxRect.style.height = h + 'px';
-      document.getElementById('valX').textContent = Math.round(rectLeft + w / 2);
-      document.getElementById('valY').textContent = Math.round(rectTop + h / 2);
-      document.getElementById('valW').textContent = Math.round(w);
-      document.getElementById('valH').textContent = Math.round(h);
-    }
-    window.addEventListener('mousemove', e => { if (dragging) updateBBox(e.clientX, e.clientY); });
-    window.addEventListener('touchmove', e => { if (dragging && e.touches[0]) updateBBox(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
-    window.addEventListener('mouseup', () => dragging = false);
-    window.addEventListener('touchend', () => dragging = false);
-
-    /* ---------- Confidence Threshold slider (Section 9) ---------- */
-    const threshSlider = document.getElementById('threshSlider');
-    const threshVal = document.getElementById('threshVal');
-    const confBoxes = document.querySelectorAll('.conf-box');
-    function applyThreshold() {
-      const t = parseFloat(threshSlider.value);
-      threshVal.textContent = t.toFixed(2);
-      confBoxes.forEach(b => {
-        const c = parseFloat(b.dataset.conf);
-        b.style.opacity = c >= t ? '1' : '0.08';
-      });
-    }
-    threshSlider.addEventListener('input', applyThreshold);
-    applyThreshold();
-
     /* ---------- YOLO Versions (Section 10) ---------- */
     const versions = [
       {
