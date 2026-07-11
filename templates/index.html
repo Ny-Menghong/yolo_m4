@@ -20,11 +20,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="bg-bg bg-grid">
+<body class="bg-bg">
   <!-- ============ NAV ============ -->
-  <header id="siteNav" class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5">
+  <header id="siteNav" class="fixed top-0 left-0 right-0 z-50 border-2 border-current-500" style="background-color: aliceblue;">
     <div class="max-w-full mx-2 md:px-8 h-16 flex items-center justify-between">
       <a href="#home" class="flex items-center gap-2 font-display font-bold text-lg">
         <span class="w-8 h-8 rounded-lg place-items-center">
@@ -43,7 +43,7 @@
       <div class="flex items-center gap-3">
         <!--  Icon menu for mobile -->
         <button id="menuBtn"
-          class="lg:hidden w-10 h-10 grid place-items-center rounded-lg border border-white/10 text-slate-200">
+          class="lg:hidden w-10 h-10 grid place-items-center rounded-lg border border-white/10 text-slate-800">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
@@ -55,9 +55,6 @@
         <button id="btn-ai" class="nav-link  py-2 border-b border-white/5" onclick="showPage('ai')">AI Lesson</button>
         <button class="nav-link  py-2 border-b border-white/5" onclick="showPage('yolol')">Yolo Lesson</button>
         <button id="btn-demo" class="nav-link  py-2 border-b border-white/5" onclick="showPage('demo')">Demo</button>
-        <button class="nav-link  py-2 border-b border-white/5" onclick="showPage('yolol')">Train</button>
-        <button class="nav-link  py-2 border-b border-white/5" onclick="showPage('yolol')">Dataset</button>
-        <button class="nav-link  py-2 border-b border-white/5" onclick="showPage('yolol')">Model</button>
       </nav>
     </div>
   </header>
@@ -111,7 +108,7 @@
                 <span class="text-slate-600">រៀនពីរបៀបដែលកុំព្យូទ័រ "មើលឃើញ" និងស្គាល់វត្ថុ</span>
               </li>
               <li class="flex items-start gap-3">
-                <i class="fa-solid fa-check-circle text-secondary mt-1"></i>
+                <i class="text-secondary mt-1"></i>
                 <span class="text-slate-600">យល់ពីក្បួនដោះស្រាយ YOLO ជាជំហានៗ</span>
               </li>
               <li class="flex items-start gap-3">
@@ -457,8 +454,8 @@
         <div class="grid md:grid-cols-2 gap-6 mt-14">
 
           <!-- 1 -->
-          <div class="glass glass-card frame-corners p-6" data-aos="fade-up">
-            <h3 class="font-display font-semibold text-xl text-pink-500">
+          <div class="glass frame-corners p-6" data-aos="fade-up">
+            <h3 class="font-display font-semibold text-xl grad-text">
               <i class="fa-brands fa-cloudversify"></i> ១. ការរៀនពីទិន្នន័យ (Learning)
             </h3>
             <p class="mt-4 text-sm text-slate-600 leading-8 text-justify">
@@ -472,7 +469,7 @@
           </div>
           <!-- 2 -->
           <div class="glass glass-card frame-corners p-6" data-aos="fade-up">
-            <h3 class="font-display font-semibold text-xl text-green-200">
+            <h3 class="font-display font-semibold text-xl grad-text">
               <i class="fa-solid fa-hexagon-nodes-bolt"></i></i> ២. ការពិចារណា និងសម្រេចចិត្ត (Reasoning & Decision Making)
             </h3>
             <p class="mt-4 text-sm text-slate-600 leading-8 text-justify">
@@ -485,7 +482,7 @@
             </p>
           </div>
           <!-- 3 -->
-          <div class="glass glass-card frame-corners p-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="glass p-6 grad-text" data-aos="fade-up" data-aos-delay="100">
             <h3 class="font-display font-semibold text-xl">
               <i class="fa-solid fa-chart-pie"></i>
                ៣. ការវិភាគ (Analysis)
@@ -498,7 +495,7 @@
             </p>
           </div>
           <!-- 4 -->
-          <div class="glass glass-card frame-corners p-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="glass p-6 grad-text" data-aos="fade-up" data-aos-delay="100">
             <h3 class="font-display font-semibold text-xl">
               <i class="fa-brands fa-keycdn"></i> ៤. ការអនុវត្តសកម្មភាព (Action & Automation)
             </h3>
@@ -513,8 +510,8 @@
         </div>
 
         <!-- Summary -->
-        <div class="mt-10 glass glass-card p-6 border-l-2 border-primary" data-aos="fade-up">
-          <h4 class="font-display font-semibold text-lg text-primary">
+        <div class="mt-10 glass p-6 border-l-2 border-primary" data-aos="fade-up">
+          <h4 class="font-display font-semibold text-lg grad-text">
             សរុប
           </h4>
           <p class="mt-3 text-sm text-slate-600 leading-8 text-justify">
@@ -643,7 +640,7 @@
           <!-- 1 -->
           <div class="glass p-6 md:p-8 "
             data-aos="fade-up">
-            <h3 class="font-display text-xl font-semibold text-slate-100">
+            <h3 class="font-display text-xl font-semibold text-slate-800">
              <i class="fa-solid fa-robot"></i><pre>Narrow AI (AI តូច / AI មានកម្រិត)</pre>
             </h3>
             <p class="mt-4 text-sm text-slate-600 leading-8 text-justify">
@@ -655,9 +652,9 @@
           </div>
 
           <!-- 2 -->
-          <div class="border border-slate-700 bg-slate-900/40 p-6 md:p-8 rounded-sm shadow-lg" data-aos="fade-up">
+          <div class="glass p-6 md:p-8 " data-aos="fade-up">
 
-            <h3 class="font-display text-xl font-semibold text-slate-100">
+            <h3 class="font-display text-xl font-semibold text-slate-800">
                 <i class="fa-solid fa-brain text-pink-400"></i> <br>General AI (AI ទូទៅ)
             </h3>
 
@@ -670,9 +667,9 @@
           </div>
 
           <!-- 3 -->
-          <div class="border border-slate-700 bg-slate-900/40 p-6 md:p-8 rounded-sm shadow-lg" data-aos="fade-up">
+          <div class="glass md:p-8 p-6 md:p-8" data-aos="fade-up">
 
-            <h3 class="font-display text-xl font-semibold text-slate-100">
+            <h3 class="font-display text-xl font-semibold text-slate-800">
                 <i class="fa-solid fa-bolt-lightning text-orange-500"></i><br>​Super AI (AI លើសមនុស្ស)
             </h3>
 
