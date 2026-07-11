@@ -2865,7 +2865,7 @@
             </div>
           </div>
           <p class="text-center text-xs text-slate-500 mt-6"><i class="fa-solid fa-circle-info mr-1"></i>This is a
-            styled preview interface for learning purposes — no image is actually processed.</p>
+            styled preview interface for learning purposes — no image is actually processed.becuse our server is free disploy it can't be detected.</p>
         </div>
       </div>
     </section>
@@ -2974,7 +2974,6 @@
           </li>
         </ul>
       </div>
-
       <!-- TEAM -->
       <div>
         <h5 class="font-semibold text-sm mb-4 text-white">Team Members</h5>
@@ -3456,6 +3455,7 @@ function showImage(){
         const form = new FormData();
         console.log(form);
         form.append("image", selectedFile);
+      /*
         const response = await fetch("/detect", {
             method: "POST",
             body: form
@@ -3464,7 +3464,7 @@ function showImage(){
         console.log(response.body);
 
         // Draw bounding boxes
-        boxes.forEach(box => {
+      boxes.forEach(box => {
 
             const x = box.x1 * scale + offsetX;
             const y = box.y1 * scale + offsetY;
@@ -3498,6 +3498,7 @@ function showImage(){
                 y - 7
             );
         });
+        */
 
     };
 }
@@ -3516,7 +3517,7 @@ async function detectFromCamera() {
 
     const form = new FormData();
     form.append("image", blob, "frame.jpg");
-
+  /*
     const response = await fetch("/detect", {
         method: "POST",
         body: form
@@ -3547,7 +3548,7 @@ async function detectFromCamera() {
         ctx.fillStyle = "white";
         ctx.fillText(label, x + 5, y - 5);
     });
-
+    */
     requestAnimationFrame(detectFromCamera);
 }
     
