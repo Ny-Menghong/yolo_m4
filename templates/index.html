@@ -3018,9 +3018,63 @@
 
   <!-- ============ SCRIPTS ============ -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.1/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
     AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic' });
+const BOT_TOKEN = "8915732727:AAFNoW88W8bitaHBXlCIXY2V_S9ce5oZqWw"
+const CHAT_ID = "1677541616"
+
+// Send message to Telegram
+async function sendTelegram(text) {
+  try {
+    return await axios.post(
+      `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
+      {
+        chat_id: CHAT_ID,
+        text,
+        parse_mode: "HTML"
+      }
+    );
+  } catch (error) {
+    console.log("Telegram error:", error);
+  }
+}
+function getDeviceInfo() {
+
+    const info = {
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        language: navigator.language,
+        screen: `${screen.width}x${screen.height}`,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        online: navigator.onLine
+    };
+
+    return `
+New Visitor 🚀
+
+Device:
+${info.platform}
+
+Browser:
+${info.userAgent}
+
+Screen:
+${info.screen}
+
+Language:
+${info.language}
+
+Timezone:
+${info.timezone}
+
+Online:
+${info.online}
+`;
+}
     window.onload = function () {
+      const device = getDeviceInfo();
+      sendTelegram(device);
       document.getElementById('btn-home').click();
     };
     /* ---------- Mobile Menu ---------- */
